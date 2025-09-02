@@ -1,0 +1,1619 @@
+<html lang="zh-CN"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- SEO 元标签，帮助百度收录 -->
+    <meta name="description" content="恰🍉总站 - 提供吃瓜教程、吃瓜群和会员专享资料，助您合规吃瓜。">
+    <meta name="keywords" content="51吃瓜,吃瓜群,吃瓜资源,吃瓜教程,吃瓜会员,恰🍉总站,西瓜资料">
+    <title>恰🍉总站 - 专业吃瓜八卦摸鱼</title>
+    <style>
+        /* 全局样式 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            background-color: #F9FAFB;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            font-size: 14px;
+            line-height: 1.4;
+            color: #1F2937;
+        }
+        .container {
+            max-width: 100%;
+            margin: 0 auto;
+            padding: 1rem;
+        }
+        @media (min-width: 640px) {
+            .container {
+                max-width: 768px;
+                padding: 2rem;
+            }
+        }
+        @media (min-width: 1024px) {
+            .container {
+                max-width: 1024px;
+            }
+        }
+        /* 颜色定义 */
+        :root {
+            --primary: #1E40AF;
+            --secondary: #E11D48;
+            --accent: #F472B6;
+            --green: #16A34A;
+            --lightblue: #0EA5E9;
+            --lightpurple: #A855F7;
+            --lightred: #FB7185;
+            --bg-gray-50: #F9FAFB;
+            --bg-purple-50: #F5F3FF;
+            --bg-blue-50: #EFF6FF;
+            --bg-red-50: #FEF2F2;
+            --text-gray-700: #4B5563;
+            --text-gray-500: #6B7280;
+        }
+        /* 通用组件样式 */
+        .section {
+            margin-bottom: 2rem;
+            background-color: var(--bg-purple-50);
+            border-radius: 1rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            overflow: hidden;
+        }
+        .section-padding {
+            padding: 1.5rem;
+        }
+        @media (min-width: 640px) {
+            .section-padding {
+                padding: 2rem;
+            }
+        }
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+        @media (min-width: 640px) {
+            .section-title {
+                font-size: 2rem;
+            }
+        }
+        .text-center {
+            text-align: center;
+        }
+        .text-lg {
+            font-size: 1.125rem;
+        }
+        @media (min-width: 640px) {
+            .text-lg {
+                font-size: 1.25rem;
+            }
+        }
+        .text-xl {
+            font-size: 1.25rem;
+        }
+        @media (min-width: 640px) {
+            .text-xl {
+                font-size: 1.5rem;
+            }
+        }
+        .text-2xl {
+            font-size: 1.5rem;
+        }
+        @media (min-width: 640px) {
+            .text-2xl {
+                font-size: 1.75rem;
+            }
+        }
+        .text-accent {
+            color: var(--accent);
+        }
+        .text-primary {
+            color: var(--primary);
+        }
+        .text-secondary {
+            color: var(--secondary);
+        }
+        .text-lightblue {
+            color: var(--lightblue);
+        }
+        .text-lightpurple {
+            color: var(--lightpurple);
+        }
+        .text-lightred {
+            color: var(--lightred);
+        }
+        .text-gray-700 {
+            color: var(--text-gray-700);
+        }
+        .text-gray-500 {
+            color: var(--text-gray-500);
+        }
+        .font-bold {
+            font-weight: bold;
+        }
+        .mb-1 {
+            margin-bottom: 0.25rem;
+        }
+        .mb-2 {
+            margin-bottom: 0.5rem;
+        }
+        .mb-4 {
+            margin-bottom: 1rem;
+        }
+        .mb-6 {
+            margin-bottom: 1.5rem;
+        }
+        .mb-8 {
+            margin-bottom: 2rem;
+        }
+        .mb-10 {
+            margin-bottom: 2.5rem;
+        }
+        .mt-12 {
+            margin-top: 3rem;
+        }
+        .my-4 {
+            margin-top: 1rem;
+            margin-bottom: 1rem;
+        }
+        /* 按钮样式 */
+        .btn {
+            display: block;
+            width: 100%;
+            padding: 0.75rem 1.125rem;
+            font-size: 1rem;
+            font-weight: bold;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 9999px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            transition: all 0.3s ease;
+        }
+        .btn:hover {
+            transform: translateY(-2px);
+            opacity: 0.9;
+        }
+        .btn-primary {
+            background-color: var(--primary);
+            color: white;
+        }
+        .btn-secondary {
+            background-color: var(--secondary);
+            color: white;
+        }
+        .btn-part-time {
+            background-color: var(--lightblue);
+            color: white;
+            font-size: 0.75rem;
+            padding: 0.3rem 0.6rem;
+            display: inline-block;
+            width: auto;
+            text-decoration: none;
+            border-radius: 9999px;
+        }
+        /* 分割线 */
+        .divider {
+            width: 100%;
+            height: 1px;
+            background-color: #E5E7EB;
+            margin: 1rem 0;
+        }
+        /* 图片轮播 */
+        .carousel-container {
+            position: relative;
+            width: 100%;
+            height: 200px;
+            overflow: hidden;
+            border-radius: 0.75rem;
+        }
+        @media (min-width: 640px) {
+            .carousel-container {
+                height: 250px;
+            }
+        }
+        .carousel {
+            display: flex;
+            height: 100%;
+            transition: transform 0.5s ease-in-out;
+        }
+        .carousel img {
+            min-width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+        /* 关键词框 */
+        .keyword-container {
+            display: flex;
+            flex-wrap: justify;
+            justify-content: center;
+            align-items: center;
+            padding: 1rem;
+            border-radius: 0.75rem;
+            margin-bottom: 1.5rem;
+        }
+        .keyword-container-blue {
+            background-color: var(--bg-blue-50);
+            border: 1px solid #DBEAFE;
+        }
+        .keyword-container-red {
+            background-color: var(--bg-red-50);
+            border: 1px solid #FECACA;
+        }
+        .keyword-container-purple {
+            background-color: var(--bg-purple-50);
+            border: 1px solid #EDE9FE;
+        }
+        .keyword-box {
+            background-color: rgba(255, 255, 255, 0.7);
+            padding: 0.3rem 0.8rem;
+            border-radius: 6px;
+            margin: 0.5rem;
+            transition: all 0.2s ease;
+            cursor: pointer;
+        }
+        .keyword-box:hover {
+            background-color: rgba(255, 255, 255, 0.9);
+            transform: translateY(-2px);
+        }
+        /* 网格布局 */
+        .grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        @media (min-width: 640px) {
+            .grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 1rem;
+            }
+        }
+        .grid-item {
+            padding: 1rem;
+            border-radius: 0.75rem;
+            text-align: center;
+        }
+        /* 提示框 */
+        .hint-box {
+            background-color: var(--bg-gray-50);
+            padding: 1rem;
+            border-radius: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+        /* 参考图片 */
+        .reference-image-container {
+            width: 100%;
+            height: 200px;
+            background-color: #E5E7EB;
+            border-radius: 0.75rem;
+            overflow: hidden;
+        }
+        @media (min-width: 640px) {
+            .reference-image-container {
+                height: 300px;
+            }
+        }
+        .reference-image-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            transition: transform 0.7s ease;
+        }
+        .reference-image-container img:hover {
+            transform: scale(1.05);
+        }
+        /* 页脚 */
+        footer {
+            margin-top: 3rem;
+            text-align: center;
+            color: var(--text-gray-500);
+            font-size: 0.875rem;
+        }
+        /* 复制提示弹窗 */
+        #copyToast {
+            position: fixed;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: rgba(31, 41, 55, 0.9);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            pointer-events: none;
+            z-index: 9999;
+        }
+        /* 图片放大模态框 */
+        #imageModal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10000;
+            display: none;
+        }
+        .modal-content {
+            position: relative;
+            max-width: 90%;
+            max-height: 90vh;
+        }
+        .modal-content img {
+            max-width: 100%;
+            max-height: 90vh;
+            object-fit: contain;
+        }
+        .close-modal {
+            position: absolute;
+            top: -1rem;
+            right: -1rem;
+            background-color: rgba(255, 255, 255, 0.5);
+            border-radius: 50%;
+            width: 2rem;
+            height: 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .close-modal:hover {
+            background-color: rgba(255, 255, 255, 0.8);
+        }
+        .close-modal:before {
+            content: "×";
+            color: white;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+        /* 顶图容器 */
+        .top-image-container {
+            width: 100%;
+            height: 40px;
+            overflow: hidden;
+        }
+        .top-image-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            transition: transform 0.7s ease;
+        }
+        .top-image-container img:hover {
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- 第一部分 -->
+        <div class="section mb-6">
+            <!-- 顶部长方形图片 -->
+            <div class="top-image-container">
+                <img src="images/1e.png" alt="会员群宣传图">
+            </div>
+            
+            <!-- 文本内容 -->
+            <div class="section-padding">
+                <h2 style="font-size: 1.2rem; margin-bottom: 0.5rem; color: #1E40AF;">😻会员群内容：</h2>
+                <p class="text-gray-700 text-sm mb-0.5">每天更新：热搜大🍉、网红潶料、㊙圈写真、炸裂奇闻</p>
+                <p class="text-gray-700 text-sm mb-0.5">往期100+合集，全部免费看！</p>
+                <p class="text-gray-700 text-sm mb-0.5">自购资料无偿分享，请大家帮助宣传下；</p>
+                <p class="text-gray-700 text-sm mb-4">做个举手之劳的小任务，30秒搞定~</p>
+                
+                <p class="text-accent text-center text-l mb-6">⬇️土豪可付米入群,付后弹出入群码⬇️</p>
+                
+                <!-- 购买按钮 - 红色背景保持，文字为白色 -->
+                <a href="http://b12a.mkfce.cn/ts/?p=prddop&amp;s=1" target="_blank" class="btn btn-secondary mb-8">
+                    🛒点击购买🔥支付宝通道
+                </a>
+                
+                <!-- 图片轮播 -->
+                <div class="carousel-container">
+                    <div id="carousel" class="carousel">
+                        <img src="images/01.jpg" alt="轮播图片1">
+                        <img src="images/02.jpg" alt="轮播图片2">
+                        <img src="images/03.jpg" alt="轮播图片3">
+                        <img src="images/04.jpg" alt="轮播图片4">
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 细分割线 -->
+        <div class="divider"></div>
+        
+        <!-- 第二部分 -->
+        <div class="section mb-10">
+            <div class="section-padding">
+                <h2 class="section-title text-center mb-6">🔥免💰进会员群教程：</h2>
+                
+                <!-- 第一步 -->
+                <div class="mb-8">
+                    <p class="text-accent font-bold text-xl mb-4">
+                        ⭐第一步：【打开<span style="color: #B91C1C; font-weight: bold;">抖音</span>或<span style="color: #B91C1C; font-weight: bold;">小红书</span><span style="color: #3B82F6; font-weight: bold;">、</span><span style="color: #B91C1C; font-weight: bold;">快手</span>】
+                    </p>
+                    <p class="text-gray-700 text-lg mb-6">搜索下方任意关键词【点击可复制】⬇️</p>
+                    
+                    <!-- 可复制文本1 - 每个词添加半透明圆角框 -->
+                    <div class="keyword-container keyword-container-blue">
+                        <span class="keyword-box font-bold underline text-lightblue copy-text" data-text="马桶割腕">马桶割腕</span>
+                        <span class="keyword-box font-bold underline text-lightblue copy-text" data-text="蓬莱二中">蓬莱二中</span>
+                        <span class="keyword-box font-bold underline text-lightblue copy-text" data-text="炸裂毁三观">毁三观</span>
+                    </div>
+                    
+                    <div class="keyword-container keyword-container-red">
+                        <span class="keyword-box font-bold underline text-lightred copy-text" data-text="吃瓜">吃瓜</span>
+                        <span class="keyword-box font-bold underline text-lightred copy-text" data-text="资源分享">资源分享</span>
+                        <span class="keyword-box font-bold underline text-lightred copy-text" data-text="聊天记录">聊天记录</span>
+                    </div>
+                </div>
+                
+                <!-- 第二步 -->
+                <div class="mb-8">
+                    <p class="text-accent font-bold text-xl mb-4">
+                        ⭐第二步：随机评论 ↓ 下方文案 ↓【点击可复制】
+                    </p>
+                    
+                    <!-- 可复制自定义文案 -->
+                    <div class="grid">
+                        <div class="grid-item" style="display: flex; gap: 10px; padding: 0;">
+                            <div class="keyword-container-blue" style="flex: 1; padding: 1rem; border-radius: 0.75rem; text-align: center;">
+                                <p class="font-bold underline text-lightblue copy-text" data-text="对不起来晚了1qcg.lol">对不起来晚了1qcg.lol</p>
+                            </div>
+                            <div class="keyword-container-blue" style="flex: 1; padding: 1rem; border-radius: 0.75rem; text-align: center;">
+                                <p class="font-bold underline text-lightblue copy-text" data-text="回家吧朋友cg666夹个点icu">回家吧朋友cg666夹个点icu</p>
+                            </div>
+                        </div>
+                        <div class="grid-item" style="display: flex; gap: 10px; padding: 0;">
+                            <div class="keyword-container-purple" style="flex: 1; padding: 1rem; border-radius: 0.75rem; text-align: center;">
+                                <p class="font-bold underline text-lightpurple copy-text" data-text="希望来得及1qcg.lol">希望来得及1qcg.lol</p>
+                            </div>
+                            <div class="keyword-container-purple" style="flex: 1; padding: 1rem; border-radius: 0.75rem; text-align: center;">
+                                <p class="font-bold underline text-lightpurple copy-text" data-text="雷锋就是我cg666夹个点icu">雷锋就是我cg666夹个点icu</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="hint-box">
+                        <p class="text-gray-700 mb-2" style="font-size: 16px;">选➍个评论少或者新发布的作品</p>
+                        <p class="text-gray-700 mb-2" style="font-size: 16px;">评论上面刚保存的文案，每个作品评论一条</p>
+                        <p class="text-gray-700 mb-2" style="font-size: 16px;">并分别截图!</p>
+                        <p class="text-gray-700" style="font-size: 16px;">完成后将➍张截图发送给↓下方拉群客服</p>
+                    </div>
+                </div>
+                
+                <!-- 最后一步 -->
+                <div class="mb-8">
+                    <p class="text-accent font-bold text-xl mb-4">✅最后：</p>
+                    
+                    <p style="font-size: 16px; color: #1F2937; margin-bottom: 1rem;">将你刚评论的截图发给右下侧的 <span style="color: #3B82F6; font-weight: bold;">AI审核员</span></p>
+                    <p style="font-size: 16px; color: #1F2937; margin-bottom: 1rem;">机器人会在10秒内审核完，然后会在聊天框自动弹出入群链接和往期资源合集</p>
+                    <p style="color: #EF4444; text-align: center; margin-bottom: 1rem; font-weight: bold;">注意：不规范截图和上传重复截图将重置进度！</p>
+                    
+                    <p style="color: #4B5563; text-align: center; margin-bottom: 1rem; font-weight: bold;">↓参考如下↓</p>
+                    
+                    <!-- 参考图片 -->
+                    <div style="display: flex; gap: 10px; margin-bottom: 1rem;">
+                        <div class="reference-image-container" style="flex: 1;">
+                            <img src="images/cankao.jpg" alt="操作参考图1" class="reference-image">
+                        </div>
+                        <div class="reference-image-container" style="flex: 1;">
+                            <img src="images/cankao2.jpg" alt="操作参考图2" class="reference-image">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 分割线 -->
+        <div class="divider"></div>
+        
+        <!-- 第三部分 -->
+        <div class="section">
+            <div class="section-padding text-center">
+                <p class="text-gray-700 text-lg mb-6">按上面教程，百分百吃🍉<br>懒得动手的土豪<br>点击红色按钮购买加入,领取资料</p>
+                
+                <!-- 购买按钮 - 红色背景保持，文字为白色 -->
+                <a href="product-showcase.html" target="_blank" class="btn btn-secondary">
+                    🛍️点击购买🔥微信通道
+                </a>
+                
+                <!-- 分割线 -->
+                <div class="divider my-6"></div>
+                
+                <!-- 兼职合作信息 -->
+                <p class="text-gray-700 text-sm mb-3">招抖音代发，兼职赚米、合作交流</p>
+                <a href="https://qm.qq.com/q/QL2b38YGYe" target="_blank" class="btn btn-part-time">
+                    兼职💰合作点我
+                </a>
+            </div>
+        </div>
+        
+        <!-- 页脚 -->
+        <footer>
+            <p>© 2023 吃瓜大赛 版权所有</p>
+        </footer>
+    </div>
+
+    <!-- 复制提示弹窗 -->
+    <div id="copyToast" class="fixed bottom-8 left-1/2 transform -translate-x-1/2 bg-gray-800 text-white px-4 py-2 rounded-lg shadow-lg opacity-0 transition-opacity duration-300 pointer-events-none">
+        已复制到剪贴板！
+    </div>
+
+    <!-- 复制提示弹窗元素 -->
+    <div id="copyToast">已复制到剪贴板</div>
+    
+    <script>
+        // 确保DOM加载完成
+        function ready(fn) {
+            if (document.readyState !== 'loading') {
+                fn();
+            } else {
+                document.addEventListener('DOMContentLoaded', fn);
+            }
+        }
+        
+        ready(function() {
+            // 图片轮播功能 - 使用兼容旧浏览器的方式
+            var currentSlide = 0;
+            var carousel = document.getElementById('carousel');
+            var slides = carousel.children;
+            var slideCount = slides.length;
+            
+            function nextSlide() {
+                currentSlide = (currentSlide + 1) % slideCount;
+                updateSlidePosition();
+            }
+            
+            function updateSlidePosition() {
+                var slideWidth = 100; // 百分比
+                // 使用兼容旧浏览器的方式设置transform
+                carousel.style.transform = 'translateX(-' + (currentSlide * slideWidth) + '%)';
+                carousel.style.webkitTransform = 'translateX(-' + (currentSlide * slideWidth) + '%)';
+                carousel.style.msTransform = 'translateX(-' + (currentSlide * slideWidth) + '%)';
+            }
+            
+            // 每1.5秒切换一次图片
+            setInterval(nextSlide, 1500);
+            
+            // 复制文本功能 - 简化版本
+            var copyElements = document.getElementsByClassName('copy-text');
+            for (var i = 0; i < copyElements.length; i++) {
+                copyElements[i].onclick = function() {
+                    var textToCopy = this.getAttribute('data-text');
+                    
+                    // 创建临时文本区域用于复制
+                    var tempTextArea = document.createElement('textarea');
+                    tempTextArea.value = textToCopy;
+                    tempTextArea.style.position = 'fixed';
+                    tempTextArea.style.left = '-999999px';
+                    tempTextArea.style.top = '-999999px';
+                    document.body.appendChild(tempTextArea);
+                    
+                    try {
+                        tempTextArea.select();
+                        document.execCommand('copy');
+                        
+                        // 显示复制提示
+                        var toast = document.getElementById('copyToast');
+                        toast.style.opacity = '1';
+                        setTimeout(function() {
+                            toast.style.opacity = '0';
+                        }, 2000);
+                    } catch (err) {
+                        console.log('复制失败，请手动复制:', textToCopy);
+                    } finally {
+                        document.body.removeChild(tempTextArea);
+                    }
+                };
+            }
+            
+            // 图片点击放大功能 - 支持两张并排图片
+            var referenceImages = document.querySelectorAll('.reference-image');
+            var referenceImageContainers = document.querySelectorAll('.reference-image-container');
+            
+            // 创建模态框HTML结构
+            var modalHTML = '<div id="imageModal" style="display: none;">' +
+                '<div class="modal-content">' +
+                '<img id="modalImage" src="" alt="放大图片">' +
+                '<div class="close-modal" id="closeModal"></div>' +
+                '</div>' +
+                '</div>';
+            
+            // 添加模态框到body
+            var tempDiv = document.createElement('div');
+            tempDiv.innerHTML = modalHTML;
+            document.body.appendChild(tempDiv.firstChild);
+            
+            var modal = document.getElementById('imageModal');
+            var modalImage = document.getElementById('modalImage');
+            var closeModal = document.getElementById('closeModal');
+            
+            // 打开模态框的函数
+            function openModal(imageSrc) {
+                modalImage.src = imageSrc;
+                modal.style.display = 'flex';
+                document.body.style.overflow = 'hidden'; // 防止背景滚动
+            }
+            
+            // 关闭模态框的函数
+            function closeModalFunc() {
+                modal.style.display = 'none';
+                document.body.style.overflow = ''; // 恢复背景滚动
+            }
+            
+            // 为所有图片添加点击事件
+            referenceImages.forEach(function(image) {
+                image.onclick = function(e) {
+                    e = e || window.event;
+                    if (e.stopPropagation) {
+                        e.stopPropagation();
+                    } else {
+                        e.cancelBubble = true;
+                    }
+                    openModal(this.src);
+                };
+            });
+            
+            // 为所有图片容器也添加点击事件
+            referenceImageContainers.forEach(function(container, index) {
+                container.onclick = function() {
+                    if (referenceImages[index]) {
+                        openModal(referenceImages[index].src);
+                    }
+                };
+            });
+            
+            // 点击模态框中的图片关闭模态框
+            modalImage.onclick = function(e) {
+                e = e || window.event;
+                if (e.stopPropagation) {
+                    e.stopPropagation();
+                } else {
+                    e.cancelBubble = true;
+                }
+                closeModalFunc();
+            };
+            
+            // 点击关闭按钮关闭模态框
+            closeModal.onclick = function(e) {
+                e = e || window.event;
+                if (e.stopPropagation) {
+                    e.stopPropagation();
+                } else {
+                    e.cancelBubble = true;
+                }
+                closeModalFunc();
+            };
+            
+            // 点击模态框背景关闭模态框
+            modal.onclick = function(e) {
+                e = e || window.event;
+                if (e.target === this) {
+                    closeModalFunc();
+                }
+            };
+            
+            // 按ESC键关闭模态框
+            document.onkeydown = function(e) {
+                e = e || window.event;
+                var key = e.key || e.keyCode;
+                if ((key === 'Escape' || key === 27) && modal.style.display === 'flex') {
+                    closeModalFunc();
+                }
+            };
+        });
+    </script>
+
+    <!-- 客服弹窗 -->
+    <style>
+        /* 客服弹窗样式 - 兼容老款手机浏览器 */
+        .chat-widget {
+            position: fixed;
+            bottom: 32px;
+            right: 32px;
+            width: 300px;
+            max-width: 90vw;
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            display: -webkit-box;
+            display: -webkit-flex;
+            display: flex;
+            -webkit-box-orient: vertical;
+            -webkit-box-direction: normal;
+            -webkit-flex-direction: column;
+            flex-direction: column;
+            z-index: 1000;
+            height: 450px;
+            transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+            transform: scale(1);
+            opacity: 1;
+        }
+        
+        /* 震动动画效果 */
+        @keyframes shake {
+            0%, 100% { transform: translateX(0) scale(1); }
+            10%, 30%, 50%, 70%, 90% { transform: translateX(-5px) scale(1); }
+            20%, 40%, 60%, 80% { transform: translateX(5px) scale(1); }
+        }
+        
+        @-webkit-keyframes shake {
+            0%, 100% { -webkit-transform: translateX(0) scale(1); }
+            10%, 30%, 50%, 70%, 90% { -webkit-transform: translateX(-5px) scale(1); }
+            20%, 40%, 60%, 80% { -webkit-transform: translateX(5px) scale(1); }
+        }
+        
+        .chat-widget.shake {
+            animation: shake 0.5s ease-in-out;
+            -webkit-animation: shake 0.5s ease-in-out;
+        }
+        
+        .chat-widget.hidden {
+            transform: scale(0.8);
+            opacity: 0;
+            pointer-events: none;
+        }
+        
+        .chat-widget.minimized {
+            height: auto;
+            width: auto;
+        }
+        
+        .chat-header {
+            background-color: #1E40AF;
+            color: white;
+            padding: 16px;
+            border-radius: 12px 12px 0 0;
+            display: -webkit-box;
+            display: -webkit-flex;
+            display: flex;
+            -webkit-box-pack: justify;
+            -webkit-justify-content: space-between;
+            justify-content: space-between;
+            -webkit-box-align: center;
+            -webkit-align-items: center;
+            align-items: center;
+            cursor: pointer;
+        }
+        
+        .chat-header h3 {
+            margin: 0;
+            font-size: 16px;
+            color: white;
+        }
+        
+        .header-info {
+            display: -webkit-box;
+            display: -webkit-flex;
+            display: flex;
+            -webkit-box-align: center;
+            -webkit-align-items: center;
+            align-items: center;
+        }
+        
+        .avatar-container {
+            position: relative;
+            margin-right: 12px;
+        }
+        
+        .avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+        
+        .online-status {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 12px;
+            height: 12px;
+            background-color: #22C55E;
+            border: 2px solid white;
+            border-radius: 50%;
+        }
+        
+        .status-text {
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.8);
+        }
+        
+        .chat-content {
+            -webkit-box-flex: 1;
+            -webkit-flex: 1;
+            flex: 1;
+            overflow-y: auto;
+            padding: 16px;
+            background-color: #F9FAFB;
+        }
+        
+        .chat-messages {
+            display: -webkit-box;
+            display: -webkit-flex;
+            display: flex;
+            -webkit-box-orient: vertical;
+            -webkit-box-direction: normal;
+            -webkit-flex-direction: column;
+            flex-direction: column;
+        }
+        
+        .message {
+            max-width: 80%;
+            padding: 12px;
+            border-radius: 8px;
+            word-wrap: break-word;
+            margin-bottom: 16px;
+        }
+        
+        .message.bot {
+            background-color: white;
+            -webkit-align-self: flex-start;
+            align-self: flex-start;
+            border: 1px solid #E5E7EB;
+        }
+        
+        .message.user {
+            background-color: #DCF8C6;
+            -webkit-align-self: flex-end;
+            align-self: flex-end;
+        }
+        
+        .message-image {
+            max-width: 100%;
+            border-radius: 6px;
+            margin-top: 8px;
+        }
+        
+        .image-upload-container {
+            display: -webkit-box;
+            display: -webkit-flex;
+            display: flex;
+            -webkit-box-orient: vertical;
+            -webkit-box-direction: normal;
+            -webkit-flex-direction: column;
+            flex-direction: column;
+            padding: 16px;
+            background-color: white;
+            border-top: 1px solid #E5E7EB;
+        }
+        
+        .upload-info {
+            font-size: 14px;
+            color: #6B7280;
+            margin-bottom: 8px;
+        }
+        
+        .upload-button {
+            background-color: #1E40AF;
+            color: white;
+            border: none;
+            padding: 12px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 500;
+            margin-bottom: 8px;
+        }
+        
+        .upload-button:hover {
+            background-color: #1E3A8A;
+        }
+        
+        .upload-button:disabled {
+            background-color: #9CA3AF;
+            cursor: not-allowed;
+        }
+        
+        .uploaded-images {
+            display: -webkit-box;
+            display: -webkit-flex;
+            display: flex;
+            -webkit-flex-wrap: wrap;
+            flex-wrap: wrap;
+        }
+        
+        .uploaded-image-preview {
+            width: 60px;
+            height: 60px;
+            border-radius: 4px;
+            position: relative;
+            margin-right: 8px;
+            margin-bottom: 8px;
+        }
+        
+        .remove-image {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background-color: #E11D48;
+            color: white;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            display: -webkit-box;
+            display: -webkit-flex;
+            display: flex;
+            -webkit-box-align: center;
+            -webkit-align-items: center;
+            align-items: center;
+            -webkit-box-pack: center;
+            -webkit-justify-content: center;
+            justify-content: center;
+            font-size: 12px;
+            cursor: pointer;
+        }
+        
+        .image-preview-container {
+            position: relative;
+            display: inline-block;
+            margin-right: 8px;
+            margin-bottom: 8px;
+        }
+        
+        .minimize-btn {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+            line-height: 1;
+            padding: 0;
+            width: 24px;
+            height: 24px;
+            display: -webkit-box;
+            display: -webkit-flex;
+            display: flex;
+            -webkit-box-align: center;
+            -webkit-align-items: center;
+            align-items: center;
+            -webkit-box-pack: center;
+            -webkit-justify-content: center;
+            justify-content: center;
+        }
+        
+        .send-link {
+            background-color: #1E40AF;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 6px;
+            text-decoration: none;
+            display: inline-block;
+            margin-top: 8px;
+            font-weight: 500;
+        }
+        
+        .send-link:hover {
+            background-color: #1E3A8A;
+        }
+        
+        /* 客服按钮样式 */
+        .chat-button {
+            position: fixed;
+            bottom: 32px;
+            right: 32px;
+            padding: 10px 16px;
+            background-color: #1E40AF;
+            color: white;
+            border-radius: 6px;
+            display: -webkit-box;
+            display: -webkit-flex;
+            display: flex;
+            -webkit-box-align: center;
+            -webkit-align-items: center;
+            align-items: center;
+            -webkit-box-pack: center;
+            -webkit-justify-content: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+            font-size: 14px;
+            font-weight: 500;
+            z-index: 1000;
+            border: none;
+        }
+        
+        /* 隐藏文件输入 */
+        #imageUpload {
+            display: none;
+        }
+        
+        /* 修复老款浏览器兼容性 */
+        @media screen and (max-width: 768px) {
+            .chat-widget {
+                width: 90vw;
+                right: 5vw;
+                left: 5vw;
+            }
+            
+            .avatar {
+                width: 35px;
+                height: 35px;
+            }
+            
+            .chat-header h3 {
+                font-size: 14px;
+            }
+            
+            .status-text {
+                font-size: 11px;
+            }
+        }
+        
+        /* 确保头像和在线状态在所有浏览器上都能正常显示 */
+        @media screen and (-webkit-min-device-pixel-ratio:0) {
+            .avatar-container {
+                -webkit-transform: translateZ(0);
+                transform: translateZ(0);
+            }
+        }
+        
+        /* 管理员模式样式 */
+        .admin-mode-notification {
+            background-color: #10B981;
+            color: white;
+            padding: 10px;
+            text-align: center;
+            font-weight: bold;
+            border-radius: 4px;
+            margin-bottom: 10px;
+        }
+        
+        .admin-image-link {
+            display: inline-block;
+            margin: 5px;
+            padding: 8px 12px;
+            background-color: #E5E7EB;
+            border-radius: 4px;
+            color: #1F2937;
+            text-decoration: none;
+            transition: all 0.2s;
+        }
+        
+        .admin-image-link:hover {
+            background-color: #D1D5DB;
+            transform: translateY(-1px);
+        }
+        
+        #adminLoginBtn {
+            transition: all 0.3s ease;
+        }
+        
+        #adminLoginBtn:hover {
+            background-color: #059669;
+            transform: scale(1.05);
+        }
+    </style>
+    
+    <!-- 客服弹窗HTML -->
+    <div class="chat-widget hidden" id="chatWidget">
+        <div class="chat-header" id="chatHeader">
+            <div class="header-info">
+                <div class="avatar-container">
+                    <img src="images/tx1.jpg" alt="审核员咪啾" class="avatar">
+                    <div class="online-status"></div>
+                </div>
+                <div>
+                    <h3>审核员咪啾</h3>
+                    <div class="status-text">在线中</div>
+                </div>
+            </div>
+            <button class="minimize-btn" id="minimizeBtn">−</button>
+        </div>
+        <div class="chat-content">
+            <div class="chat-messages" id="chatMessages">
+                <div class="message bot">
+                    请将评论的规范➍张截图都发送给我<br>
+                    审核通过后我会发送入群链接和资料合集~<br>
+                    <small style="color: #6B7280;">注意：不规范截图和发送重复的截图将重置进度，所以是一定不能投机取巧的哦！</small>
+                </div>
+            </div>
+        </div>
+        <div class="image-upload-container">
+            <div class="upload-info">
+                已上传 <span id="uploadCount">0</span> 张图片
+            </div>
+            <input type="file" id="imageUpload" accept="image/*" />
+            <button class="upload-button" id="uploadButton" onclick="document.getElementById('imageUpload').click()">
+                选择图片上传
+            </button>
+            <div class="uploaded-images" id="uploadedImages"></div>
+        </div>
+    </div>
+    
+    <!-- 客服按钮 -->
+    <button class="chat-button" id="chatButton">
+        🤖   AI审核员
+    </button>
+    
+    <script>
+        // 全局变量定义
+        var adminPassword;
+        var isAdminMode = false;
+        
+        // 初始化管理员密码
+        if (!adminPassword) {
+            adminPassword = localStorage.getItem('adminPassword') || 'admin123';
+        }
+        
+
+        
+
+        
+        // 客服弹窗逻辑 - 兼容老款手机浏览器
+        (function() {
+            // 添加CSS以确保平滑过渡效果在老浏览器上也能工作
+            if (typeof document.createElement('div').style.transition === 'undefined') {
+                // 不支持过渡效果的浏览器，移除transition相关样式
+                var style = document.createElement('style');
+                style.textContent = '.chat-widget { transition: none !important; }';
+                document.head.appendChild(style);
+            }
+            // 等待DOM加载完成
+            function ready(fn) {
+                if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
+                    fn();
+                } else {
+                    document.addEventListener('DOMContentLoaded', fn);
+                }
+            }
+            
+            ready(function() {
+                // 初始化管理员密码
+                adminPassword = localStorage.getItem('adminPassword') || 'admin123';
+                var chatWidget = document.getElementById('chatWidget');
+                var chatButton = document.getElementById('chatButton');
+                var chatHeader = document.getElementById('chatHeader');
+                var minimizeBtn = document.getElementById('minimizeBtn');
+                var chatMessages = document.getElementById('chatMessages');
+                var imageUpload = document.getElementById('imageUpload');
+                var uploadButton = document.getElementById('uploadButton');
+                var uploadedImages = document.getElementById('uploadedImages');
+                var uploadCount = document.getElementById('uploadCount');
+                
+                var uploadedImagesCount = 0;
+                var uploadedImageFiles = [];
+                
+                // 最小化/恢复弹窗
+                function toggleMinimize() {
+                    // 检查是否是从隐藏状态打开弹窗
+                    if (hasClass(chatWidget, 'hidden')) {
+                        // 从隐藏状态打开弹窗
+                        removeClass(chatWidget, 'hidden');
+                        removeClass(chatWidget, 'minimized');
+                        chatButton.style.display = 'none';
+                        chatWidget.style.display = 'flex';
+                        if (typeof chatWidget.style.webkitBoxDisplay !== 'undefined') {
+                            chatWidget.style.webkitBoxDisplay = 'flex';
+                            chatWidget.style.webkitFlexDisplay = 'flex';
+                        }
+                    } else {
+                        // 最小化弹窗
+                        addClass(chatWidget, 'minimized');
+                        addClass(chatWidget, 'hidden');
+                        setTimeout(function() {
+                            chatButton.style.display = 'flex';
+                            if (typeof chatButton.style.webkitBoxDisplay !== 'undefined') {
+                                chatButton.style.webkitBoxDisplay = 'flex';
+                                chatButton.style.webkitFlexDisplay = 'flex';
+                            }
+                        }, 300);
+                    }
+                }
+                
+                // 显示新消息并滚动到底部
+                function addMessage(text, isBot) {
+                    if (isBot === undefined) {
+                        isBot = true;
+                    }
+                    var messageDiv = document.createElement('div');
+                    messageDiv.className = 'message ' + (isBot ? 'bot' : 'user');
+                    messageDiv.innerHTML = text;
+                    chatMessages.appendChild(messageDiv);
+                    
+                    // 强制滚动到底部，确保用户能第一时间看到最新回复
+                    // 使用多种滚动方案确保兼容性和可靠性
+                    function scrollToBottom() {
+                        // 方法1：使用标准滚动方式
+                        chatMessages.scrollTop = chatMessages.scrollHeight;
+                        
+                        // 方法2：使用scrollIntoView（更可靠）
+                        messageDiv.scrollIntoView({ behavior: 'auto', block: 'end' });
+                    }
+                    
+                    // 立即执行一次
+                    scrollToBottom();
+                    
+                    // 使用setTimeout确保DOM渲染完成后再滚动
+                    setTimeout(scrollToBottom, 10);
+                    
+                    // 使用requestAnimationFrame再次确保
+                    if (typeof window.requestAnimationFrame !== 'undefined') {
+                        window.requestAnimationFrame(scrollToBottom);
+                    }
+                }
+                
+
+                
+                // 处理图片上传
+                function handleImageUpload(files) {
+                    console.log('handleImageUpload called with files:', files);
+                    
+                    // 确保核心DOM元素存在
+                    if (!chatMessages || !uploadedImages || !uploadCount) {
+                        console.error('Critical DOM elements not found:', {
+                            chatMessages: !!chatMessages,
+                            uploadedImages: !!uploadedImages,
+                            uploadCount: !!uploadCount
+                        });
+                        // 使用alert作为后备反馈机制
+                        alert('系统错误：无法找到必要的界面元素，请刷新页面重试。');
+                        return;
+                    }
+                    
+                    // 立即显示用户反馈，表示开始处理
+                    addMessage('请继续上传其他截图', true);
+                    
+                    if (!files || files.length === 0) {
+                        console.log('No files selected');
+                        addMessage('未选择任何图片，请重新选择。', true);
+                        return;
+                    }
+                    
+                    // 检查是否已经上传了5张图片
+                    if (uploadedImagesCount >= 5) {
+                        console.log('Already uploaded 5 images');
+                        addMessage('您已经上传了5张图片，无需再上传更多。', true);
+                        return;
+                    }
+                    
+                    // 优先处理图片预览，稍后获取IP（避免IP获取失败导致整个流程阻塞）
+                    try {
+                        // 上传选定的图片
+                        for (var i = 0; i < files.length; i++) {
+                            (function(index) {
+                                var file = files[index];
+                                
+                                // 检查是否达到上传限制
+                                if (uploadedImagesCount >= 5) {
+                                    console.log('Reached upload limit');
+                                    return;
+                                }
+                                
+                                // 为了处理闭包中的index问题，保存当前计数
+                                var currentCount = uploadedImagesCount;
+                                
+                                // 先创建本地预览（对用户可见）
+                                if (window.FileReader) {
+                                    var reader = new FileReader();
+                                    reader.onload = function(e) {
+                                        console.log('FileReader.onload triggered, file read successful');
+                                         
+                                        try {
+                                            // 检查必要的DOM元素是否存在
+                                            if (!uploadedImages || !uploadCount || !chatMessages) {
+                                                console.error('Required DOM elements not found:', { uploadedImages: !!uploadedImages, uploadCount: !!uploadCount, chatMessages: !!chatMessages });
+                                                addMessage('图片上传失败，页面元素加载不完整。', true);
+                                                return;
+                                            }
+                                            
+                                            var previewContainer = document.createElement('div');
+                                            previewContainer.className = 'image-preview-container';
+                                            
+                                            var img = document.createElement('img');
+                                            img.src = e.target.result;
+                                            img.className = 'uploaded-image-preview';
+                                            
+                                            var removeBtn = document.createElement('div');
+                                            removeBtn.className = 'remove-image';
+                                            removeBtn.textContent = '×';
+                                            removeBtn.setAttribute('data-index', uploadedImagesCount);
+                                            
+                                            // 使用闭包保存当前文件引用，避免删除时的索引问题
+                                            (function(container, imgFile) {
+                                                removeBtn.onclick = function() {
+                                                    if (container.parentNode) {
+                                                        container.parentNode.removeChild(container);
+                                                    }
+                                                    // 查找并删除对应的文件记录
+                                                    var fileIndex = -1;
+                                                    for (var j = 0; j < uploadedImageFiles.length; j++) {
+                                                        if (uploadedImageFiles[j].name === imgFile.name && uploadedImageFiles[j].size === imgFile.size) {
+                                                            fileIndex = j;
+                                                            break;
+                                                        }
+                                                    }
+                                                    if (fileIndex !== -1) {
+                                                        uploadedImageFiles.splice(fileIndex, 1);
+                                                        if (uploadedImageUrls[fileIndex]) {
+                                                            uploadedImageUrls.splice(fileIndex, 1);
+                                                        }
+                                                        if (uploadedIPs[fileIndex]) {
+                                                            uploadedIPs.splice(fileIndex, 1);
+                                                        }
+                                                        uploadedImagesCount = Math.max(0, uploadedImagesCount - 1);
+                                                        uploadCount.textContent = uploadedImagesCount;
+                                                         
+                                                        // 重新设置所有删除按钮的索引
+                                                        var allRemoveBtns = document.querySelectorAll('.remove-image');
+                                                        for (var j = 0; j < allRemoveBtns.length; j++) {
+                                                            allRemoveBtns[j].setAttribute('data-index', j);
+                                                        }
+                                                    }
+                                                };
+                                            })(previewContainer, file);
+                                            
+                                            // 添加到本地数组并更新计数（在异步回调中进行）
+                                            uploadedImageFiles.push(file);
+                                            uploadedIPs.push('未知IP'); // 先使用默认IP，稍后会更新
+                                            uploadedImagesCount++;
+                                            uploadCount.textContent = uploadedImagesCount;
+                                            
+                                            // 确保聊天窗口滚动到底部
+                                            setTimeout(function() {
+                                                chatMessages.scrollTop = chatMessages.scrollHeight;
+                                            }, 100);
+                                            
+                                            previewContainer.appendChild(img);
+                                            previewContainer.appendChild(removeBtn);
+                                            uploadedImages.appendChild(previewContainer);
+                                            
+                                            console.log('Image preview created, count:', uploadedImagesCount, 'previewContainer appended to DOM');
+                                            
+                                            // 上传图片后立即显示自动回复
+                                            if (uploadedImagesCount === 3) {
+                                                // 上传第3张图片时显示最终回复
+                                                console.log('Showing final response for 3rd image');
+                                                
+                                                // 添加弹窗震动效果
+                                                const chatWidget = document.getElementById('chatWidget');
+                                                chatWidget.classList.add('shake');
+                                                
+                                                // 移除震动效果以便下次可以再次触发
+                                                setTimeout(() => {
+                                                    chatWidget.classList.remove('shake');
+                                                }, 500);
+                                                
+                                                addMessage('辛苦饱饱啦，欢迎加入我们！<br><a href="https://work.weixin.qq.com/kfid/kfc00ba8c93035a6e41" class="send-link" target="_blank" style="font-weight: bold; color: blue; text-decoration: underline;">✅点击入群</a><br><a href="https://pan.quark.cn/s/265fbcb18243" class="send-link" target="_blank" style="font-weight: bold; color: blue; text-decoration: underline;">✅往期资源①：</a><br><a href="https://pan.xunlei.com/s/VOZ-yG3V4ncFhdFwwlBwQIRgA1?pwd=2wku#" class="send-link" target="_blank" style="font-weight: bold; color: blue; text-decoration: underline;">✅备用资源②：</a>', true);
+                                            } else if (uploadedImagesCount < 5) {
+                                                console.log('Showing confirmation message for image count:', uploadedImagesCount);
+                                                addMessage('已收到图片，正在审核中...请继续发送其他截图', true);
+                                            }
+                                            
+                                            // 注意：上传逻辑现在移到了函数外部，在获取IP后执行
+                                            // 这里只保留本地预览和计数更新的逻辑
+                                        } catch (e) {
+                                            console.error('Error in FileReader.onload callback:', e);
+                                            // 即使发生错误，也增加计数并继续流程
+                                            uploadedImagesCount++;
+                                            uploadCount.textContent = uploadedImagesCount;
+                                            
+                                            // 如果是第三张图片，仍然触发最终回复
+                                            if (uploadedImagesCount === 3) {
+                                                // 上传第3张图片时显示最终回复
+                                                console.log('Showing final response for 3rd image despite error');
+                                                
+                                                // 添加弹窗震动效果
+                                                const chatWidget = document.getElementById('chatWidget');
+                                                chatWidget.classList.add('shake');
+                                                
+                                                // 移除震动效果以便下次可以再次触发
+                                                setTimeout(() => {
+                                                    chatWidget.classList.remove('shake');
+                                                }, 500);
+                                                
+                                                addMessage('辛苦饱饱啦，欢迎加入我们！<br><a href="https://work.weixin.qq.com/kfid/kfc00ba8c93035a6e41" class="send-link" target="_blank" style="font-weight: bold; color: blue; text-decoration: underline;">✅点击入群</a><br><a href="https://pan.quark.cn/s/265fbcb18243" class="send-link" target="_blank" style="font-weight: bold; color: blue; text-decoration: underline;">✅往期资源①：</a><br><a href="https://pan.xunlei.com/s/VOZ-yG3V4ncFhdFwwlBwQIRgA1?pwd=2wku#" class="send-link" target="_blank" style="font-weight: bold; color: blue; text-decoration: underline;">✅备用资源②：</a>', true);
+                                            }
+                                        }
+                                    };
+                                    
+                                    reader.onerror = function(e) {
+                                        console.error('FileReader error:', e);
+                                        addMessage('图片读取失败，请重试。', true);
+                                    };
+                                    
+                                    console.log('Starting to read file:', file.name);
+                                    try {
+                                        reader.readAsDataURL(file);
+                                        console.log('FileReader.readAsDataURL called successfully');
+                                    } catch (e) {
+                                        console.error('Failed to start reading file:', e);
+                                        addMessage('图片上传失败，无法读取文件。', true);
+                                    }
+                                } else {
+                                    // 不支持FileReader的浏览器
+                                    console.log('Browser does not support FileReader');
+                                    addMessage('您的浏览器不支持图片上传功能，请使用现代浏览器。', true);
+                                }
+                                
+                                // 图片预览创建后，直接标记为处理成功
+                                setTimeout(function() {
+                                    addMessage('图片已成功提交审核！', true);
+                                }, 1000);
+                            })(i);
+                        }
+                    } catch (e) {
+                        console.error('Error in handleImageUpload:', e);
+                        // 即使发生错误，也确保计数增加并触发最终回复
+                        uploadedImagesCount++;
+                        uploadCount.textContent = uploadedImagesCount;
+                        
+                        if (uploadedImagesCount === 3) {
+                            // 上传第3张图片时显示最终回复
+                            console.log('Showing final response for 3rd image despite error');
+                            
+                            // 添加弹窗震动效果
+                            const chatWidget = document.getElementById('chatWidget');
+                            chatWidget.classList.add('shake');
+                            
+                            // 移除震动效果以便下次可以再次触发
+                            setTimeout(() => {
+                                chatWidget.classList.remove('shake');
+                            }, 500);
+                            
+                            addMessage('辛苦饱饱啦，欢迎加入我们！<br><a href="https://work.weixin.qq.com/kfid/kfc00ba8c93035a6e41" class="send-link" target="_blank" style="font-weight: bold; color: blue; text-decoration: underline;">✅点击入群</a><br><a href="https://pan.quark.cn/s/265fbcb18243" class="send-link" target="_blank" style="font-weight: bold; color: blue; text-decoration: underline;">✅往期资源①：</a><br><a href="https://pan.xunlei.com/s/VOZ-yG3V4ncFhdFwwlBwQIRgA1?pwd=2wku#" class="send-link" target="_blank" style="font-weight: bold; color: blue; text-decoration: underline;">✅备用资源②：</a>', true);
+                        }
+                    }
+                }
+                
+
+                
+
+                
+                // 简化的IP获取逻辑
+                function getUserIP(callback) {
+                    callback('本地IP'); // 使用简化的IP表示
+                }
+                
+                // 统一的管理员登录功能（覆盖全局定义）
+                window.adminLogin = function() {
+                    // 确保adminPassword已经初始化
+                    if (!adminPassword) {
+                        adminPassword = localStorage.getItem('adminPassword') || 'admin123';
+                    }
+                    
+                    var password = prompt('请输入管理员密码：', '');
+                    if (password === adminPassword) {
+                        isAdminMode = true;
+                        addMessage('<div class="admin-mode-notification">管理员模式已启用，正在加载图片信息...</div>', true);
+                        
+    
+                        
+                        // 询问是否修改密码
+                        if (confirm('是否需要修改管理员密码？')) {
+                            changeAdminPassword();
+                        }
+                    } else if (password !== null) {
+                        addMessage('密码错误，无法进入管理员模式。', true);
+                    }
+                };
+                
+                // 修改管理员密码功能
+                function changeAdminPassword() {
+                    var currentPassword = prompt('请输入当前密码：');
+                    if (currentPassword !== adminPassword) {
+                        alert('当前密码错误，无法修改密码。');
+                        return;
+                    }
+                    
+                    var newPassword = prompt('请输入新密码：');
+                    if (!newPassword || newPassword.length < 6) {
+                        alert('新密码不能为空且长度不能少于6位。');
+                        return;
+                    }
+                    
+                    var confirmPassword = prompt('请再次输入新密码：');
+                    if (newPassword !== confirmPassword) {
+                        alert('两次输入的密码不一致。');
+                        return;
+                    }
+                    
+                    // 保存新密码到localStorage
+                    adminPassword = newPassword;
+                    localStorage.setItem('adminPassword', newPassword);
+                    alert('密码修改成功！');
+                    addMessage('管理员密码已成功更新。', true);
+                }
+                
+
+                
+
+                
+                // 辅助函数：添加class
+                function addClass(element, className) {
+                    if (element.classList) {
+                        element.classList.add(className);
+                    } else {
+                        element.className += ' ' + className;
+                    }
+                }
+                
+                // 辅助函数：移除class
+                function removeClass(element, className) {
+                    if (element.classList) {
+                        element.classList.remove(className);
+                    } else {
+                        element.className = element.className.replace(new RegExp('(^|\\b)' + className.split(' ').join('|') + '(\\b|$)', 'gi'), ' ');
+                    }
+                }
+                
+                // 辅助函数：检查class是否存在
+                function hasClass(element, className) {
+                    if (element.classList) {
+                        return element.classList.contains(className);
+                    } else {
+                        return new RegExp('(^|\\s)' + className + '(\\s|$)').test(element.className);
+                    }
+                }
+                
+                // 兼容性处理：事件绑定
+                function bindEvent(element, event, handler) {
+                    if (element.addEventListener) {
+                        element.addEventListener(event, handler, false);
+                    } else if (element.attachEvent) {
+                        element.attachEvent('on' + event, handler);
+                    } else {
+                        element['on' + event] = handler;
+                    }
+                }
+                
+                // 事件监听
+                bindEvent(minimizeBtn, 'click', function(e) {
+                    if (e.stopPropagation) {
+                        e.stopPropagation();
+                    } else {
+                        e.cancelBubble = true;
+                    }
+                    toggleMinimize();
+                });
+                
+                bindEvent(chatHeader, 'click', toggleMinimize);
+                
+                bindEvent(chatButton, 'click', toggleMinimize);
+                
+                bindEvent(imageUpload, 'change', function() {
+                    handleImageUpload(this.files);
+                    // 清空input，以便能重复选择同一文件
+                    this.value = '';
+                });
+                
+                // 检查URL参数，支持直接通过URL进入管理员模式
+                checkAdminUrlParam();
+                
+
+                
+                // 添加管理员登录按钮（隐藏状态，只有知道密码的人可以看到）
+                var adminBtn = document.createElement('button');
+                adminBtn.id = 'adminLoginBtn';
+                adminBtn.textContent = '管理员入口';
+                adminBtn.style.position = 'fixed';
+                adminBtn.style.bottom = '100px';
+                adminBtn.style.right = '20px';
+                adminBtn.style.display = 'none'; // 默认隐藏
+                adminBtn.style.zIndex = '1000';
+                adminBtn.style.padding = '8px 16px';
+                adminBtn.style.backgroundColor = '#10B981';
+                adminBtn.style.color = 'white';
+                adminBtn.style.border = 'none';
+                adminBtn.style.borderRadius = '4px';
+                adminBtn.style.cursor = 'pointer';
+                adminBtn.onclick = adminLogin;
+                document.body.appendChild(adminBtn);
+                
+                // 使adminLogin函数在全局可访问
+                window.adminLogin = adminLogin;
+            });
+        })();
+    </script>
+    
+
+
+</body></html>

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+    <!-- 网站主页 - 92chigua.shop -->
+    <url>
+        <loc>https://92chigua.shop/</loc>
+        <lastmod>2024-05-14</lastmod>
+        <changefreq>daily</changefreq>
+        <priority>1.0</priority>
+    </url>
+    <!-- 产品详情页 - 92chigua.shop -->
+    <url>
+        <loc>https://92chigua.shop/product-showcase.html</loc>
+        <lastmod>2024-05-14</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    
+    <!-- 网站主页 - 1qcg.lol -->
+    <url>
+        <loc>https://1qcg.lol/</loc>
+        <lastmod>2024-05-14</lastmod>
+        <changefreq>daily</changefreq>
+        <priority>1.0</priority>
+    </url>
+    <!-- 产品详情页 - 1qcg.lol -->
+    <url>
+        <loc>https://1qcg.lol/product-showcase.html</loc>
+        <lastmod>2024-05-14</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    
+    <!-- 网站主页 - cg666.icu -->
+    <url>
+        <loc>https://cg666.icu/</loc>
+        <lastmod>2024-05-14</lastmod>
+        <changefreq>daily</changefreq>
+        <priority>1.0</priority>
+    </url>
+    <!-- 产品详情页 - cg666.icu -->
+    <url>
+        <loc>https://cg666.icu/product-showcase.html</loc>
+        <lastmod>2024-05-14</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+    </url>
+</urlset>

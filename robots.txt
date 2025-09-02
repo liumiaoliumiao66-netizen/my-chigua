@@ -1,0 +1,10 @@
+User-agent: *
+Disallow:
+
+# 允许所有搜索引擎爬虫访问所有内容
+# 百度特定爬虫
+sitemap: https://92chigua.shop/sitemap.xml
+sitemap: https://1qcg.lol/sitemap.xml
+sitemap: https://cg666.icu/sitemap.xml
+
+# 注意：上线时请将sitemap中的域名替换为您实际的域名
