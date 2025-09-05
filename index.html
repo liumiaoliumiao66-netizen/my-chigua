@@ -232,6 +232,9 @@
             min-width: 100%;
             height: 100%;
             object-fit: contain;
+            display: block;
+            /* 确保图片加载时的平滑过渡 */
+            transition: opacity 0.3s ease-in-out;
         }
         /* 关键词框 */
         .keyword-container {
@@ -428,10 +431,12 @@
                 <!-- 图片轮播 -->
                 <div class="carousel-container">
                     <div id="carousel" class="carousel">
-                        <img src="images/01.jpg" alt="轮播图片1">
-                        <img src="images/02.jpg" alt="轮播图片2">
-                        <img src="images/03.jpg" alt="轮播图片3">
-                        <img src="images/04.jpg" alt="轮播图片4">
+                        <!-- 首图使用loading="eager"确保尽快加载 -->
+                        <img src="images/01.jpg" alt="轮播图片1" loading="eager" width="100%" height="100%" class="carousel-image">
+                        <!-- 其他图片使用懒加载 -->
+                        <img src="images/02.jpg" alt="轮播图片2" loading="lazy" width="100%" height="100%" class="carousel-image">
+                        <img src="images/03.jpg" alt="轮播图片3" loading="lazy" width="100%" height="100%" class="carousel-image">
+                        <img src="images/04.jpg" alt="轮播图片4" loading="lazy" width="100%" height="100%" class="carousel-image">
                     </div>
                 </div>
             </div>
@@ -572,27 +577,59 @@
         }
         
         ready(function() {
-            // 图片轮播功能 - 使用兼容旧浏览器的方式
-            var currentSlide = 0;
-            var carousel = document.getElementById('carousel');
-            var slides = carousel.children;
-            var slideCount = slides.length;
-            
-            function nextSlide() {
-                currentSlide = (currentSlide + 1) % slideCount;
-                updateSlidePosition();
+            // 图片预加载函数 - 优化LCP
+            function preloadImage(src) {
+                return new Promise((resolve, reject) => {
+                    const img = new Image();
+                    img.onload = resolve;
+                    img.onerror = reject;
+                    img.src = src;
+                });
             }
-            
-            function updateSlidePosition() {
-                var slideWidth = 100; // 百分比
-                // 使用兼容旧浏览器的方式设置transform
-                carousel.style.transform = 'translateX(-' + (currentSlide * slideWidth) + '%)';
-                carousel.style.webkitTransform = 'translateX(-' + (currentSlide * slideWidth) + '%)';
-                carousel.style.msTransform = 'translateX(-' + (currentSlide * slideWidth) + '%)';
+
+            // 优先预加载LCP元素（首图）
+            const lcpImage = document.querySelector('.carousel-image[loading="eager"]');
+            if (lcpImage) {
+                // 确保首图已加载完成后再执行其他逻辑
+                if (lcpImage.complete) {
+                    loadCriticalResources();
+                } else {
+                    lcpImage.onload = loadCriticalResources;
+                }
+            } else {
+                // 如果没有找到LCP图片，直接加载关键资源
+                loadCriticalResources();
             }
-            
-            // 每1.5秒切换一次图片
-            setInterval(nextSlide, 1500);
+
+            // 加载其他关键资源
+            function loadCriticalResources() {
+                // 图片轮播功能 - 使用兼容旧浏览器的方式
+                var currentSlide = 0;
+                var carousel = document.getElementById('carousel');
+                var slides = carousel.children;
+                var slideCount = slides.length;
+                
+                function nextSlide() {
+                    currentSlide = (currentSlide + 1) % slideCount;
+                    updateSlidePosition();
+                }
+                
+                function updateSlidePosition() {
+                    var slideWidth = 100; // 百分比
+                    // 使用兼容旧浏览器的方式设置transform
+                    carousel.style.transform = 'translateX(-' + (currentSlide * slideWidth) + '%)';
+                    carousel.style.webkitTransform = 'translateX(-' + (currentSlide * slideWidth) + '%)';
+                    carousel.style.msTransform = 'translateX(-' + (currentSlide * slideWidth) + '%)';
+                }
+                
+                // 每1.5秒切换一次图片
+                setInterval(nextSlide, 1500);
+                
+                // 预加载下一张轮播图
+                if (slides.length > 1) {
+                    preloadImage(slides[1].src);
+                }
+            }
             
             // 复制文本功能 - 简化版本
             var copyElements = document.getElementsByClassName('copy-text');

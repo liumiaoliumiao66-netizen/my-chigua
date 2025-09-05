@@ -50,14 +50,24 @@
             background-color: white;
         }
         
-        /* 图片样式 - 确保无缝连接 */
+        /* 图片样式 - 确保无缝连接和布局稳定性 */
         .image-container img {
             width: 100%;
             height: auto;
             display: block;
             border: none;
             outline: none;
-            transition: transform 0.3s ease;
+            transition: transform 0.3s ease, opacity 0.3s ease-in-out;
+        }
+        
+        /* 为防止布局偏移，设置图片容器固定宽高比 */
+        .image-container {
+            display: flex;
+            flex-direction: column;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            background-color: white;
         }
         
         /* 去除图片间的间隙 */
@@ -103,11 +113,13 @@
     <div class="image-showcase">
         <!-- 图片容器 - 竖排连续无缝展示 -->
         <div class="image-container">
-            <img src="images/q1.jpeg" alt="产品图片1" class="showcase-image">
-            <img src="images/q2.gif" alt="产品图片2" class="showcase-image">
-            <img src="images/q3.jpg" alt="产品图片3" class="showcase-image">
-            <img src="images/q4.jpg" alt="产品图片4" class="showcase-image">
-            <img src="images/q5.jpg" alt="产品图片5" class="showcase-image">
+            <!-- 首图使用loading="eager"确保尽快加载 -->
+            <img src="images/q1.jpeg" alt="产品图片1" class="showcase-image" loading="eager" width="100%">
+            <!-- 其他图片使用懒加载 -->
+            <img src="images/q2.gif" alt="产品图片2" class="showcase-image" loading="lazy" width="100%">
+            <img src="images/q3.jpg" alt="产品图片3" class="showcase-image" loading="lazy" width="100%">
+            <img src="images/q4.jpg" alt="产品图片4" class="showcase-image" loading="lazy" width="100%">
+            <img src="images/q5.jpg" alt="产品图片5" class="showcase-image" loading="lazy" width="100%">
         </div>
     </div>
     
@@ -117,26 +129,58 @@
     </div>
     
     <script>
-        // 获取DOM元素
-        const imageOverlay = document.getElementById('imageOverlay');
-        const enlargedImage = document.getElementById('enlargedImage');
-        const showcaseImages = document.querySelectorAll('.showcase-image');
-        
-        // 为每个图片添加点击事件
-        showcaseImages.forEach(img => {
-            img.addEventListener('click', function() {
-                // 设置放大图片的源
-                enlargedImage.src = this.src;
-                // 显示覆盖层
-                imageOverlay.style.display = 'flex';
-                // 阻止事件冒泡
-                event.stopPropagation();
+        // 图片预加载函数 - 优化LCP
+        function preloadImage(src) {
+            return new Promise((resolve, reject) => {
+                const img = new Image();
+                img.onload = resolve;
+                img.onerror = reject;
+                img.src = src;
             });
-        });
-        
-        // 点击覆盖层关闭放大图片
-        imageOverlay.addEventListener('click', function() {
-            this.style.display = 'none';
+        }
+
+        // 优先加载LCP元素（首图）
+        document.addEventListener('DOMContentLoaded', function() {
+            // 获取DOM元素
+            const imageOverlay = document.getElementById('imageOverlay');
+            const enlargedImage = document.getElementById('enlargedImage');
+            const showcaseImages = document.querySelectorAll('.showcase-image');
+            
+            // 确保首图已加载完成
+            const lcpImage = document.querySelector('.showcase-image[loading="eager"]');
+            if (lcpImage) {
+                if (lcpImage.complete) {
+                    initPage();
+                } else {
+                    lcpImage.onload = initPage;
+                }
+            } else {
+                initPage();
+            }
+            
+            function initPage() {
+                // 预加载其他图片
+                for (let i = 1; i < showcaseImages.length; i++) {
+                    preloadImage(showcaseImages[i].src);
+                }
+                
+                // 为每个图片添加点击事件
+                showcaseImages.forEach(img => {
+                    img.addEventListener('click', function(e) {
+                        // 设置放大图片的源
+                        enlargedImage.src = this.src;
+                        // 显示覆盖层
+                        imageOverlay.style.display = 'flex';
+                        // 阻止事件冒泡
+                        e.stopPropagation();
+                    });
+                });
+                
+                // 点击覆盖层关闭放大图片
+                imageOverlay.addEventListener('click', function() {
+                    this.style.display = 'none';
+                });
+            }
         });
         
         // 监听ESC键关闭放大图片
