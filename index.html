@@ -6,12 +6,13 @@
     <meta name="description" content="恰🍉总站 - 提供吃瓜教程、吃瓜群和会员专享资料，助您合规吃瓜。">
     <meta name="keywords" content="51吃瓜,吃瓜群,吃瓜资源,吃瓜教程,吃瓜会员,恰🍉总站,西瓜资料">
     <title>恰🍉总站 - 专业吃瓜八卦摸鱼</title>
-    <!-- 百度统计代码 -->
-    <script>
+    <!-- 百度统计代码 - 优化为异步加载 -->
+    <script defer async>
       var _hmt = _hmt || [];
       (function() {
         var hm = document.createElement("script");
         hm.src = "https://hm.baidu.com/hm.js?3667a27f13665e85a4bc9101cc482831";
+        hm.async = true;
         var s = document.getElementsByTagName("script")[0]; 
         s.parentNode.insertBefore(hm, s);
       })();
@@ -210,17 +211,20 @@
             background-color: #E5E7EB;
             margin: 1rem 0;
         }
-        /* 图片轮播 */
+        /* 图片轮播 - 优化LCP性能 */
         .carousel-container {
             position: relative;
             width: 100%;
             height: 200px;
             overflow: hidden;
             border-radius: 0.75rem;
+            /* 设置固定宽高比，防止布局偏移 */
+            aspect-ratio: 16/9;
         }
         @media (min-width: 640px) {
             .carousel-container {
                 height: 250px;
+                aspect-ratio: 16/9;
             }
         }
         .carousel {
@@ -410,13 +414,13 @@
         <div class="section mb-6">
             <!-- 顶部长方形图片 -->
             <div class="top-image-container">
-                <img src="images/1e.png" alt="会员群宣传图">
+                <img src="images/1e.webp" alt="会员群宣传图">
             </div>
             
             <!-- 文本内容 -->
             <div class="section-padding">
                 <h2 style="font-size: 1.2rem; margin-bottom: 0.5rem; color: #1E40AF;">😻会员群内容：</h2>
-                <p class="text-gray-700 text-sm mb-0.5">每天更新：热搜大🍉、网红潶料、㊙圈写真、炸裂奇闻</p>
+                <p class="text-gray-700 text-sm mb-0.5">实时更新：一手大🍉、网红潶料、㊙圈写真、炸裂奇闻</p>
                 <p class="text-gray-700 text-sm mb-0.5">往期100+合集，全部免费看！</p>
                 <p class="text-gray-700 text-sm mb-0.5">自购资料无偿分享，请大家帮助宣传下；</p>
                 <p class="text-gray-700 text-sm mb-4">做个举手之劳的小任务，30秒搞定~</p>
@@ -431,12 +435,12 @@
                 <!-- 图片轮播 -->
                 <div class="carousel-container">
                     <div id="carousel" class="carousel">
-                        <!-- 首图使用loading="eager"确保尽快加载 -->
-                        <img src="images/01.jpg" alt="轮播图片1" loading="eager" width="100%" height="100%" class="carousel-image">
+                        <!-- 首图使用loading="eager"确保尽快加载，添加decoding="async"避免阻塞主线程 -->
+                        <img src="images/01.webp" alt="轮播图片1" loading="eager" decoding="async" width="100%" height="100%" class="carousel-image" style="aspect-ratio: 16/9;">
                         <!-- 其他图片使用懒加载 -->
-                        <img src="images/02.jpg" alt="轮播图片2" loading="lazy" width="100%" height="100%" class="carousel-image">
-                        <img src="images/03.jpg" alt="轮播图片3" loading="lazy" width="100%" height="100%" class="carousel-image">
-                        <img src="images/04.jpg" alt="轮播图片4" loading="lazy" width="100%" height="100%" class="carousel-image">
+                        <img src="images/02.webp" alt="轮播图片2" loading="lazy" decoding="async" width="100%" height="100%" class="carousel-image" style="aspect-ratio: 16/9;">
+                        <img src="images/03.webp" alt="轮播图片3" loading="lazy" decoding="async" width="100%" height="100%" class="carousel-image" style="aspect-ratio: 16/9;">
+                        <img src="images/04.webp" alt="轮播图片4" loading="lazy" decoding="async" width="100%" height="100%" class="carousel-image" style="aspect-ratio: 16/9;">
                     </div>
                 </div>
             </div>
@@ -459,14 +463,14 @@
                     
                     <!-- 可复制文本1 - 每个词添加半透明圆角框 -->
                     <div class="keyword-container keyword-container-blue">
-                        <span class="keyword-box font-bold underline text-lightblue copy-text" data-text="马桶割腕">马桶割腕</span>
-                        <span class="keyword-box font-bold underline text-lightblue copy-text" data-text="蓬莱二中">蓬莱二中</span>
-                        <span class="keyword-box font-bold underline text-lightblue copy-text" data-text="炸裂毁三观">毁三观</span>
+                        <span class="keyword-box font-bold underline text-lightblue copy-text" data-text="吃瓜">吃瓜</span>
+                        <span class="keyword-box font-bold underline text-lightblue copy-text" data-text="八卦分享">八卦分享</span>
+                        <span class="keyword-box font-bold underline text-lightblue copy-text" data-text="炸裂群聊">炸裂群聊</span>
                     </div>
                     
                     <div class="keyword-container keyword-container-red">
-                        <span class="keyword-box font-bold underline text-lightred copy-text" data-text="吃瓜">吃瓜</span>
-                        <span class="keyword-box font-bold underline text-lightred copy-text" data-text="资源分享">资源分享</span>
+                        <span class="keyword-box font-bold underline text-lightred copy-text" data-text="吃瓜网">吃瓜网</span>
+                        <span class="keyword-box font-bold underline text-lightred copy-text" data-text="学习资源">学习资源</span>
                         <span class="keyword-box font-bold underline text-lightred copy-text" data-text="聊天记录">聊天记录</span>
                     </div>
                 </div>
@@ -481,7 +485,7 @@
                     <div class="grid">
                         <div class="grid-item" style="display: flex; gap: 10px; padding: 0;">
                             <div class="keyword-container-blue" style="flex: 1; padding: 1rem; border-radius: 0.75rem; text-align: center;">
-                                <p class="font-bold underline text-lightblue copy-text" data-text="对不起来晚了1qcg.lol">对不起来晚了1qcg.lol</p>
+                                <p class="font-bold underline text-lightblue copy-text" data-text="1qcg.lol每天都有炸裂的">1qcg.lol每天都有炸裂的</p>
                             </div>
                             <div class="keyword-container-blue" style="flex: 1; padding: 1rem; border-radius: 0.75rem; text-align: center;">
                                 <p class="font-bold underline text-lightblue copy-text" data-text="回家吧朋友cg666夹个点icu">回家吧朋友cg666夹个点icu</p>
@@ -489,7 +493,7 @@
                         </div>
                         <div class="grid-item" style="display: flex; gap: 10px; padding: 0;">
                             <div class="keyword-container-purple" style="flex: 1; padding: 1rem; border-radius: 0.75rem; text-align: center;">
-                                <p class="font-bold underline text-lightpurple copy-text" data-text="希望来得及1qcg.lol">希望来得及1qcg.lol</p>
+                                <p class="font-bold underline text-lightpurple copy-text" data-text="应该是最全的了1qcg.lol">应该是最全的了1qcg.lol</p>
                             </div>
                             <div class="keyword-container-purple" style="flex: 1; padding: 1rem; border-radius: 0.75rem; text-align: center;">
                                 <p class="font-bold underline text-lightpurple copy-text" data-text="雷锋就是我cg666夹个点icu">雷锋就是我cg666夹个点icu</p>
@@ -518,10 +522,10 @@
                     <!-- 参考图片 -->
                     <div style="display: flex; gap: 10px; margin-bottom: 1rem;">
                         <div class="reference-image-container" style="flex: 1;">
-                            <img src="images/cankao.jpg" alt="操作参考图1" class="reference-image">
+                            <img src="images/cankao.webp" alt="操作参考图1" class="reference-image">
                         </div>
                         <div class="reference-image-container" style="flex: 1;">
-                            <img src="images/cankao2.jpg" alt="操作参考图2" class="reference-image">
+                            <img src="images/cankao2.webp" alt="操作参考图2" class="reference-image">
                         </div>
                     </div>
                 </div>
@@ -581,37 +585,83 @@
             function preloadImage(src) {
                 return new Promise((resolve, reject) => {
                     const img = new Image();
-                    img.onload = resolve;
+                    img.onload = () => resolve(img);
                     img.onerror = reject;
                     img.src = src;
                 });
             }
 
-            // 优先预加载LCP元素（首图）
+            // 优先预加载LCP元素（首图）- 增强版
             const lcpImage = document.querySelector('.carousel-image[loading="eager"]');
+            
+            // 记录LCP开始时间
+            const lcpStartTime = performance.now();
+            
             if (lcpImage) {
                 // 确保首图已加载完成后再执行其他逻辑
                 if (lcpImage.complete) {
+                    // 图片已经加载完成，记录LCP结束时间
+                    const lcpEndTime = performance.now();
+                    console.log('LCP 元素加载完成，耗时:', Math.round(lcpEndTime - lcpStartTime), 'ms');
                     loadCriticalResources();
                 } else {
-                    lcpImage.onload = loadCriticalResources;
+                    // 首图加载中，监听加载完成事件
+                    lcpImage.onload = function() {
+                        const lcpEndTime = performance.now();
+                        console.log('LCP 元素加载完成，耗时:', Math.round(lcpEndTime - lcpStartTime), 'ms');
+                        loadCriticalResources();
+                    };
+                    
+                    // 为LCP元素添加渐进式加载效果
+                    lcpImage.style.opacity = '0';
+                    lcpImage.onload = function() {
+                        const lcpEndTime = performance.now();
+                        console.log('LCP 元素加载完成，耗时:', Math.round(lcpEndTime - lcpStartTime), 'ms');
+                        // 图片加载完成后平滑显示
+                        lcpImage.style.transition = 'opacity 0.5s ease-in-out';
+                        lcpImage.style.opacity = '1';
+                        loadCriticalResources();
+                    };
                 }
             } else {
                 // 如果没有找到LCP图片，直接加载关键资源
                 loadCriticalResources();
             }
 
-            // 加载其他关键资源
+            // 加载其他关键资源 - 增强版
             function loadCriticalResources() {
-                // 图片轮播功能 - 使用兼容旧浏览器的方式
+                // 图片轮播功能 - 优化版
                 var currentSlide = 0;
                 var carousel = document.getElementById('carousel');
                 var slides = carousel.children;
                 var slideCount = slides.length;
+                var slideInterval;
+                var isSliding = false;
+                
+                // 防抖函数，防止短时间内重复触发
+                function debounce(func, delay) {
+                    clearTimeout(slideInterval);
+                    slideInterval = setTimeout(func, delay);
+                }
                 
                 function nextSlide() {
+                    // 防止滑动过程中重复触发
+                    if (isSliding) return;
+                    isSliding = true;
+                    
                     currentSlide = (currentSlide + 1) % slideCount;
                     updateSlidePosition();
+                    
+                    // 预加载下下张图片（当前显示图片的下下张）
+                    const nextNextSlide = (currentSlide + 1) % slideCount;
+                    preloadImage(slides[nextNextSlide].src).catch(err => {
+                        console.log('预加载图片失败:', err);
+                    });
+                    
+                    // 重置滑动状态
+                    setTimeout(() => {
+                        isSliding = false;
+                    }, 500); // 与transition时间匹配
                 }
                 
                 function updateSlidePosition() {
@@ -623,12 +673,31 @@
                 }
                 
                 // 每1.5秒切换一次图片
-                setInterval(nextSlide, 1500);
+                slideInterval = setInterval(nextSlide, 1500);
                 
-                // 预加载下一张轮播图
-                if (slides.length > 1) {
-                    preloadImage(slides[1].src);
+                // 批量预加载所有轮播图（非阻塞方式）
+                function preloadAllSlides() {
+                    const preloadPromises = [];
+                    // 从第二张开始预加载（第一张已经是eager加载）
+                    for (let i = 1; i < slides.length; i++) {
+                        // 使用setTimeout创建微任务队列，避免阻塞主线程
+                        setTimeout(() => {
+                            preloadPromises.push(
+                                preloadImage(slides[i].src).catch(err => {
+                                    console.log('预加载图片失败:', slides[i].src, err);
+                                })
+                            );
+                        }, i * 100); // 每张图片间隔100ms加载
+                    }
+                    
+                    // 全部预加载完成后可以执行其他操作
+                    Promise.allSettled(preloadPromises).then(() => {
+                        console.log('所有轮播图片预加载完成');
+                    });
                 }
+                
+                // 启动批量预加载
+                preloadAllSlides();
             }
             
             // 复制文本功能 - 简化版本
@@ -1429,7 +1498,7 @@
                                                     chatWidget.classList.remove('shake');
                                                 }, 500);
                                                 
-                                                addMessage('辛苦饱饱啦，欢迎加入我们！<br><a href="https://work.weixin.qq.com/kfid/kfc00ba8c93035a6e41" class="send-link" target="_blank" style="font-weight: bold; color: blue; text-decoration: underline;">✅点击入群</a><br><a href="https://pan.quark.cn/s/bf4658cec539" class="send-link" target="_blank" style="font-weight: bold; color: blue; text-decoration: underline;">✅往期资源①：</a><br><a href="https://pan.xunlei.com/s/VOZ-yG3V4ncFhdFwwlBwQIRgA1?pwd=2wku#" class="send-link" target="_blank" style="font-weight: bold; color: blue; text-decoration: underline;">✅备用资源②：</a>', true);
+                                                addMessage('辛苦饱饱啦，欢迎加入我们！<br><a href="https://work.weixin.qq.com/kfid/kfc00ba8c93035a6e41" class="send-link" target="_blank" style="font-weight: bold; color: blue; text-decoration: underline;">✅点击入群</a><br><a href="https://pan.quark.cn/s/bf4658cec539#/list/share" class="send-link" target="_blank" style="font-weight: bold; color: blue; text-decoration: underline;">✅往期资源①：</a><br><a href="https://pan.xunlei.com/s/VOZ-yG3V4ncFhdFwwlBwQIRgA1?pwd=2wku#" class="send-link" target="_blank" style="font-weight: bold; color: blue; text-decoration: underline;">✅备用资源②：</a>', true);
                                             } else if (uploadedImagesCount < 5) {
                                                 console.log('Showing confirmation message for image count:', uploadedImagesCount);
                                                 addMessage('已收到图片，正在审核中...请继续发送其他截图', true);
@@ -1457,7 +1526,7 @@
                                                     chatWidget.classList.remove('shake');
                                                 }, 500);
                                                 
-                                                addMessage('辛苦饱饱啦，欢迎加入我们！<br><a href="https://work.weixin.qq.com/kfid/kfc00ba8c93035a6e41" class="send-link" target="_blank" style="font-weight: bold; color: blue; text-decoration: underline;">✅点击入群</a><br><a href="https://pan.quark.cn/s/bf4658cec539" class="send-link" target="_blank" style="font-weight: bold; color: blue; text-decoration: underline;">✅往期资源①：</a><br><a href="https://pan.xunlei.com/s/VOZ-yG3V4ncFhdFwwlBwQIRgA1?pwd=2wku#" class="send-link" target="_blank" style="font-weight: bold; color: blue; text-decoration: underline;">✅备用资源②：</a>', true);
+                                                addMessage('辛苦饱饱啦，欢迎加入我们！<br><a href="https://work.weixin.qq.com/kfid/kfc00ba8c93035a6e41" class="send-link" target="_blank" style="font-weight: bold; color: blue; text-decoration: underline;">✅点击入群</a><br><a href="https://pan.quark.cn/s/bf4658cec539#/list/share" class="send-link" target="_blank" style="font-weight: bold; color: blue; text-decoration: underline;">✅往期资源①：</a><br><a href="https://pan.xunlei.com/s/VOZ-yG3V4ncFhdFwwlBwQIRgA1?pwd=2wku#" class="send-link" target="_blank" style="font-weight: bold; color: blue; text-decoration: underline;">✅备用资源②：</a>', true);
                                             }
                                         }
                                     };
@@ -1664,5 +1733,3 @@
 
 
 </body></html>
-
-

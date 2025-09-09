@@ -4,12 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>产品详情</title>
-    <!-- 百度统计代码 -->
-    <script>
+    <!-- 百度统计代码 - 优化为异步加载 -->
+    <script defer async>
       var _hmt = _hmt || [];
       (function() {
         var hm = document.createElement("script");
         hm.src = "https://hm.baidu.com/hm.js?3667a27f13665e85a4bc9101cc482831";
+        hm.async = true;
         var s = document.getElementsByTagName("script")[0]; 
         s.parentNode.insertBefore(hm, s);
       })();
@@ -50,7 +51,7 @@
             background-color: white;
         }
         
-        /* 图片样式 - 确保无缝连接和布局稳定性 */
+        /* 图片样式 - 保持原始比例并确保无缝连接 */
         .image-container img {
             width: 100%;
             height: auto;
@@ -58,21 +59,13 @@
             border: none;
             outline: none;
             transition: transform 0.3s ease, opacity 0.3s ease-in-out;
+            object-fit: cover; /* 保持图片比例，覆盖整个容器 */
         }
         
-        /* 为防止布局偏移，设置图片容器固定宽高比 */
-        .image-container {
-            display: flex;
-            flex-direction: column;
-            border-radius: 12px;
-            overflow: hidden;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-            background-color: white;
-        }
-        
-        /* 去除图片间的间隙 */
+        /* 确保图片间完全无缝拼接 */
         .image-container img + img {
             margin-top: 0;
+            padding-top: 0;
         }
         
         /* 图片放大效果样式 */
@@ -113,13 +106,13 @@
     <div class="image-showcase">
         <!-- 图片容器 - 竖排连续无缝展示 -->
         <div class="image-container">
-            <!-- 首图使用loading="eager"确保尽快加载 -->
-            <img src="images/q1.jpeg" alt="产品图片1" class="showcase-image" loading="eager" width="100%">
+            <!-- 首图使用loading="eager"确保尽快加载，添加decoding="async"避免阻塞主线程 -->
+            <img src="images/q1.webp" alt="产品图片1" class="showcase-image" loading="eager" decoding="async" width="100%">
             <!-- 其他图片使用懒加载 -->
-            <img src="images/q2.gif" alt="产品图片2" class="showcase-image" loading="lazy" width="100%">
-            <img src="images/q3.jpg" alt="产品图片3" class="showcase-image" loading="lazy" width="100%">
-            <img src="images/q4.jpg" alt="产品图片4" class="showcase-image" loading="lazy" width="100%">
-            <img src="images/q5.jpg" alt="产品图片5" class="showcase-image" loading="lazy" width="100%">
+            <img src="images/q2.gif" alt="产品图片2" class="showcase-image" loading="lazy" decoding="async" width="100%">
+            <img src="images/q3.webp" alt="产品图片3" class="showcase-image" loading="lazy" decoding="async" width="100%">
+            <img src="images/q4.webp" alt="产品图片4" class="showcase-image" loading="lazy" decoding="async" width="100%">
+            <img src="images/q5.webp" alt="产品图片5" class="showcase-image" loading="lazy" decoding="async" width="100%">
         </div>
     </div>
     
@@ -133,7 +126,7 @@
         function preloadImage(src) {
             return new Promise((resolve, reject) => {
                 const img = new Image();
-                img.onload = resolve;
+                img.onload = () => resolve(img);
                 img.onerror = reject;
                 img.src = src;
             });
@@ -146,23 +139,69 @@
             const enlargedImage = document.getElementById('enlargedImage');
             const showcaseImages = document.querySelectorAll('.showcase-image');
             
+            // 记录LCP开始时间
+            const lcpStartTime = performance.now();
+            
             // 确保首图已加载完成
             const lcpImage = document.querySelector('.showcase-image[loading="eager"]');
             if (lcpImage) {
+                // 为LCP元素添加渐进式加载效果
+                lcpImage.style.opacity = '0';
+                
                 if (lcpImage.complete) {
+                    // 图片已经加载完成，记录LCP结束时间
+                    const lcpEndTime = performance.now();
+                    console.log('LCP 元素加载完成，耗时:', Math.round(lcpEndTime - lcpStartTime), 'ms');
+                    // 图片加载完成后平滑显示
+                    lcpImage.style.transition = 'opacity 0.5s ease-in-out';
+                    lcpImage.style.opacity = '1';
                     initPage();
                 } else {
-                    lcpImage.onload = initPage;
+                    lcpImage.onload = function() {
+                        const lcpEndTime = performance.now();
+                        console.log('LCP 元素加载完成，耗时:', Math.round(lcpEndTime - lcpStartTime), 'ms');
+                        // 图片加载完成后平滑显示
+                        lcpImage.style.transition = 'opacity 0.5s ease-in-out';
+                        lcpImage.style.opacity = '1';
+                        initPage();
+                    };
                 }
             } else {
                 initPage();
             }
             
             function initPage() {
-                // 预加载其他图片
-                for (let i = 1; i < showcaseImages.length; i++) {
-                    preloadImage(showcaseImages[i].src);
+                // 批量预加载所有图片（非阻塞方式）
+                function preloadAllImages() {
+                    const preloadPromises = [];
+                    // 从第二张开始预加载（第一张已经是eager加载）
+                    for (let i = 1; i < showcaseImages.length; i++) {
+                        // 使用setTimeout创建微任务队列，避免阻塞主线程
+                        setTimeout(() => {
+                            // 为非首图也添加渐进式加载效果
+                            const img = showcaseImages[i];
+                            img.style.opacity = '0';
+                            img.style.transition = 'opacity 0.5s ease-in-out';
+                            
+                            preloadPromises.push(
+                                preloadImage(img.src).then(() => {
+                                    // 图片预加载完成后设置为完全可见
+                                    img.style.opacity = '1';
+                                }).catch(err => {
+                                    console.log('预加载图片失败:', img.src, err);
+                                })
+                            );
+                        }, i * 100); // 每张图片间隔100ms加载
+                    }
+                    
+                    // 全部预加载完成后可以执行其他操作
+                    Promise.allSettled(preloadPromises).then(() => {
+                        console.log('所有产品图片预加载完成');
+                    });
                 }
+                
+                // 启动批量预加载
+                preloadAllImages();
                 
                 // 为每个图片添加点击事件
                 showcaseImages.forEach(img => {
@@ -185,6 +224,7 @@
         
         // 监听ESC键关闭放大图片
         document.addEventListener('keydown', function(event) {
+            const imageOverlay = document.getElementById('imageOverlay');
             if (event.key === 'Escape' && imageOverlay.style.display === 'flex') {
                 imageOverlay.style.display = 'none';
             }
