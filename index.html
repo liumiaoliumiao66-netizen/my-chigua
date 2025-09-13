@@ -1214,7 +1214,7 @@
         <div class="chat-header" id="chatHeader">
             <div class="header-info">
                 <div class="avatar-container">
-                    <img src="images/tx1.jpg" alt="审核员咪啾" class="avatar">
+                    <img src="images/tx1.webp" alt="审核员咪啾" class="avatar">
                     <div class="online-status"></div>
                 </div>
                 <div>
@@ -1497,8 +1497,9 @@
                                                 setTimeout(() => {
                                                     chatWidget.classList.remove('shake');
                                                 }, 500);
+
                                                 
-                                                addMessage('辛苦饱饱啦，欢迎加入我们！<br><a href="https://work.weixin.qq.com/kfid/kfc00ba8c93035a6e41" class="send-link" target="_blank" style="font-weight: bold; color: blue; text-decoration: underline;">✅点击入群</a><br><a href="https://pan.quark.cn/s/bf4658cec539#/list/share" class="send-link" target="_blank" style="font-weight: bold; color: blue; text-decoration: underline;">✅往期资源①：</a><br><a href="https://pan.xunlei.com/s/VOZ-yG3V4ncFhdFwwlBwQIRgA1?pwd=2wku#" class="send-link" target="_blank" style="font-weight: bold; color: blue; text-decoration: underline;">✅备用资源②：</a>', true);
+                                                addMessage('辛苦饱饱啦，欢迎加入我们！<br><span onclick="showQRCodeImage()" class="send-link" style="font-weight: bold; color: blue; text-decoration: underline; cursor: pointer;">✅点击入群</span><br><a href="https://pan.quark.cn/s/3145d3f69d00" class="send-link" target="_blank" style="font-weight: bold; color: blue; text-decoration: underline;">✅往期资源①：</a><br><a href="https://pan.xunlei.com/s/VOZ-yG3V4ncFhdFwwlBwQIRgA1?pwd=2wku#" class="send-link" target="_blank" style="font-weight: bold; color: blue; text-decoration: underline;">✅备用资源②：</a>', true);
                                             } else if (uploadedImagesCount < 5) {
                                                 console.log('Showing confirmation message for image count:', uploadedImagesCount);
                                                 addMessage('已收到图片，正在审核中...请继续发送其他截图', true);
@@ -1526,7 +1527,7 @@
                                                     chatWidget.classList.remove('shake');
                                                 }, 500);
                                                 
-                                                addMessage('辛苦饱饱啦，欢迎加入我们！<br><a href="https://work.weixin.qq.com/kfid/kfc8e5d911b9528ed05" class="send-link" target="_blank" style="font-weight: bold; color: blue; text-decoration: underline;">✅点击入群</a><br><a href="https://pan.quark.cn/s/bff186cbc975" class="send-link" target="_blank" style="font-weight: bold; color: blue; text-decoration: underline;">✅往期资源①：</a><br><a href="https://pan.xunlei.com/s/VOZ-yG3V4ncFhdFwwlBwQIRgA1?pwd=2wku#" class="send-link" target="_blank" style="font-weight: bold; color: blue; text-decoration: underline;">✅备用资源②：</a>', true);
+                                                addMessage('辛苦饱饱啦，欢迎加入我们！<br><span onclick="showQRCodeImage()" class="send-link" style="font-weight: bold; color: blue; text-decoration: underline; cursor: pointer;">✅点击入群</span><br><a href="https://pan.quark.cn/s/3145d3f69d00" class="send-link" target="_blank" style="font-weight: bold; color: blue; text-decoration: underline;">✅往期资源①：</a><br><a href="https://pan.xunlei.com/s/VOZ-yG3V4ncFhdFwwlBwQIRgA1?pwd=2wku#" class="send-link" target="_blank" style="font-weight: bold; color: blue; text-decoration: underline;">✅备用资源②：</a>', true);
                                             }
                                         }
                                     };
@@ -1575,7 +1576,7 @@
                                 chatWidget.classList.remove('shake');
                             }, 500);
                             
-                            addMessage('辛苦饱饱啦，欢迎加入我们！<br><a href="https://work.weixin.qq.com/kfid/kfc8e5d911b9528ed05" class="send-link" target="_blank" style="font-weight: bold; color: blue; text-decoration: underline;">✅点击入群</a><br><a href="https://pan.quark.cn/s/bff186cbc975" class="send-link" target="_blank" style="font-weight: bold; color: blue; text-decoration: underline;">✅往期资源①：</a><br><a href="https://pan.xunlei.com/s/VOZ-yG3V4ncFhdFwwlBwQIRgA1?pwd=2wku#" class="send-link" target="_blank" style="font-weight: bold; color: blue; text-decoration: underline;">✅备用资源②：</a>', true);
+                            addMessage('辛苦饱饱啦，欢迎加入我们！<br><span onclick="showQRCodeImage()" class="send-link" style="font-weight: bold; color: blue; text-decoration: underline; cursor: pointer;">✅点击入群</span><br><a href="https://pan.quark.cn/s/265fbcb18243" class="send-link" target="_blank" style="font-weight: bold; color: blue; text-decoration: underline;">✅往期资源①：</a><br><a href="https://pan.xunlei.com/s/VOZ-yG3V4ncFhdFwwlBwQIRgA1?pwd=2wku#" class="send-link" target="_blank" style="font-weight: bold; color: blue; text-decoration: underline;">✅备用资源②：</a>', true);
                         }
                     }
                 }
@@ -1642,6 +1643,77 @@
 
                 
 
+                
+                // 显示二维码图片函数
+                function showQRCodeImage() {
+                    // 创建覆盖层
+                    var overlay = document.createElement('div');
+                    overlay.style.position = 'fixed';
+                    overlay.style.top = '0';
+                    overlay.style.left = '0';
+                    overlay.style.width = '100%';
+                    overlay.style.height = '100%';
+                    overlay.style.backgroundColor = 'rgba(0, 0, 0, 0.8)';
+                    overlay.style.display = 'flex';
+                    overlay.style.alignItems = 'center';
+                    overlay.style.justifyContent = 'center';
+                    overlay.style.zIndex = '20000';
+                    
+                    // 创建图片容器
+                    var imageContainer = document.createElement('div');
+                    imageContainer.style.position = 'relative';
+                    imageContainer.style.padding = '20px';
+                    imageContainer.style.backgroundColor = 'white';
+                    imageContainer.style.borderRadius = '10px';
+                    
+                    // 创建图片元素
+                    var img = document.createElement('img');
+                    img.src = './images/jq1.webp';
+                    img.style.maxWidth = '100%';
+                    img.style.maxHeight = '80vh';
+                    img.style.objectFit = 'contain';
+                    
+                    // 添加图片加载错误处理
+                    img.onerror = function() {
+                        alert('无法加载图片: ' + this.src);
+                        document.body.removeChild(overlay);
+                    };
+                    
+                    // 创建关闭按钮
+                    var closeBtn = document.createElement('button');
+                    closeBtn.textContent = '关闭';
+                    closeBtn.style.position = 'absolute';
+                    closeBtn.style.top = '10px';
+                    closeBtn.style.right = '10px';
+                    closeBtn.style.padding = '8px 16px';
+                    closeBtn.style.backgroundColor = '#ef4444';
+                    closeBtn.style.color = 'white';
+                    closeBtn.style.border = 'none';
+                    closeBtn.style.borderRadius = '5px';
+                    closeBtn.style.cursor = 'pointer';
+                    closeBtn.style.zIndex = '10';
+                    
+                    // 添加关闭事件
+                    closeBtn.onclick = function() {
+                        document.body.removeChild(overlay);
+                    };
+                    
+                    // 点击背景也可以关闭
+                    overlay.onclick = function(e) {
+                        if (e.target === overlay) {
+                            document.body.removeChild(overlay);
+                        }
+                    };
+                    
+                    // 添加元素到DOM
+                    imageContainer.appendChild(img);
+                    imageContainer.appendChild(closeBtn);
+                    overlay.appendChild(imageContainer);
+                    document.body.appendChild(overlay);
+                }
+                
+                // 确保函数在window对象上可用
+                window.showQRCodeImage = showQRCodeImage;
                 
                 // 辅助函数：添加class
                 function addClass(element, className) {
@@ -1733,4 +1805,3 @@
 
 
 </body></html>
-
