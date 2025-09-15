@@ -838,92 +838,173 @@
                 preloadAllSlides();
             }
             
-            // 复制文本功能 - 兼容老款安卓浏览器版本
+            // 复制文本功能 - 超强兼容老款安卓浏览器版本
             function initCopyText() {
+                // 首先添加一个全局的备用复制方法
+                window.copyToClipboardFallback = function(text) {
+                    var textArea = document.createElement('textarea');
+                    textArea.value = text;
+                    textArea.style.position = 'fixed';
+                    textArea.style.left = '-999999px';
+                    textArea.style.top = '-999999px';
+                    document.body.appendChild(textArea);
+                    textArea.select();
+                    
+                    try {
+                        // 尝试传统的复制方法
+                        var successful = document.execCommand('copy');
+                        if (successful) {
+                            showCopyToast();
+                        } else {
+                            // 降级：如果复制失败，使用提示引导用户手动复制
+                            alert('请长按文本并选择"复制"');
+                        }
+                    } catch (err) {
+                        alert('请长按文本并选择"复制"');
+                    } finally {
+                        document.body.removeChild(textArea);
+                    }
+                };
+                
                 var copyElements = document.getElementsByClassName('copy-text');
                 for (var i = 0; i < copyElements.length; i++) {
-                    // 确保在老浏览器中也能绑定事件
-                    if (copyElements[i].addEventListener) {
-                        copyElements[i].addEventListener('click', copyToClipboard);
+                    var element = copyElements[i];
+                    var text = element.getAttribute('data-text');
+                    
+                    // 为每个复制元素添加一个备用复制按钮
+                    addFallbackCopyButton(element, text);
+                    
+                    // 使用最基础的事件绑定方式
+                    if (element.addEventListener) {
+                        element.addEventListener('click', function(e) {
+                            var target = e.target || e.srcElement;
+                            var textToCopy = target.getAttribute('data-text');
+                            copyToClipboardEnhanced(textToCopy);
+                        });
+                    } else if (element.attachEvent) {
+                        // IE8及以下兼容
+                        element.attachEvent('onclick', function(e) {
+                            e = e || window.event;
+                            var target = e.srcElement;
+                            var textToCopy = target.getAttribute('data-text');
+                            copyToClipboardEnhanced(textToCopy);
+                        });
                     } else {
-                        // 兼容IE8及以下
-                        copyElements[i].attachEvent('onclick', copyToClipboard);
+                        // 最基础的绑定方式
+                        element.onclick = function() {
+                            var textToCopy = this.getAttribute('data-text');
+                            copyToClipboardEnhanced(textToCopy);
+                        };
                     }
                 }
             }
             
-            function copyToClipboard(event) {
-                // 获取触发事件的元素
-                var target = event.target || event.srcElement;
-                var textToCopy = target.getAttribute('data-text');
+            // 为每个复制元素添加备用按钮
+            function addFallbackCopyButton(element, text) {
+                // 检查元素是否已经有父容器
+                var parent = element.parentNode;
                 
-                // 创建临时文本区域用于复制
-                var tempTextArea = document.createElement('textarea');
-                tempTextArea.value = textToCopy;
+                // 为第二步中的文本添加特殊处理
+                if (parent && parent.classList && (parent.classList.contains('keyword-container-blue') || parent.classList.contains('keyword-container-purple'))) {
+                    // 在第二步中的关键词，创建一个备用按钮
+                    var fallbackBtn = document.createElement('button');
+                    fallbackBtn.innerHTML = '复制';
+                    fallbackBtn.className = 'fallback-copy-btn';
+                    fallbackBtn.style.display = 'inline-block';
+                    fallbackBtn.style.marginLeft = '8px';
+                    fallbackBtn.style.padding = '4px 8px';
+                    fallbackBtn.style.fontSize = '12px';
+                    fallbackBtn.style.backgroundColor = '#666';
+                    fallbackBtn.style.color = 'white';
+                    fallbackBtn.style.border = 'none';
+                    fallbackBtn.style.borderRadius = '4px';
+                    fallbackBtn.style.cursor = 'pointer';
+                    
+                    // 绑定点击事件
+                    fallbackBtn.onclick = function(e) {
+                        e.stopPropagation ? e.stopPropagation() : (e.cancelBubble = true);
+                        copyToClipboardEnhanced(text);
+                    };
+                    
+                    // 将按钮添加到父元素中
+                    parent.appendChild(fallbackBtn);
+                }
+            }
+            
+            // 增强版复制函数，包含多种复制策略
+            function copyToClipboardEnhanced(textToCopy) {
+                // 1. 尝试现代方法
+                if (tryModernCopy(textToCopy)) {
+                    showCopyToast();
+                    return;
+                }
                 
-                // 兼容性样式设置
-                tempTextArea.style.position = 'fixed';
-                tempTextArea.style.left = '-9999px';
-                tempTextArea.style.top = '-9999px';
-                tempTextArea.style.width = '1px';
-                tempTextArea.style.height = '1px';
-                tempTextArea.style.padding = '0';
-                tempTextArea.style.border = 'none';
-                tempTextArea.style.outline = 'none';
-                tempTextArea.style.boxShadow = 'none';
-                tempTextArea.style.background = 'transparent';
+                // 2. 尝试传统方法
+                if (tryLegacyCopy(textToCopy)) {
+                    showCopyToast();
+                    return;
+                }
                 
+                // 3. 尝试创建临时输入框并聚焦
                 try {
-                    document.body.appendChild(tempTextArea);
+                    var tempInput = document.createElement('input');
+                    tempInput.value = textToCopy;
+                    tempInput.style.position = 'fixed';
+                    tempInput.style.left = '-9999px';
+                    document.body.appendChild(tempInput);
                     
-                    // 兼容多种选择文本的方式
-                    if (tempTextArea.createTextRange) {
-                        // IE兼容
-                        var range = tempTextArea.createTextRange();
-                        range.execCommand('select');
-                    } else if (window.getSelection) {
-                        // 标准浏览器
-                        tempTextArea.select();
-                    } else if (tempTextArea.setSelectionRange) {
-                        // 移动设备
-                        tempTextArea.setSelectionRange(0, 999999);
-                    }
+                    // 尝试聚焦和选择
+                    if (tempInput.focus) tempInput.focus();
+                    if (tempInput.select) tempInput.select();
                     
-                    // 执行复制操作
-                    var success = false;
-                    try {
-                        success = document.execCommand('copy');
-                    } catch (err) {
-                        // 降级方案：如果复制失败，尝试使用古老的window.clipboardData
-                        try {
-                            if (window.clipboardData && window.clipboardData.setData) {
-                                window.clipboardData.setData('Text', textToCopy);
-                                success = true;
-                            }
-                        } catch (err2) {
-                            console.log('复制失败:', err2);
-                        }
-                    }
-                    
-                    // 显示复制提示
-                    if (success) {
-                        showCopyToast();
-                    } else {
-                        // 复制失败时提供一个简单的提示
-                        alert('已选择文本，请手动复制: ' + textToCopy);
+                    // 显示手动复制提示
+                    setTimeout(function() {
+                        alert('文本已选中，请长按并选择"复制"');
+                        document.body.removeChild(tempInput);
+                    }, 100);
+                } catch (err) {
+                    // 终极降级：直接显示文本并提示用户手动复制
+                    alert('请手动复制：' + textToCopy);
+                }
+            }
+            
+            // 尝试现代复制方法
+            function tryModernCopy(text) {
+                try {
+                    if (navigator.clipboard && window.isSecureContext) {
+                        navigator.clipboard.writeText(text);
+                        return true;
                     }
                 } catch (err) {
-                    console.log('复制操作异常:', err);
-                    // 简单的降级提示
-                    alert('复制失败，请手动选择并复制文本');
-                } finally {
-                    // 确保移除临时元素
-                    try {
-                        if (tempTextArea.parentNode) {
-                            document.body.removeChild(tempTextArea);
-                        }
-                    } catch (e) {}
+                    console.log('现代复制方法失败:', err);
                 }
+                return false;
+            }
+            
+            // 尝试传统复制方法
+            function tryLegacyCopy(text) {
+                try {
+                    var textArea = document.createElement('textarea');
+                    textArea.value = text;
+                    textArea.style.position = 'fixed';
+                    textArea.style.left = '-9999px';
+                    
+                    document.body.appendChild(textArea);
+                    
+                    // 使用多种选择方式
+                    if (textArea.setSelectionRange) {
+                        textArea.setSelectionRange(0, text.length);
+                    } else {
+                        textArea.select();
+                    }
+                    
+                    var successful = document.execCommand('copy');
+                    document.body.removeChild(textArea);
+                    return successful;
+                } catch (err) {
+                    console.log('传统复制方法失败:', err);
+                }
+                return false;
             }
             
             function showCopyToast() {
@@ -944,7 +1025,17 @@
             }
             
             // 初始化复制功能
-            initCopyText();
+            try {
+                // 使用setTimeout确保DOM完全加载
+                if (window.attachEvent) {
+                    window.attachEvent('onload', initCopyText);
+                } else {
+                    window.addEventListener('load', initCopyText, false);
+                }
+            } catch (err) {
+                // 如果以上方法都失败，直接执行初始化
+                setTimeout(initCopyText, 1000);
+            }
             
             // 图片点击放大功能 - 支持两张并排图片
             var referenceImages = document.querySelectorAll('.reference-image');
