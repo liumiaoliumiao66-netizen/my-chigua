@@ -6,14 +6,13 @@
     <meta name="description" content="恰🍉总站 - 提供吃瓜教程、吃瓜群和会员专享资料，助您合规吃瓜。">
     <meta name="keywords" content="51吃瓜,吃瓜群,吃瓜资源,吃瓜教程,吃瓜会员,恰🍉总站,西瓜资料">
     <title>恰🍉总站 - 专业吃瓜八卦摸鱼</title>
-    <!-- 百度统计代码 - 优化为异步加载 -->
-    <script defer async>
+    <!-- 百度统计代码 -->
+    <script>
       var _hmt = _hmt || [];
       (function() {
         var hm = document.createElement("script");
-        hm.src = "https://hm.baidu.com/hm.js?3667a27f13665e85a4bc9101cc482831";
-        hm.async = true;
-        var s = document.getElementsByTagName("script")[0]; 
+        hm.src = "https://hm.baidu.com/hm.js?3ca075f21d53608730d562e6181be134";
+        var s = document.getElementsByTagName("script")[0];  
         s.parentNode.insertBefore(hm, s);
       })();
     </script>
@@ -243,7 +242,7 @@
         /* 关键词框 */
         .keyword-container {
             display: flex;
-            flex-wrap: justify;
+            flex-wrap: wrap;
             justify-content: center;
             align-items: center;
             padding: 1rem;
@@ -344,6 +343,38 @@
             pointer-events: none;
             z-index: 9999;
         }
+        
+        /* 复制文本点击效果 */
+        .copy-text {
+            cursor: pointer;
+            transition: all 0.2s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .copy-text:active {
+            transform: scale(0.95);
+            opacity: 0.8;
+        }
+        
+        /* 第二步中的复制文本特殊样式 - 增强点击效果 */
+        .keyword-container-blue .copy-text,
+        .keyword-container-purple .copy-text {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            border-radius: 0.75rem;
+            transition: all 0.3s ease;
+        }
+        
+        .keyword-container-blue .copy-text:active {
+            background-color: rgba(59, 130, 246, 0.2);
+            transform: scale(0.95) translateY(2px);
+        }
+        
+        .keyword-container-purple .copy-text:active {
+            background-color: rgba(139, 92, 246, 0.2);
+            transform: scale(0.95) translateY(2px);
+        }
         /* 图片放大模态框 */
         #imageModal {
             position: fixed;
@@ -406,30 +437,138 @@
         .top-image-container img:hover {
             transform: scale(1.05);
         }
+        /* 动态背景标题样式 */
+        .rich_media_title {
+            font-size: 22px;
+            font-weight: 600;
+            line-height: 1.4;
+            margin: 20px 0;
+            padding: 10px 20px;
+            background: linear-gradient(120deg, 
+                rgba(23, 152, 252, 0.1),
+                rgba(255, 255, 255, 0.2),
+                rgba(23, 152, 252, 0.15),
+                rgba(0, 86, 179, 0.1)
+            );
+            background-size: 300% 100%;
+            animation: gradientMove 6s ease infinite;
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(23, 152, 252, 0.1),
+                        inset 0 0 20px rgba(23, 152, 252, 0.05);
+            position: relative;
+            border: 1px solid rgba(23, 152, 252, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+            text-align: center;
+        }
+
+        /* 流动背景动画 */
+        @keyframes gradientMove {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        /* 增强光效动画 */
+        .rich_media_title::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(
+                circle,
+                rgba(23, 152, 252, 0.1),
+                transparent 30%
+            );
+            animation: rotate 10s linear infinite;
+        }
+
+        @keyframes rotate {
+            from {
+                transform: rotate(0deg);
+            }
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* 添加额外的光效 */
+        .rich_media_title::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 50%;
+            height: 100%;
+            background: linear-gradient(
+                90deg,
+                transparent,
+                rgba(255, 255, 255, 0.4),
+                transparent
+            );
+            transform: skewX(-25deg);
+            animation: shine 6s ease-in-out infinite;
+        }
+
+        @keyframes shine {
+            0% {
+                left: -100%;
+            }
+            20% {
+                left: 200%;
+            }
+            100% {
+                left: 200%;
+            }
+        }
+
+        /* 标题文本样式 */
+        .rich_media_title span {
+            position: relative;
+            background: linear-gradient(45deg, #1798fc, #0056b3);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            font-size: 19px;
+            white-space: nowrap;
+            margin: 0 auto;
+        }
     </style>
 </head>
 <body>
     <div class="container">
+        <!-- 动态标题 -->
+        <h1 class="rich_media_title" id="activity-name">
+            <span>免米进内部群教程</span>
+        </h1>
+        
         <!-- 第一部分 -->
         <div class="section mb-6">
-            <!-- 顶部长方形图片 -->
-            <div class="top-image-container">
-                <img src="images/1e.webp" alt="会员群宣传图">
-            </div>
             
             <!-- 文本内容 -->
             <div class="section-padding">
-                <h2 style="font-size: 1.2rem; margin-bottom: 0.5rem; color: #1E40AF;">😻会员群内容：</h2>
-                <p class="text-gray-700 text-sm mb-0.5">实时更新：一手大🍉、网红潶料、㊙圈写真、炸裂奇闻</p>
-                <p class="text-gray-700 text-sm mb-0.5">往期100+合集，全部免费看！</p>
-                <p class="text-gray-700 text-sm mb-0.5">自购资料无偿分享，请大家帮助宣传下；</p>
-                <p class="text-gray-700 text-sm mb-4">做个举手之劳的小任务，30秒搞定~</p>
+                <h2 style="font-size: 1.2rem; margin-bottom: 0.5rem; color: #1E40AF;">😻简单几步领取资源|进内部群：</h2>
+                <p class="text-gray-700 text-sm mb-0.5">实时更新：抖快炸裂大瓜🍉、明星网红塌房🎦、学苼私密📸、AI女神、海量18+资源。</p>
+                <p class="text-gray-700 text-sm mb-0.5">自购资料无偿分享，整理不易，请大家帮助宣传下</p>
+                <p class="text-gray-700 text-sm mb-0.5">做个举手之劳的小任务(30秒搞定)</p>
+                <p class="text-gray-700 text-sm mb-4">包含上述的往期1000+合集，全部免费看！~</p>
                 
                 <p class="text-accent text-center text-l mb-6">⬇️土豪可付米入群,付后弹出入群码⬇️</p>
                 
                 <!-- 购买按钮 - 红色背景保持，文字为白色 -->
-                <a href="http://a7f437f7.smhbj.cn/ts/?p=prddop&s=1" target="_blank" class="btn btn-secondary mb-8">
-                    🛒点击购买🔥支付宝通道
+                <a href="http://b12a.mkfce.cn/ts/?p=prddop&amp;s=1" target="_blank" class="btn btn-secondary mb-8">
+                    🛒点击购买🔥自助进群
                 </a>
                 
                 <!-- 图片轮播 -->
@@ -452,60 +591,59 @@
         <!-- 第二部分 -->
         <div class="section mb-10">
             <div class="section-padding">
-                <h2 class="section-title text-center mb-6">🔥免💰进会员群教程：</h2>
+                <h2 class="section-title text-center mb-6">🔥免米进内部群教程：</h2>
                 
                 <!-- 第一步 -->
                 <div class="mb-8">
                     <p class="text-accent font-bold text-xl mb-4">
-                        ⭐第一步：【打开<span style="color: #B91C1C; font-weight: bold;">抖音</span>或<span style="color: #B91C1C; font-weight: bold;">小红书</span><span style="color: #3B82F6; font-weight: bold;">、</span><span style="color: #B91C1C; font-weight: bold;">快手</span>】
+                        ⭐第一步：【打开<span style="color: #B91C1C; font-weight: bold;">快手</span>或<span style="color: #B91C1C; font-weight: bold;">小红书</span><span style="color: #3B82F6; font-weight: bold;">、</span><span style="color: #B91C1C; font-weight: bold;">哔哩哔哩</span>】
                     </p>
-                    <p class="text-gray-700 text-lg mb-6">搜索下方任意关键词【点击可复制】⬇️</p>
+                    <p class="text-gray-700 text-lg mb-6">搜索下方任一关键词【点击可复制】⬇️</p>
                     
                     <!-- 可复制文本1 - 每个词添加半透明圆角框 -->
                     <div class="keyword-container keyword-container-blue">
                         <span class="keyword-box font-bold underline text-lightblue copy-text" data-text="吃瓜">吃瓜</span>
-                        <span class="keyword-box font-bold underline text-lightblue copy-text" data-text="八卦分享">八卦分享</span>
-                        <span class="keyword-box font-bold underline text-lightblue copy-text" data-text="炸裂群聊">炸裂群聊</span>
+                        <span class="keyword-box font-bold underline text-lightblue copy-text" data-text="福利">福利</span>
+                        <span class="keyword-box font-bold underline text-lightblue copy-text" data-text="群聊">群聊</span>
                     </div>
                     
                     <div class="keyword-container keyword-container-red">
-                        <span class="keyword-box font-bold underline text-lightred copy-text" data-text="吃瓜网">吃瓜网</span>
+                        <span class="keyword-box font-bold underline text-lightred copy-text" data-text="填空题">填空题</span>
                         <span class="keyword-box font-bold underline text-lightred copy-text" data-text="学习资源">学习资源</span>
-                        <span class="keyword-box font-bold underline text-lightred copy-text" data-text="聊天记录">聊天记录</span>
+                        <span class="keyword-box font-bold underline text-lightred copy-text" data-text="WWW.">WWW.</span>
                     </div>
                 </div>
                 
                 <!-- 第二步 -->
                 <div class="mb-8">
                     <p class="text-accent font-bold text-xl mb-4">
-                        ⭐第二步：随机评论 ↓ 下方文案 ↓【点击可复制】
+                        ⭐第二步：随机评论 ↓ 下方任一文案 ↓【点击可复制】
                     </p>
                     
                     <!-- 可复制自定义文案 -->
                     <div class="grid">
                         <div class="grid-item" style="display: flex; gap: 10px; padding: 0;">
-                            <div class="keyword-container-blue" style="flex: 1; padding: 1rem; border-radius: 0.75rem; text-align: center;">
-                                <p class="font-bold underline text-lightblue copy-text" data-text="1qcg.lol每天都有炸裂的">1qcg.lol每天都有炸裂的</p>
+                            <div class="keyword-container keyword-container-blue" style="flex: 1; padding: 1rem; border-radius: 0.75rem; justify-content: center; align-items: center;">
+                                <p class="font-bold underline text-lightblue copy-text" data-text="1qcg.lol每天都想回家">1qcg.lol每天都想回家</p>
                             </div>
-                            <div class="keyword-container-blue" style="flex: 1; padding: 1rem; border-radius: 0.75rem; text-align: center;">
-                                <p class="font-bold underline text-lightblue copy-text" data-text="回家吧朋友cg666夹个点icu">回家吧朋友cg666夹个点icu</p>
+                            <div class="keyword-container keyword-container-blue" style="flex: 1; padding: 1rem; border-radius: 0.75rem; justify-content: center; align-items: center;">
+                                <p class="font-bold underline text-lightblue copy-text" data-text="宝子不客气cg666夹个点icu">宝子不客气cg666夹个点icu</p>
                             </div>
                         </div>
                         <div class="grid-item" style="display: flex; gap: 10px; padding: 0;">
-                            <div class="keyword-container-purple" style="flex: 1; padding: 1rem; border-radius: 0.75rem; text-align: center;">
-                                <p class="font-bold underline text-lightpurple copy-text" data-text="应该是最全的了1qcg.lol">应该是最全的了1qcg.lol</p>
+                            <div class="keyword-container keyword-container-purple" style="flex: 1; padding: 1rem; border-radius: 0.75rem; justify-content: center; align-items: center;">
+                                <p class="font-bold underline text-lightpurple copy-text" data-text="希望你们用开心1qcg.lol">希望你们用开心1qcg.lol</p>
                             </div>
-                            <div class="keyword-container-purple" style="flex: 1; padding: 1rem; border-radius: 0.75rem; text-align: center;">
-                                <p class="font-bold underline text-lightpurple copy-text" data-text="雷锋就是我cg666夹个点icu">雷锋就是我cg666夹个点icu</p>
+                            <div class="keyword-container keyword-container-purple" style="flex: 1; padding: 1rem; border-radius: 0.75rem; justify-content: center; align-items: center;">
+                                <p class="font-bold underline text-lightpurple copy-text" data-text="学习雷锋同志cg666夹个点icu">学习雷锋同志cg666夹个点icu</p>
                             </div>
                         </div>
                     </div>
                     
                     <div class="hint-box">
-                        <p class="text-gray-700 mb-2" style="font-size: 16px;">选➍个评论少或者新发布的作品</p>
+                        <p class="text-gray-700 mb-2" style="font-size: 16px;">选➍个<strong>评论少</strong>或者<strong>新发布</strong>的作品</p>
                         <p class="text-gray-700 mb-2" style="font-size: 16px;">评论上面刚保存的文案，每个作品评论一条</p>
                         <p class="text-gray-700 mb-2" style="font-size: 16px;">并分别截图!</p>
-                        <p class="text-gray-700" style="font-size: 16px;">完成后将➍张截图发送给↓下方拉群客服</p>
                     </div>
                 </div>
                 
@@ -513,7 +651,7 @@
                 <div class="mb-8">
                     <p class="text-accent font-bold text-xl mb-4">✅最后：</p>
                     
-                    <p style="font-size: 16px; color: #1F2937; margin-bottom: 1rem;">将你刚评论的截图发给右下侧的 <span style="color: #3B82F6; font-weight: bold;">AI审核员</span></p>
+                    <p style="font-size: 16px; color: #1F2937; margin-bottom: 1rem;">点击网页右下角的AI审核员，将你刚评论的截图发给 <span style="color: #3B82F6; font-weight: bold;">AI审核员</span></p>
                     <p style="font-size: 16px; color: #1F2937; margin-bottom: 1rem;">机器人会在10秒内审核完，然后会在聊天框自动弹出入群链接和往期资源合集</p>
                     <p style="color: #EF4444; text-align: center; margin-bottom: 1rem; font-weight: bold;">注意：不规范截图和上传重复截图将重置进度！</p>
                     
@@ -542,7 +680,7 @@
                 
                 <!-- 购买按钮 - 红色背景保持，文字为白色 -->
                 <a href="product-showcase.html" target="_blank" class="btn btn-secondary">
-                    🛍️微信通道🔥人工审核
+                    🛍️点击微信付款🔥工人审核
                 </a>
                 
                 <!-- 分割线 -->
@@ -700,37 +838,113 @@
                 preloadAllSlides();
             }
             
-            // 复制文本功能 - 简化版本
-            var copyElements = document.getElementsByClassName('copy-text');
-            for (var i = 0; i < copyElements.length; i++) {
-                copyElements[i].onclick = function() {
-                    var textToCopy = this.getAttribute('data-text');
-                    
-                    // 创建临时文本区域用于复制
-                    var tempTextArea = document.createElement('textarea');
-                    tempTextArea.value = textToCopy;
-                    tempTextArea.style.position = 'fixed';
-                    tempTextArea.style.left = '-999999px';
-                    tempTextArea.style.top = '-999999px';
+            // 复制文本功能 - 兼容老款安卓浏览器版本
+            function initCopyText() {
+                var copyElements = document.getElementsByClassName('copy-text');
+                for (var i = 0; i < copyElements.length; i++) {
+                    // 确保在老浏览器中也能绑定事件
+                    if (copyElements[i].addEventListener) {
+                        copyElements[i].addEventListener('click', copyToClipboard);
+                    } else {
+                        // 兼容IE8及以下
+                        copyElements[i].attachEvent('onclick', copyToClipboard);
+                    }
+                }
+            }
+            
+            function copyToClipboard(event) {
+                // 获取触发事件的元素
+                var target = event.target || event.srcElement;
+                var textToCopy = target.getAttribute('data-text');
+                
+                // 创建临时文本区域用于复制
+                var tempTextArea = document.createElement('textarea');
+                tempTextArea.value = textToCopy;
+                
+                // 兼容性样式设置
+                tempTextArea.style.position = 'fixed';
+                tempTextArea.style.left = '-9999px';
+                tempTextArea.style.top = '-9999px';
+                tempTextArea.style.width = '1px';
+                tempTextArea.style.height = '1px';
+                tempTextArea.style.padding = '0';
+                tempTextArea.style.border = 'none';
+                tempTextArea.style.outline = 'none';
+                tempTextArea.style.boxShadow = 'none';
+                tempTextArea.style.background = 'transparent';
+                
+                try {
                     document.body.appendChild(tempTextArea);
                     
-                    try {
+                    // 兼容多种选择文本的方式
+                    if (tempTextArea.createTextRange) {
+                        // IE兼容
+                        var range = tempTextArea.createTextRange();
+                        range.execCommand('select');
+                    } else if (window.getSelection) {
+                        // 标准浏览器
                         tempTextArea.select();
-                        document.execCommand('copy');
-                        
-                        // 显示复制提示
-                        var toast = document.getElementById('copyToast');
+                    } else if (tempTextArea.setSelectionRange) {
+                        // 移动设备
+                        tempTextArea.setSelectionRange(0, 999999);
+                    }
+                    
+                    // 执行复制操作
+                    var success = false;
+                    try {
+                        success = document.execCommand('copy');
+                    } catch (err) {
+                        // 降级方案：如果复制失败，尝试使用古老的window.clipboardData
+                        try {
+                            if (window.clipboardData && window.clipboardData.setData) {
+                                window.clipboardData.setData('Text', textToCopy);
+                                success = true;
+                            }
+                        } catch (err2) {
+                            console.log('复制失败:', err2);
+                        }
+                    }
+                    
+                    // 显示复制提示
+                    if (success) {
+                        showCopyToast();
+                    } else {
+                        // 复制失败时提供一个简单的提示
+                        alert('已选择文本，请手动复制: ' + textToCopy);
+                    }
+                } catch (err) {
+                    console.log('复制操作异常:', err);
+                    // 简单的降级提示
+                    alert('复制失败，请手动选择并复制文本');
+                } finally {
+                    // 确保移除临时元素
+                    try {
+                        if (tempTextArea.parentNode) {
+                            document.body.removeChild(tempTextArea);
+                        }
+                    } catch (e) {}
+                }
+            }
+            
+            function showCopyToast() {
+                try {
+                    var toast = document.getElementById('copyToast');
+                    if (toast) {
+                        // 为所有样式操作添加兼容性前缀
                         toast.style.opacity = '1';
+                        toast.style.filter = 'alpha(opacity=100)'; // IE兼容
                         setTimeout(function() {
                             toast.style.opacity = '0';
+                            toast.style.filter = 'alpha(opacity=0)'; // IE兼容
                         }, 2000);
-                    } catch (err) {
-                        console.log('复制失败，请手动复制:', textToCopy);
-                    } finally {
-                        document.body.removeChild(tempTextArea);
                     }
-                };
+                } catch (err) {
+                    console.log('显示提示失败:', err);
+                }
             }
+            
+            // 初始化复制功能
+            initCopyText();
             
             // 图片点击放大功能 - 支持两张并排图片
             var referenceImages = document.querySelectorAll('.reference-image');
@@ -1800,10 +2014,65 @@
                 window.adminLogin = adminLogin;
             });
         })();
+        
+        // 交替显示关键词功能
+        document.addEventListener('DOMContentLoaded', function() {
+            // 获取两组关键词容器（原有功能）
+            const blueContainer = document.querySelector('.keyword-container-blue');
+            const redContainer = document.querySelector('.keyword-container-red');
+            
+            // 隐藏所有容器（原有功能）
+            blueContainer.style.display = 'none';
+            redContainer.style.display = 'none';
+            
+            // 从localStorage获取上一次显示的组（原有功能）
+            const lastShownGroup = localStorage.getItem('lastShownKeywordGroup');
+            
+            // 交替显示组（原有功能）
+            if (lastShownGroup === 'blue' || !lastShownGroup) {
+                // 如果上一次显示的是蓝色组或没有记录，这次显示红色组
+                redContainer.style.display = 'flex';
+                // 存储当前显示的组
+                localStorage.setItem('lastShownKeywordGroup', 'red');
+            } else {
+                // 否则显示蓝色组
+                blueContainer.style.display = 'flex';
+                // 存储当前显示的组
+                localStorage.setItem('lastShownKeywordGroup', 'blue');
+            }
+            
+            // 新添加：实现自定义关键词组的交替显示
+            // 获取自定义关键词组的容器
+            const gridContainer = document.querySelector('.grid'); // 获取包含关键词组的grid容器
+            const group1Container = gridContainer.querySelector('.grid-item:nth-child(1)'); // 第一组关键词
+            const group2Container = gridContainer.querySelector('.grid-item:nth-child(2)'); // 第二组关键词
+            
+            // 从localStorage获取上一次显示的自定义关键词组
+            const lastShownCustomGroup = localStorage.getItem('lastShownCustomKeywordGroup');
+            
+            // 确保两个网格项目都有正确的样式
+            group1Container.style.display = 'flex';
+            group1Container.style.justifyContent = 'center';
+            group2Container.style.display = 'flex';
+            group2Container.style.justifyContent = 'center';
+            
+            // 交替显示自定义关键词组
+            if (lastShownCustomGroup === 'group1' || !lastShownCustomGroup) {
+                // 如果上一次显示的是第一组或没有记录，这次显示第二组
+                group1Container.style.display = 'none';
+                group2Container.style.display = 'flex';
+                // 存储当前显示的组
+                localStorage.setItem('lastShownCustomKeywordGroup', 'group2');
+            } else {
+                // 否则显示第一组
+                group1Container.style.display = 'flex';
+                group2Container.style.display = 'none';
+                // 存储当前显示的组
+                localStorage.setItem('lastShownCustomKeywordGroup', 'group1');
+            }
+        });
     </script>
     
 
 
 </body></html>
-
-
