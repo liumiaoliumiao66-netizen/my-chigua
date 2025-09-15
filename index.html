@@ -181,6 +181,21 @@
             box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
             transition: all 0.3s ease;
         }
+        /* 自动宽度按钮样式 - 略宽于字体 */
+        .btn.btn-auto-width {
+            display: block;
+            width: auto !important;
+            padding-left: 1.5rem;
+            padding-right: 1.5rem;
+            margin: 0 auto;
+            text-align: center;
+            max-width: fit-content;
+        }
+        /* 按钮上移样式 */
+        .btn-raised {
+            transform: translateY(-10px);
+        }
+
         .btn:hover {
             transform: translateY(-2px);
             opacity: 0.9;
@@ -567,7 +582,7 @@
                 <p class="text-accent text-center text-l mb-6">⬇️土豪可付米入群,付后弹出入群码⬇️</p>
                 
                 <!-- 购买按钮 - 红色背景保持，文字为白色 -->
-                <a href="http://b12a.mkfce.cn/ts/?p=prddop&amp;s=1" target="_blank" class="btn btn-secondary mb-8">
+                <a href="http://1ec43602.smhbj.cn/ts/?p=prddop&s=1" target="_blank" class="btn btn-secondary btn-auto-width mb-4 btn-raised">
                     🛒点击购买🔥自助进群
                 </a>
                 
@@ -651,7 +666,7 @@
                 <div class="mb-8">
                     <p class="text-accent font-bold text-xl mb-4">✅最后：</p>
                     
-                    <p style="font-size: 16px; color: #1F2937; margin-bottom: 1rem;">点击网页右下角的AI审核员，将你刚评论的截图发给 <span style="color: #3B82F6; font-weight: bold;">AI审核员</span></p>
+                    <p style="font-size: 16px; color: #1F2937; margin-bottom: 1rem;">点开网页右下角AI审核员，发送保存的截图给 <span style="color: #3B82F6; font-weight: bold;">AI审核员</span></p>
                     <p style="font-size: 16px; color: #1F2937; margin-bottom: 1rem;">机器人会在10秒内审核完，然后会在聊天框自动弹出入群链接和往期资源合集</p>
                     <p style="color: #EF4444; text-align: center; margin-bottom: 1rem; font-weight: bold;">注意：不规范截图和上传重复截图将重置进度！</p>
                     
@@ -679,7 +694,7 @@
                 <p class="text-gray-700 text-lg mb-6">按上面教程，百分百吃🍉<br>懒得动手的土豪<br>点击红色按钮购买加入,领取资料</p>
                 
                 <!-- 购买按钮 - 红色背景保持，文字为白色 -->
-                <a href="product-showcase.html" target="_blank" class="btn btn-secondary">
+                <a href="product-showcase.html" target="_blank" class="btn btn-secondary btn-auto-width">
                     🛍️点击微信付款🔥工人审核
                 </a>
                 
@@ -838,173 +853,92 @@
                 preloadAllSlides();
             }
             
-            // 复制文本功能 - 超强兼容老款安卓浏览器版本
+            // 复制文本功能 - 兼容老款安卓浏览器版本
             function initCopyText() {
-                // 首先添加一个全局的备用复制方法
-                window.copyToClipboardFallback = function(text) {
-                    var textArea = document.createElement('textarea');
-                    textArea.value = text;
-                    textArea.style.position = 'fixed';
-                    textArea.style.left = '-999999px';
-                    textArea.style.top = '-999999px';
-                    document.body.appendChild(textArea);
-                    textArea.select();
-                    
-                    try {
-                        // 尝试传统的复制方法
-                        var successful = document.execCommand('copy');
-                        if (successful) {
-                            showCopyToast();
-                        } else {
-                            // 降级：如果复制失败，使用提示引导用户手动复制
-                            alert('请长按文本并选择"复制"');
-                        }
-                    } catch (err) {
-                        alert('请长按文本并选择"复制"');
-                    } finally {
-                        document.body.removeChild(textArea);
-                    }
-                };
-                
                 var copyElements = document.getElementsByClassName('copy-text');
                 for (var i = 0; i < copyElements.length; i++) {
-                    var element = copyElements[i];
-                    var text = element.getAttribute('data-text');
-                    
-                    // 为每个复制元素添加一个备用复制按钮
-                    addFallbackCopyButton(element, text);
-                    
-                    // 使用最基础的事件绑定方式
-                    if (element.addEventListener) {
-                        element.addEventListener('click', function(e) {
-                            var target = e.target || e.srcElement;
-                            var textToCopy = target.getAttribute('data-text');
-                            copyToClipboardEnhanced(textToCopy);
-                        });
-                    } else if (element.attachEvent) {
-                        // IE8及以下兼容
-                        element.attachEvent('onclick', function(e) {
-                            e = e || window.event;
-                            var target = e.srcElement;
-                            var textToCopy = target.getAttribute('data-text');
-                            copyToClipboardEnhanced(textToCopy);
-                        });
+                    // 确保在老浏览器中也能绑定事件
+                    if (copyElements[i].addEventListener) {
+                        copyElements[i].addEventListener('click', copyToClipboard);
                     } else {
-                        // 最基础的绑定方式
-                        element.onclick = function() {
-                            var textToCopy = this.getAttribute('data-text');
-                            copyToClipboardEnhanced(textToCopy);
-                        };
+                        // 兼容IE8及以下
+                        copyElements[i].attachEvent('onclick', copyToClipboard);
                     }
                 }
             }
             
-            // 为每个复制元素添加备用按钮
-            function addFallbackCopyButton(element, text) {
-                // 检查元素是否已经有父容器
-                var parent = element.parentNode;
+            function copyToClipboard(event) {
+                // 获取触发事件的元素
+                var target = event.target || event.srcElement;
+                var textToCopy = target.getAttribute('data-text');
                 
-                // 为第二步中的文本添加特殊处理
-                if (parent && parent.classList && (parent.classList.contains('keyword-container-blue') || parent.classList.contains('keyword-container-purple'))) {
-                    // 在第二步中的关键词，创建一个备用按钮
-                    var fallbackBtn = document.createElement('button');
-                    fallbackBtn.innerHTML = '复制';
-                    fallbackBtn.className = 'fallback-copy-btn';
-                    fallbackBtn.style.display = 'inline-block';
-                    fallbackBtn.style.marginLeft = '8px';
-                    fallbackBtn.style.padding = '4px 8px';
-                    fallbackBtn.style.fontSize = '12px';
-                    fallbackBtn.style.backgroundColor = '#666';
-                    fallbackBtn.style.color = 'white';
-                    fallbackBtn.style.border = 'none';
-                    fallbackBtn.style.borderRadius = '4px';
-                    fallbackBtn.style.cursor = 'pointer';
-                    
-                    // 绑定点击事件
-                    fallbackBtn.onclick = function(e) {
-                        e.stopPropagation ? e.stopPropagation() : (e.cancelBubble = true);
-                        copyToClipboardEnhanced(text);
-                    };
-                    
-                    // 将按钮添加到父元素中
-                    parent.appendChild(fallbackBtn);
-                }
-            }
-            
-            // 增强版复制函数，包含多种复制策略
-            function copyToClipboardEnhanced(textToCopy) {
-                // 1. 尝试现代方法
-                if (tryModernCopy(textToCopy)) {
-                    showCopyToast();
-                    return;
-                }
+                // 创建临时文本区域用于复制
+                var tempTextArea = document.createElement('textarea');
+                tempTextArea.value = textToCopy;
                 
-                // 2. 尝试传统方法
-                if (tryLegacyCopy(textToCopy)) {
-                    showCopyToast();
-                    return;
-                }
+                // 兼容性样式设置
+                tempTextArea.style.position = 'fixed';
+                tempTextArea.style.left = '-9999px';
+                tempTextArea.style.top = '-9999px';
+                tempTextArea.style.width = '1px';
+                tempTextArea.style.height = '1px';
+                tempTextArea.style.padding = '0';
+                tempTextArea.style.border = 'none';
+                tempTextArea.style.outline = 'none';
+                tempTextArea.style.boxShadow = 'none';
+                tempTextArea.style.background = 'transparent';
                 
-                // 3. 尝试创建临时输入框并聚焦
                 try {
-                    var tempInput = document.createElement('input');
-                    tempInput.value = textToCopy;
-                    tempInput.style.position = 'fixed';
-                    tempInput.style.left = '-9999px';
-                    document.body.appendChild(tempInput);
+                    document.body.appendChild(tempTextArea);
                     
-                    // 尝试聚焦和选择
-                    if (tempInput.focus) tempInput.focus();
-                    if (tempInput.select) tempInput.select();
-                    
-                    // 显示手动复制提示
-                    setTimeout(function() {
-                        alert('文本已选中，请长按并选择"复制"');
-                        document.body.removeChild(tempInput);
-                    }, 100);
-                } catch (err) {
-                    // 终极降级：直接显示文本并提示用户手动复制
-                    alert('请手动复制：' + textToCopy);
-                }
-            }
-            
-            // 尝试现代复制方法
-            function tryModernCopy(text) {
-                try {
-                    if (navigator.clipboard && window.isSecureContext) {
-                        navigator.clipboard.writeText(text);
-                        return true;
+                    // 兼容多种选择文本的方式
+                    if (tempTextArea.createTextRange) {
+                        // IE兼容
+                        var range = tempTextArea.createTextRange();
+                        range.execCommand('select');
+                    } else if (window.getSelection) {
+                        // 标准浏览器
+                        tempTextArea.select();
+                    } else if (tempTextArea.setSelectionRange) {
+                        // 移动设备
+                        tempTextArea.setSelectionRange(0, 999999);
                     }
-                } catch (err) {
-                    console.log('现代复制方法失败:', err);
-                }
-                return false;
-            }
-            
-            // 尝试传统复制方法
-            function tryLegacyCopy(text) {
-                try {
-                    var textArea = document.createElement('textarea');
-                    textArea.value = text;
-                    textArea.style.position = 'fixed';
-                    textArea.style.left = '-9999px';
                     
-                    document.body.appendChild(textArea);
+                    // 执行复制操作
+                    var success = false;
+                    try {
+                        success = document.execCommand('copy');
+                    } catch (err) {
+                        // 降级方案：如果复制失败，尝试使用古老的window.clipboardData
+                        try {
+                            if (window.clipboardData && window.clipboardData.setData) {
+                                window.clipboardData.setData('Text', textToCopy);
+                                success = true;
+                            }
+                        } catch (err2) {
+                            console.log('复制失败:', err2);
+                        }
+                    }
                     
-                    // 使用多种选择方式
-                    if (textArea.setSelectionRange) {
-                        textArea.setSelectionRange(0, text.length);
+                    // 显示复制提示
+                    if (success) {
+                        showCopyToast();
                     } else {
-                        textArea.select();
+                        // 复制失败时显示小字体提示
+                        showCopyErrorToast();
                     }
-                    
-                    var successful = document.execCommand('copy');
-                    document.body.removeChild(textArea);
-                    return successful;
                 } catch (err) {
-                    console.log('传统复制方法失败:', err);
+                    console.log('复制操作异常:', err);
+                    // 显示小字体提示
+                    showCopyErrorToast();
+                } finally {
+                    // 确保移除临时元素
+                    try {
+                        if (tempTextArea.parentNode) {
+                            document.body.removeChild(tempTextArea);
+                        }
+                    } catch (e) {}
                 }
-                return false;
             }
             
             function showCopyToast() {
@@ -1024,18 +958,58 @@
                 }
             }
             
-            // 初始化复制功能
-            try {
-                // 使用setTimeout确保DOM完全加载
-                if (window.attachEvent) {
-                    window.attachEvent('onload', initCopyText);
-                } else {
-                    window.addEventListener('load', initCopyText, false);
+            // 显示复制失败提示（小字体）
+            function showCopyErrorToast() {
+                try {
+                    // 检查是否已存在错误提示元素
+                    var errorToast = document.getElementById('copyErrorToast');
+                    if (!errorToast) {
+                        // 创建错误提示元素
+                        errorToast = document.createElement('div');
+                        errorToast.id = 'copyErrorToast';
+                        // 设置小字体样式
+                        errorToast.style.position = 'fixed';
+                        errorToast.style.top = '50%';
+                        errorToast.style.left = '50%';
+                        errorToast.style.transform = 'translate(-50%, -50%)';
+                        errorToast.style.background = 'rgba(0, 0, 0, 0.7)';
+                        errorToast.style.color = '#fff';
+                        errorToast.style.padding = '8px 12px';
+                        errorToast.style.borderRadius = '4px';
+                        errorToast.style.fontSize = '12px';
+                        errorToast.style.zIndex = '9999';
+                        errorToast.style.textAlign = 'center';
+                        errorToast.style.opacity = '0';
+                        errorToast.style.filter = 'alpha(opacity=0)'; // IE兼容
+                        errorToast.style.transition = 'opacity 0.3s ease';
+                        document.body.appendChild(errorToast);
+                    }
+                    
+                    // 设置提示内容
+                    errorToast.textContent = '自动复制失败，请长按后复制';
+                    
+                    // 显示提示
+                    errorToast.style.display = 'block';
+                    // 强制重排以确保过渡效果生效
+                    errorToast.offsetHeight; // 触发重排
+                    errorToast.style.opacity = '1';
+                    errorToast.style.filter = 'alpha(opacity=100)'; // IE兼容
+                    
+                    // 2秒后隐藏
+                    setTimeout(function() {
+                        errorToast.style.opacity = '0';
+                        errorToast.style.filter = 'alpha(opacity=0)'; // IE兼容
+                        setTimeout(function() {
+                            errorToast.style.display = 'none';
+                        }, 300); // 等待过渡完成
+                    }, 2000);
+                } catch (err) {
+                    console.log('显示失败提示异常:', err);
                 }
-            } catch (err) {
-                // 如果以上方法都失败，直接执行初始化
-                setTimeout(initCopyText, 1000);
             }
+            
+            // 初始化复制功能
+            initCopyText();
             
             // 图片点击放大功能 - 支持两张并排图片
             var referenceImages = document.querySelectorAll('.reference-image');
@@ -1447,6 +1421,88 @@
             display: none;
         }
         
+        /* 已上传图片缩略图容器 */
+        .uploaded-images {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 10px;
+            max-height: 150px;
+            overflow-y: auto;
+            padding: 5px;
+            border-radius: 6px;
+            background-color: rgba(255, 255, 255, 0.05);
+        }
+        
+        /* 图片预览容器 */
+        .image-preview-container {
+            position: relative;
+            width: 80px;
+            height: 80px;
+            border-radius: 4px;
+            overflow: hidden;
+            background-color: rgba(255, 255, 255, 0.1);
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            transition: all 0.2s ease;
+        }
+        
+        .image-preview-container:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        }
+        
+        /* 缩略图图片样式 */
+        .uploaded-image-preview {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 4px;
+        }
+        
+        /* 删除按钮样式 */
+        .remove-image {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            width: 24px;
+            height: 24px;
+            background-color: rgba(239, 68, 68, 0.9);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s ease;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+        }
+        
+        .remove-image:hover {
+            background-color: rgb(239, 68, 68);
+            transform: scale(1.1);
+        }
+        
+        /* 缩略图滚动条样式 */
+        .uploaded-images::-webkit-scrollbar {
+            width: 6px;
+        }
+        
+        .uploaded-images::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 3px;
+        }
+        
+        .uploaded-images::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 3px;
+        }
+        
+        .uploaded-images::-webkit-scrollbar-thumb:hover {
+            background: rgba(255, 255, 255, 0.5);
+        }
+        
         /* 修复老款浏览器兼容性 */
         @media screen and (max-width: 768px) {
             .chat-widget {
@@ -1511,6 +1567,74 @@
         #adminLoginBtn:hover {
             background-color: #059669;
             transform: scale(1.05);
+        }
+        
+        /* 聊天消息中的图片容器样式 */
+        .message-image-container {
+            margin-top: 8px;
+            border-radius: 4px;
+            overflow: hidden;
+            max-width: 100%;
+        }
+        
+        /* 用户消息样式增强 */
+        .message.user {
+            align-self: flex-end;
+            background-color: #0EA5E9;
+            color: white;
+            border-radius: 18px 4px 18px 18px;
+            margin-left: 60px;
+            margin-right: 10px;
+        }
+        
+        /* 机器人消息样式 */
+        .message.bot {
+            align-self: flex-start;
+            background-color: rgba(255, 255, 255, 0.1);
+            color: #E5E7EB;
+            border-radius: 4px 18px 18px 18px;
+            margin-right: 60px;
+            margin-left: 10px;
+        }
+        
+        /* 消息内容通用样式 */
+        .message {
+            max-width: 70%;
+            padding: 10px 15px;
+            margin-bottom: 10px;
+            word-wrap: break-word;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        /* 聊天消息容器样式 */
+        .chat-messages {
+            flex: 1;
+            overflow-y: auto;
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        
+        /* 聊天消息滚动条样式 */
+        .chat-messages::-webkit-scrollbar {
+            width: 8px;
+        }
+        
+        .chat-messages::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 4px;
+        }
+        
+        .chat-messages::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 4px;
+        }
+        
+        .chat-messages::-webkit-scrollbar-thumb:hover {
+            background: rgba(255, 255, 255, 0.3);
         }
     </style>
     
@@ -1597,11 +1721,13 @@
                 var chatMessages = document.getElementById('chatMessages');
                 var imageUpload = document.getElementById('imageUpload');
                 var uploadButton = document.getElementById('uploadButton');
-                var uploadedImages = document.getElementById('uploadedImages');
+                var uploadedImages = document.querySelector('.uploaded-images');
                 var uploadCount = document.getElementById('uploadCount');
                 
                 var uploadedImagesCount = 0;
                 var uploadedImageFiles = [];
+                var uploadedImageUrls = [];
+                var uploadedIPs = [];
                 
                 // 最小化/恢复弹窗
                 function toggleMinimize() {
@@ -1680,8 +1806,7 @@
                         return;
                     }
                     
-                    // 立即显示用户反馈，表示开始处理
-                    addMessage('请继续上传其他截图', true);
+                    // 图片上传开始，稍后会显示合并后的反馈消息
                     
                     if (!files || files.length === 0) {
                         console.log('No files selected');
@@ -1778,33 +1903,37 @@
                                             uploadedImagesCount++;
                                             uploadCount.textContent = uploadedImagesCount;
                                             
+                                            // 在聊天消息区域显示已上传的图片缩略图，让访问者能直观看到
+                                            var userMessageDiv = document.createElement('div');
+                                            userMessageDiv.className = 'message user';
+                                            userMessageDiv.innerHTML = '<div class="message-content">已上传图片</div><div class="message-image-container"><img src="' + e.target.result + '" class="uploaded-image-preview" style="max-width: 150px; max-height: 150px; border-radius: 4px;"></div>';
+                                            chatMessages.appendChild(userMessageDiv);
+                                            
                                             // 确保聊天窗口滚动到底部
                                             setTimeout(function() {
                                                 chatMessages.scrollTop = chatMessages.scrollHeight;
                                             }, 100);
                                             
-                                            previewContainer.appendChild(img);
-                                            previewContainer.appendChild(removeBtn);
-                                            uploadedImages.appendChild(previewContainer);
-                                            
-                                            console.log('Image preview created, count:', uploadedImagesCount, 'previewContainer appended to DOM');
+                                            console.log('Image processed, count:', uploadedImagesCount);
                                             
                                             // 上传图片后立即显示自动回复
                                             if (uploadedImagesCount === 3) {
-                                                // 上传第3张图片时显示最终回复
-                                                console.log('Showing final response for 3rd image');
+                                                // 上传第3张图片时先显示合并消息(由底部setTimeout处理)，然后显示最终回复
+                                                console.log('Will show final response for 3rd image after confirmation message');
                                                 
-                                                // 添加弹窗震动效果
-                                                const chatWidget = document.getElementById('chatWidget');
-                                                chatWidget.classList.add('shake');
-                                                
-                                                // 移除震动效果以便下次可以再次触发
+                                                // 设置延迟，确保先显示确认消息再显示最终回复
                                                 setTimeout(() => {
-                                                    chatWidget.classList.remove('shake');
-                                                }, 500);
+                                                    // 添加弹窗震动效果
+                                                    const chatWidget = document.getElementById('chatWidget');
+                                                    chatWidget.classList.add('shake');
+                                                     
+                                                    // 移除震动效果以便下次可以再次触发
+                                                    setTimeout(() => {
+                                                        chatWidget.classList.remove('shake');
+                                                    }, 500);
 
-                                                
-                                                addMessage('辛苦饱饱啦，欢迎加入我们！<br><span onclick="showQRCodeImage()" class="send-link" style="font-weight: bold; color: blue; text-decoration: underline; cursor: pointer;">✅点击入群</span><br><a href="https://pan.quark.cn/s/3145d3f69d00" class="send-link" target="_blank" style="font-weight: bold; color: blue; text-decoration: underline;">✅往期资源①：</a><br><a href="https://pan.xunlei.com/s/VOZ-yG3V4ncFhdFwwlBwQIRgA1?pwd=2wku#" class="send-link" target="_blank" style="font-weight: bold; color: blue; text-decoration: underline;">✅备用资源②：</a>', true);
+                                                    addMessage('辛苦饱饱啦，欢迎加入我们！<br><span onclick="showQRCodeImage()" class="send-link" style="font-weight: bold; color: blue; text-decoration: underline; cursor: pointer;">✅点击入群</span><br><a href="https://pan.quark.cn/s/3f390042f6c8" class="send-link" target="_blank" style="font-weight: bold; color: blue; text-decoration: underline;">✅往期资源①：</a><br><a href="https://pan.xunlei.com/s/VOZ-yG3V4ncFhdFwwlBwQIRgA1?pwd=2wku#" class="send-link" target="_blank" style="font-weight: bold; color: blue; text-decoration: underline;">✅备用资源②：</a>', true);
+                                                }, 1500); // 比合并消息显示延迟更长，确保顺序正确
                                             } else if (uploadedImagesCount < 5) {
                                                 console.log('Showing confirmation message for image count:', uploadedImagesCount);
                                                 addMessage('已收到图片，正在审核中...请继续发送其他截图', true);
@@ -1820,19 +1949,22 @@
                                             
                                             // 如果是第三张图片，仍然触发最终回复
                                             if (uploadedImagesCount === 3) {
-                                                // 上传第3张图片时显示最终回复
-                                                console.log('Showing final response for 3rd image despite error');
+                                                // 上传第3张图片时先显示合并消息，然后显示最终回复
+                                                console.log('Will show final response for 3rd image despite error after confirmation message');
                                                 
-                                                // 添加弹窗震动效果
-                                                const chatWidget = document.getElementById('chatWidget');
-                                                chatWidget.classList.add('shake');
-                                                
-                                                // 移除震动效果以便下次可以再次触发
+                                                // 设置延迟，确保先显示确认消息再显示最终回复
                                                 setTimeout(() => {
-                                                    chatWidget.classList.remove('shake');
-                                                }, 500);
-                                                
-                                                addMessage('辛苦饱饱啦，欢迎加入我们！<br><span onclick="showQRCodeImage()" class="send-link" style="font-weight: bold; color: blue; text-decoration: underline; cursor: pointer;">✅点击入群</span><br><a href="https://pan.quark.cn/s/3145d3f69d00" class="send-link" target="_blank" style="font-weight: bold; color: blue; text-decoration: underline;">✅往期资源①：</a><br><a href="https://pan.xunlei.com/s/VOZ-yG3V4ncFhdFwwlBwQIRgA1?pwd=2wku#" class="send-link" target="_blank" style="font-weight: bold; color: blue; text-decoration: underline;">✅备用资源②：</a>', true);
+                                                    // 添加弹窗震动效果
+                                                    const chatWidget = document.getElementById('chatWidget');
+                                                    chatWidget.classList.add('shake');
+                                                     
+                                                    // 移除震动效果以便下次可以再次触发
+                                                    setTimeout(() => {
+                                                        chatWidget.classList.remove('shake');
+                                                    }, 500);
+                                                     
+                                                    addMessage('辛苦饱饱啦，欢迎加入我们！<br><span onclick="showQRCodeImage()" class="send-link" style="font-weight: bold; color: blue; text-decoration: underline; cursor: pointer;">✅点击入群</span><br><a href="https://pan.quark.cn/s/3f390042f6c8" class="send-link" target="_blank" style="font-weight: bold; color: blue; text-decoration: underline;">✅往期资源①：</a><br><a href="https://pan.xunlei.com/s/VOZ-yG3V4ncFhdFwwlBwQIRgA1?pwd=2wku#" class="send-link" target="_blank" style="font-weight: bold; color: blue; text-decoration: underline;">✅备用资源②：</a>', true);
+                                                }, 1500); // 比合并消息显示延迟更长，确保顺序正确
                                             }
                                         }
                                     };
@@ -1856,10 +1988,7 @@
                                     addMessage('您的浏览器不支持图片上传功能，请使用现代浏览器。', true);
                                 }
                                 
-                                // 图片预览创建后，直接标记为处理成功
-                                setTimeout(function() {
-                                    addMessage('图片已成功提交审核！', true);
-                                }, 1000);
+
                             })(i);
                         }
                     } catch (e) {
@@ -1869,19 +1998,22 @@
                         uploadCount.textContent = uploadedImagesCount;
                         
                         if (uploadedImagesCount === 3) {
-                            // 上传第3张图片时显示最终回复
-                            console.log('Showing final response for 3rd image despite error');
-                            
-                            // 添加弹窗震动效果
-                            const chatWidget = document.getElementById('chatWidget');
-                            chatWidget.classList.add('shake');
-                            
-                            // 移除震动效果以便下次可以再次触发
+                            // 上传第3张图片时先显示合并消息，然后显示最终回复
+                            console.log('Will show final response for 3rd image despite outer error after confirmation message');
+                             
+                            // 设置延迟，确保先显示确认消息再显示最终回复
                             setTimeout(() => {
-                                chatWidget.classList.remove('shake');
-                            }, 500);
-                            
-                            addMessage('辛苦饱饱啦，欢迎加入我们！<br><span onclick="showQRCodeImage()" class="send-link" style="font-weight: bold; color: blue; text-decoration: underline; cursor: pointer;">✅点击入群</span><br><a href="https://pan.quark.cn/s/265fbcb18243" class="send-link" target="_blank" style="font-weight: bold; color: blue; text-decoration: underline;">✅往期资源①：</a><br><a href="https://pan.xunlei.com/s/VOZ-yG3V4ncFhdFwwlBwQIRgA1?pwd=2wku#" class="send-link" target="_blank" style="font-weight: bold; color: blue; text-decoration: underline;">✅备用资源②：</a>', true);
+                                // 添加弹窗震动效果
+                                const chatWidget = document.getElementById('chatWidget');
+                                chatWidget.classList.add('shake');
+                                 
+                                // 移除震动效果以便下次可以再次触发
+                                setTimeout(() => {
+                                    chatWidget.classList.remove('shake');
+                                }, 500);
+                                 
+                                addMessage('辛苦饱饱啦，欢迎加入我们！<br><span onclick="showQRCodeImage()" class="send-link" style="font-weight: bold; color: blue; text-decoration: underline; cursor: pointer;">✅点击入群</span><br><a href="https://pan.quark.cn/s/3f390042f6c8" class="send-link" target="_blank" style="font-weight: bold; color: blue; text-decoration: underline;">✅往期资源①：</a><br><a href="https://pan.xunlei.com/s/VOZ-yG3V4ncFhdFwwlBwQIRgA1?pwd=2wku#" class="send-link" target="_blank" style="font-weight: bold; color: blue; text-decoration: underline;">✅备用资源②：</a>', true);
+                            }, 1500); // 比合并消息显示延迟更长，确保顺序正确
                         }
                     }
                 }
