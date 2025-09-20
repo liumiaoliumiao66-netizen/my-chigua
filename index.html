@@ -922,89 +922,9 @@
                     // 确保在老浏览器中也能绑定事件
                     if (copyElements[i].addEventListener) {
                         copyElements[i].addEventListener('click', copyToClipboard);
-                         
-                        // 添加移动设备触摸事件支持
-                        // 长按计时器变量
-                        var longPressTimer;
-                        
-                        // 触摸开始事件 - 开始检测长按
-                        copyElements[i].addEventListener('touchstart', function(e) {
-                            // 阻止默认行为，避免触发系统文本选择
-                            e.preventDefault();
-                            var element = this;
-                            
-                            // 设置长按计时器（500毫秒为长按阈值）
-                            longPressTimer = setTimeout(function() {
-                                // 触发长按扩选功能
-                                expandSelectCurrentWord(element);
-                            }, 500);
-                        });
-                        
-                        // 触摸移动事件 - 如果用户移动手指，取消长按检测
-                        copyElements[i].addEventListener('touchmove', function() {
-                            if (longPressTimer) {
-                                clearTimeout(longPressTimer);
-                                longPressTimer = null;
-                            }
-                        });
-                        
-                        // 触摸结束事件 - 清除计时器
-                        copyElements[i].addEventListener('touchend', function() {
-                            if (longPressTimer) {
-                                clearTimeout(longPressTimer);
-                                longPressTimer = null;
-                            }
-                        });
-                        
-                        // 触摸取消事件 - 清除计时器（当触摸被中断时）
-                        copyElements[i].addEventListener('touchcancel', function() {
-                            if (longPressTimer) {
-                                clearTimeout(longPressTimer);
-                                longPressTimer = null;
-                            }
-                        });
                     } else {
                         // 兼容IE8及以下
                         copyElements[i].attachEvent('onclick', copyToClipboard);
-                    }
-                }
-            }
-            
-            // 移动设备长按扩选当前词语功能
-            function expandSelectCurrentWord(element) {
-                // 获取元素的文本内容
-                var textToCopy = element.getAttribute('data-text') || element.textContent;
-                
-                try {
-                    // 对于支持选择API的现代浏览器
-                    if (window.getSelection && document.createRange) {
-                        // 清除之前的选择
-                        window.getSelection().removeAllRanges();
-                        
-                        // 创建新的范围
-                        var range = document.createRange();
-                        range.selectNodeContents(element);
-                        
-                        // 添加范围到选择对象
-                        window.getSelection().addRange(range);
-                    } else if (document.selection) {
-                        // IE兼容
-                        var selection = document.selection.createRange();
-                        selection.moveToElementText(element);
-                        selection.select();
-                    }
-                    
-                    // 模拟点击行为，触发复制功能
-                    var event = document.createEvent('MouseEvents');
-                    event.initMouseEvent('click', true, true, window, 0, 0, 0, 0, 0, false, false, false, false, 0, null);
-                    element.dispatchEvent(event);
-                    
-                    console.log('移动设备长按扩选成功:', textToCopy);
-                } catch (e) {
-                    console.log('移动设备长按扩选失败:', e);
-                    // 如果扩选失败，仍然尝试直接复制
-                    if (textToCopy) {
-                        copyToClipboard({target: element, srcElement: element});
                     }
                 }
             }
@@ -1064,8 +984,9 @@
             
             // 传统复制方法 - 增强的备用方案，支持更多安卓自带浏览器
             function fallbackCopyText(textToCopy) {
-                // 检查是否是安卓设备
+                // 检查是否是安卓设备或iOS设备
                 var isAndroid = /android/i.test(navigator.userAgent);
+                var isiOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
                 
                 // 创建临时文本区域用于复制
                 var tempTextArea = document.createElement('textarea');
@@ -1075,25 +996,37 @@
                 tempTextArea.style.position = 'fixed';
                 tempTextArea.style.left = '-9999px';
                 tempTextArea.style.top = '-9999px';
-                tempTextArea.style.width = '200px'; // 在安卓某些浏览器中，过小的尺寸可能导致选择失败
-                tempTextArea.style.height = '200px';
-                tempTextArea.style.padding = '10px';
+                tempTextArea.style.width = '300px'; // 增大尺寸以提高在更多浏览器中的兼容性
+                tempTextArea.style.height = '300px';
+                tempTextArea.style.padding = '20px';
                 tempTextArea.style.border = 'none';
                 tempTextArea.style.outline = 'none';
                 tempTextArea.style.boxShadow = 'none';
-                tempTextArea.style.background = 'transparent';
+                tempTextArea.style.background = 'rgba(0, 0, 0, 0.01)'; // 确保在所有设备上都可见
                 tempTextArea.style.fontSize = '16px'; // 避免iOS缩放问题
                 tempTextArea.style.fontFamily = 'Arial, sans-serif';
                 tempTextArea.style.resize = 'none';
                 tempTextArea.style.whiteSpace = 'pre-wrap';
                 tempTextArea.style.wordWrap = 'break-word';
+                tempTextArea.style.overflow = 'auto';
+                tempTextArea.style.zIndex = '9999';
                 
                 // 安卓设备特有的设置
                 if (isAndroid) {
                     // 在某些安卓浏览器中，需要额外的可见性设置
                     tempTextArea.style.opacity = '0.01';
                     tempTextArea.style.transform = 'translate(-1000px, -1000px)';
-                    tempTextArea.style.zIndex = '1000';
+                    tempTextArea.style.zIndex = '9999';
+                }
+                
+                // iOS设备特有的设置
+                if (isiOS) {
+                    // iOS需要特殊的样式和处理
+                    tempTextArea.style.opacity = '1'; // iOS需要元素可见
+                    tempTextArea.style.transform = 'translate(-200%, -200%)'; // 移出屏幕视图
+                    tempTextArea.style.zIndex = '9999';
+                    // 增加字体大小以确保iOS能正确选择
+                    tempTextArea.style.fontSize = '20px';
                 }
                 
                 try {
@@ -1105,15 +1038,30 @@
                     // 增强的文本选择逻辑，尝试多种方法
                     var selectionSuccess = false;
                     
-                    // 方法1: 标准select()
-                    try {
-                        tempTextArea.select();
-                        selectionSuccess = true;
-                    } catch (e) {
-                        console.log('select() 方法失败:', e);
+                    // 强制聚焦元素
+                    tempTextArea.focus();
+                    
+                    // 方法1: 针对iOS设备的特殊处理
+                    if (isiOS && !selectionSuccess) {
+                        try {
+                            tempTextArea.setSelectionRange(0, 999999);
+                            selectionSuccess = true;
+                        } catch (e) {
+                            console.log('iOS setSelectionRange() 方法失败:', e);
+                        }
                     }
                     
-                    // 方法2: 针对移动设备的setSelectionRange
+                    // 方法2: 标准select()
+                    if (!selectionSuccess) {
+                        try {
+                            tempTextArea.select();
+                            selectionSuccess = true;
+                        } catch (e) {
+                            console.log('select() 方法失败:', e);
+                        }
+                    }
+                    
+                    // 方法3: 针对移动设备的setSelectionRange (备用)
                     if (!selectionSuccess) {
                         try {
                             if (tempTextArea.setSelectionRange) {
@@ -1125,7 +1073,7 @@
                         }
                     }
                     
-                    // 方法3: IE的createTextRange
+                    // 方法4: IE的createTextRange
                     if (!selectionSuccess) {
                         try {
                             if (tempTextArea.createTextRange) {
@@ -1138,7 +1086,7 @@
                         }
                     }
                     
-                    // 方法4: 针对某些安卓浏览器的特殊处理
+                    // 方法5: 针对某些安卓浏览器的特殊处理
                     if (!selectionSuccess && isAndroid) {
                         try {
                             // 模拟用户选择操作
@@ -1153,14 +1101,40 @@
                         }
                     }
                     
+                    // 方法6: 针对某些浏览器的双重选择策略
+                    if (!selectionSuccess) {
+                        try {
+                            tempTextArea.select();
+                            if (tempTextArea.setSelectionRange) {
+                                tempTextArea.setSelectionRange(0, tempTextArea.value.length);
+                            }
+                            selectionSuccess = true;
+                        } catch (e) {
+                            console.log('双重选择策略失败:', e);
+                        }
+                    }
+                    
                     // 执行复制操作，尝试多种方法
                     var success = false;
                     
-                    // 方法1: 标准document.execCommand('copy')
-                    try {
-                        success = document.execCommand('copy');
-                    } catch (err) {
-                        console.log('document.execCommand复制失败:', err);
+                    // 方法1: 标准document.execCommand('copy')，增加重试逻辑
+                    const maxCopyAttempts = 3;
+                    let copyAttempt = 0;
+                    
+                    while (!success && copyAttempt < maxCopyAttempts) {
+                        try {
+                            copyAttempt++;
+                            success = document.execCommand('copy');
+                            if (success) break;
+                        } catch (err) {
+                            console.log('document.execCommand复制失败 (尝试 ' + copyAttempt + '):', err);
+                            // 每次失败后短暂暂停再尝试
+                            if (copyAttempt < maxCopyAttempts) {
+                                // 同步延迟，避免异步操作导致的问题
+                                const startTime = Date.now();
+                                while (Date.now() - startTime < 50) {}
+                            }
+                        }
                     }
                     
                     // 方法2: 古老的window.clipboardData
@@ -1179,17 +1153,31 @@
                     if (!success && isAndroid) {
                         try {
                             // 强制延迟以增加某些安卓浏览器的成功率
-                            setTimeout(function() {
-                                try {
-                                    const delayedSuccess = document.execCommand('copy');
-                                    if (delayedSuccess) {
-                                        console.log('安卓延迟复制成功');
-                                        // 由于是异步操作，这里无法直接更新success变量
-                                        // 但我们已经尽力，可以让用户尝试手动复制
-                                    }
-                                } catch (e) {}
-                            }, 100);
-                        } catch (e) {}
+                            const startTime = Date.now();
+                            while (Date.now() - startTime < 100) {}
+                            
+                            // 再次尝试复制
+                            const androidSuccess = document.execCommand('copy');
+                            if (androidSuccess) {
+                                console.log('安卓延迟同步复制成功');
+                                success = true;
+                            }
+                        } catch (e) {
+                            console.log('安卓延迟复制失败:', e);
+                        }
+                    }
+                    
+                    // 方法4: 针对iOS设备的特殊处理（如果前三种方法都失败）
+                    if (!success && isiOS) {
+                        try {
+                            // 在iOS上，如果选择成功但复制失败，我们可以提示用户手动复制
+                            // 在这种情况下，文本已经被选中，用户只需要点击"拷贝"按钮
+                            console.log('iOS复制操作需要用户手动确认');
+                            // 这里我们假设选择成功就代表可以通过用户手动复制
+                            success = selectionSuccess;
+                        } catch (e) {
+                            console.log('iOS特殊处理失败:', e);
+                        }
                     }
                     
                     // 显示复制提示
