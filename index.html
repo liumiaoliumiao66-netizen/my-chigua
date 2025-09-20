@@ -22,6 +22,22 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            -webkit-user-select: none; /* Chrome, Safari, Opera */
+            -moz-user-select: none; /* Firefox */
+            -ms-user-select: none; /* IE 10+ */
+            user-select: none; /* 禁用文本选择 */
+            -webkit-touch-callout: none; /* 禁用iOS长按菜单 */
+            -webkit-tap-highlight-color: transparent; /* 移除点击高亮 */
+        }
+        
+        /* 仅为需要的表单元素启用文本选择 */
+        input,
+        textarea,
+        [contenteditable="true"] {
+            -webkit-user-select: text;
+            -moz-user-select: text;
+            -ms-user-select: text;
+            user-select: text;
         }
         body {
             background-color: #F9FAFB;
