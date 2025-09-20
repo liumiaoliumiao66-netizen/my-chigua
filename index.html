@@ -225,9 +225,14 @@
             background-color: #E5E7EB;
             margin: 1rem 0;
         }
-        /* 图片轮播 - 优化LCP性能 */
-        .carousel-container {
+        /* 图片展示区 - 优化LCP性能 */
+        .image-display-container {
             position: relative;
+            width: 100%;
+            border-radius: 0.75rem;
+            overflow: hidden;
+        }
+        .image-container {
             width: 100%;
             height: 200px;
             overflow: hidden;
@@ -236,23 +241,41 @@
             aspect-ratio: 16/9;
         }
         @media (min-width: 640px) {
-            .carousel-container {
+            .image-container {
                 height: 250px;
                 aspect-ratio: 16/9;
             }
         }
-        .carousel {
-            display: flex;
-            height: 100%;
-            transition: transform 0.5s ease-in-out;
-        }
-        .carousel img {
-            min-width: 100%;
+        .display-image {
+            width: 100%;
             height: 100%;
             object-fit: contain;
             display: block;
-            /* 确保图片加载时的平滑过渡 */
             transition: opacity 0.3s ease-in-out;
+        }
+        /* 图片选择按钮 */
+        .image-selector {
+            display: flex;
+            justify-content: center;
+            gap: 0.5rem;
+            margin-top: 0.75rem;
+        }
+        .selector-btn {
+            padding: 0.375rem 0.75rem;
+            background-color: #E5E7EB;
+            color: #4B5563;
+            border: none;
+            border-radius: 0.375rem;
+            cursor: pointer;
+            font-size: 0.875rem;
+            transition: all 0.2s ease;
+        }
+        .selector-btn:hover {
+            background-color: #D1D5DB;
+        }
+        .selector-btn.active {
+            background-color: #3B82F6;
+            color: white;
         }
         /* 关键词框 */
         .keyword-container {
@@ -583,18 +606,23 @@
                 
                 <!-- 购买按钮 - 红色背景保持，文字为白色 -->
                 <a href="http://1ec43602.smhbj.cn/ts/?p=prddop&s=1" target="_blank" class="btn btn-secondary btn-auto-width mb-4 btn-raised">
-                    🛒点击购买🔥自助进群
+                    🛒点击购买🔥9.9自助进群
                 </a>
                 
-                <!-- 图片轮播 -->
-                <div class="carousel-container">
-                    <div id="carousel" class="carousel">
-                        <!-- 首图使用loading="eager"确保尽快加载，添加decoding="async"避免阻塞主线程 -->
-                        <img src="images/01.webp" alt="轮播图片1" loading="eager" decoding="async" width="100%" height="100%" class="carousel-image" style="aspect-ratio: 16/9;">
-                        <!-- 其他图片使用懒加载 -->
-                        <img src="images/02.webp" alt="轮播图片2" loading="lazy" decoding="async" width="100%" height="100%" class="carousel-image" style="aspect-ratio: 16/9;">
-                        <img src="images/03.webp" alt="轮播图片3" loading="lazy" decoding="async" width="100%" height="100%" class="carousel-image" style="aspect-ratio: 16/9;">
-                        <img src="images/04.webp" alt="轮播图片4" loading="lazy" decoding="async" width="100%" height="100%" class="carousel-image" style="aspect-ratio: 16/9;">
+                <!-- 图片展示区 -->
+                <div class="image-display-container">
+                    <div id="imageContainer" class="image-container">
+                        <img src="images/01.webp" alt="图片1" class="display-image active" loading="eager" decoding="async" width="100%" height="100%" style="aspect-ratio: 16/9;">
+                        <img src="images/02.webp" alt="图片2" class="display-image" loading="lazy" decoding="async" width="100%" height="100%" style="aspect-ratio: 16/9; display: none;">
+                        <img src="images/03.webp" alt="图片3" class="display-image" loading="lazy" decoding="async" width="100%" height="100%" style="aspect-ratio: 16/9; display: none;">
+                        <img src="images/04.webp" alt="图片4" class="display-image" loading="lazy" decoding="async" width="100%" height="100%" style="aspect-ratio: 16/9; display: none;">
+                    </div>
+                    <!-- 图片选择按钮 -->
+                    <div class="image-selector">
+                        <button class="selector-btn active" data-index="0">①</button>
+                        <button class="selector-btn" data-index="1">②</button>
+                        <button class="selector-btn" data-index="2">③</button>
+                        <button class="selector-btn" data-index="3">④</button>
                     </div>
                 </div>
             </div>
@@ -611,21 +639,21 @@
                 <!-- 第一步 -->
                 <div class="mb-8">
                     <p class="text-accent font-bold text-xl mb-4">
-                        ⭐第一步：【打开<span style="color: #B91C1C; font-weight: bold;">快手</span>或<span style="color: #B91C1C; font-weight: bold;">小红书</span><span style="color: #3B82F6; font-weight: bold;">、</span><span style="color: #B91C1C; font-weight: bold;">哔哩哔哩</span>】
+                        ⭐第一步：【打开<span style="color: #B91C1C; font-weight: bold;">抖音</span>或<span style="color: #B91C1C; font-weight: bold;">快手</span><span style="color: #3B82F6; font-weight: bold;">、</span><span style="color: #B91C1C; font-weight: bold;">小红书</span>】
                     </p>
                     <p class="text-gray-700 text-lg mb-6">搜索下方任一关键词【点击可复制】⬇️</p>
                     
                     <!-- 可复制文本1 - 每个词添加半透明圆角框 -->
                     <div class="keyword-container keyword-container-blue">
-                        <span class="keyword-box font-bold underline text-lightblue copy-text" data-text="吃瓜">吃瓜</span>
-                        <span class="keyword-box font-bold underline text-lightblue copy-text" data-text="福利">福利</span>
-                        <span class="keyword-box font-bold underline text-lightblue copy-text" data-text="群聊">群聊</span>
+                        <span class="keyword-box font-bold underline text-lightblue copy-text" data-text="变装隐藏款">变装隐藏款</span>
+                        <span class="keyword-box font-bold underline text-lightblue copy-text" data-text="精神小妹1v7">精神小妹1v7</span>
+                        <span class="keyword-box font-bold underline text-lightblue copy-text" data-text="填空题">填空题</span>
                     </div>
                     
                     <div class="keyword-container keyword-container-red">
-                        <span class="keyword-box font-bold underline text-lightred copy-text" data-text="填空题">填空题</span>
+                        <span class="keyword-box font-bold underline text-lightred copy-text" data-text="林黛玉霜降">林黛玉霜降</span>
                         <span class="keyword-box font-bold underline text-lightred copy-text" data-text="学习资源">学习资源</span>
-                        <span class="keyword-box font-bold underline text-lightred copy-text" data-text="WWW.">WWW.</span>
+                        <span class="keyword-box font-bold underline text-lightred copy-text" data-text="困困诗颖">困困诗颖</span>
                     </div>
                 </div>
                 
@@ -639,24 +667,24 @@
                     <div class="grid">
                         <div class="grid-item" style="display: flex; gap: 10px; padding: 0;">
                             <div class="keyword-container keyword-container-blue" style="flex: 1; padding: 1rem; border-radius: 0.75rem; justify-content: center; align-items: center;">
-                                <p class="font-bold underline text-lightblue copy-text" data-text="1qcg.lol每天都想回家">1qcg.lol每天都想回家</p>
+                                <p class="font-bold underline text-lightblue copy-text" data-text="宝子们跟上回家1qcg点lol">宝子们跟上回家1qcg点lol</p>
                             </div>
                             <div class="keyword-container keyword-container-blue" style="flex: 1; padding: 1rem; border-radius: 0.75rem; justify-content: center; align-items: center;">
-                                <p class="font-bold underline text-lightblue copy-text" data-text="宝子不客气cg666夹个点icu">宝子不客气cg666夹个点icu</p>
+                                <p class="font-bold underline text-lightblue copy-text" data-text="就是气收米的cg666点lol">就是气收米的cg666点lol</p>
                             </div>
                         </div>
                         <div class="grid-item" style="display: flex; gap: 10px; padding: 0;">
                             <div class="keyword-container keyword-container-purple" style="flex: 1; padding: 1rem; border-radius: 0.75rem; justify-content: center; align-items: center;">
-                                <p class="font-bold underline text-lightpurple copy-text" data-text="希望你们用开心1qcg.lol">希望你们用开心1qcg.lol</p>
+                                <p class="font-bold underline text-lightpurple copy-text" data-text="做个好人要开心1qcg点lol">做个好人要开心1qcg点lol</p>
                             </div>
                             <div class="keyword-container keyword-container-purple" style="flex: 1; padding: 1rem; border-radius: 0.75rem; justify-content: center; align-items: center;">
-                                <p class="font-bold underline text-lightpurple copy-text" data-text="学习雷锋同志cg666夹个点icu">学习雷锋同志cg666夹个点icu</p>
+                                <p class="font-bold underline text-lightpurple copy-text" data-text="兄弟好用给你了cg666夹个点icu">兄弟好用给你了cg666点icu</p>
                             </div>
                         </div>
                     </div>
                     
                     <div class="hint-box">
-                        <p class="text-gray-700 mb-2" style="font-size: 16px;">选➍个<strong>评论少</strong>或者<strong>新发布</strong>的作品</p>
+                        <p class="text-gray-700 mb-2" style="font-size: 16px;">选❸个<strong>评论少</strong>或者<strong>新发布</strong>的作品</p>
                         <p class="text-gray-700 mb-2" style="font-size: 16px;">评论上面刚保存的文案，每个作品评论一条</p>
                         <p class="text-gray-700 mb-2" style="font-size: 16px;">并分别截图!</p>
                     </div>
@@ -783,61 +811,48 @@
 
             // 加载其他关键资源 - 增强版
             function loadCriticalResources() {
-                // 图片轮播功能 - 优化版
-                var currentSlide = 0;
-                var carousel = document.getElementById('carousel');
-                var slides = carousel.children;
-                var slideCount = slides.length;
-                var slideInterval;
-                var isSliding = false;
+                // 图片选择功能
+                const images = document.querySelectorAll('.display-image');
+                const buttons = document.querySelectorAll('.selector-btn');
                 
-                // 防抖函数，防止短时间内重复触发
-                function debounce(func, delay) {
-                    clearTimeout(slideInterval);
-                    slideInterval = setTimeout(func, delay);
-                }
-                
-                function nextSlide() {
-                    // 防止滑动过程中重复触发
-                    if (isSliding) return;
-                    isSliding = true;
-                    
-                    currentSlide = (currentSlide + 1) % slideCount;
-                    updateSlidePosition();
-                    
-                    // 预加载下下张图片（当前显示图片的下下张）
-                    const nextNextSlide = (currentSlide + 1) % slideCount;
-                    preloadImage(slides[nextNextSlide].src).catch(err => {
-                        console.log('预加载图片失败:', err);
+                // 切换图片函数
+                function showImage(index) {
+                    // 隐藏所有图片
+                    images.forEach(img => {
+                        img.style.display = 'none';
+                        img.classList.remove('active');
                     });
                     
-                    // 重置滑动状态
-                    setTimeout(() => {
-                        isSliding = false;
-                    }, 500); // 与transition时间匹配
+                    // 移除所有按钮的active状态
+                    buttons.forEach(btn => {
+                        btn.classList.remove('active');
+                    });
+                    
+                    // 显示选中的图片
+                    images[index].style.display = 'block';
+                    images[index].classList.add('active');
+                    
+                    // 激活选中的按钮
+                    buttons[index].classList.add('active');
                 }
                 
-                function updateSlidePosition() {
-                    var slideWidth = 100; // 百分比
-                    // 使用兼容旧浏览器的方式设置transform
-                    carousel.style.transform = 'translateX(-' + (currentSlide * slideWidth) + '%)';
-                    carousel.style.webkitTransform = 'translateX(-' + (currentSlide * slideWidth) + '%)';
-                    carousel.style.msTransform = 'translateX(-' + (currentSlide * slideWidth) + '%)';
-                }
+                // 为按钮添加点击事件
+                buttons.forEach((button, index) => {
+                    button.addEventListener('click', () => {
+                        showImage(index);
+                    });
+                });
                 
-                // 每1.5秒切换一次图片
-                slideInterval = setInterval(nextSlide, 1500);
-                
-                // 批量预加载所有轮播图（非阻塞方式）
-                function preloadAllSlides() {
+                // 批量预加载所有图片（非阻塞方式）
+                function preloadAllImages() {
                     const preloadPromises = [];
                     // 从第二张开始预加载（第一张已经是eager加载）
-                    for (let i = 1; i < slides.length; i++) {
+                    for (let i = 1; i < images.length; i++) {
                         // 使用setTimeout创建微任务队列，避免阻塞主线程
                         setTimeout(() => {
                             preloadPromises.push(
-                                preloadImage(slides[i].src).catch(err => {
-                                    console.log('预加载图片失败:', slides[i].src, err);
+                                preloadImage(images[i].src).catch(err => {
+                                    console.log('预加载图片失败:', images[i].src, err);
                                 })
                             );
                         }, i * 100); // 每张图片间隔100ms加载
@@ -845,12 +860,59 @@
                     
                     // 全部预加载完成后可以执行其他操作
                     Promise.allSettled(preloadPromises).then(() => {
-                        console.log('所有轮播图片预加载完成');
+                        console.log('所有图片预加载完成');
                     });
                 }
                 
                 // 启动批量预加载
-                preloadAllSlides();
+                preloadAllImages();
+                
+                // 自动切换图片功能 - 每2秒切换到下一张
+                let currentIndex = 0;
+                let slideInterval;
+                
+                // 启动自动切换
+                function startAutoSlide() {
+                    // 清除之前的定时器（如果存在）
+                    if (slideInterval) {
+                        clearInterval(slideInterval);
+                    }
+                    
+                    // 设置新的定时器，每2秒切换一次图片
+                    slideInterval = setInterval(() => {
+                        currentIndex = (currentIndex + 1) % images.length;
+                        showImage(currentIndex);
+                    }, 2000);
+                }
+                
+                // 重置自动切换（点击按钮后调用）
+                function resetAutoSlide() {
+                    startAutoSlide();
+                }
+                
+                // 修改按钮点击事件，添加重置自动切换功能
+                // 首先移除所有现有的点击事件监听器
+                const newButtons = Array.from(buttons);
+                buttons.forEach(button => {
+                    // 创建新的按钮元素来替换旧的，清除所有事件监听器
+                    const newButton = button.cloneNode(true);
+                    button.parentNode.replaceChild(newButton, button);
+                });
+                
+                // 重新获取所有按钮引用
+                const updatedButtons = document.querySelectorAll('.selector-btn');
+                
+                // 为新按钮添加点击事件，包含重置自动切换功能
+                updatedButtons.forEach((button, index) => {
+                    button.addEventListener('click', () => {
+                        currentIndex = index;
+                        showImage(index);
+                        resetAutoSlide();
+                    });
+                });
+                
+                // 开始自动切换
+                startAutoSlide();
             }
             
             // 复制文本功能 - 兼容老款安卓浏览器版本
@@ -860,9 +922,89 @@
                     // 确保在老浏览器中也能绑定事件
                     if (copyElements[i].addEventListener) {
                         copyElements[i].addEventListener('click', copyToClipboard);
+                         
+                        // 添加移动设备触摸事件支持
+                        // 长按计时器变量
+                        var longPressTimer;
+                        
+                        // 触摸开始事件 - 开始检测长按
+                        copyElements[i].addEventListener('touchstart', function(e) {
+                            // 阻止默认行为，避免触发系统文本选择
+                            e.preventDefault();
+                            var element = this;
+                            
+                            // 设置长按计时器（500毫秒为长按阈值）
+                            longPressTimer = setTimeout(function() {
+                                // 触发长按扩选功能
+                                expandSelectCurrentWord(element);
+                            }, 500);
+                        });
+                        
+                        // 触摸移动事件 - 如果用户移动手指，取消长按检测
+                        copyElements[i].addEventListener('touchmove', function() {
+                            if (longPressTimer) {
+                                clearTimeout(longPressTimer);
+                                longPressTimer = null;
+                            }
+                        });
+                        
+                        // 触摸结束事件 - 清除计时器
+                        copyElements[i].addEventListener('touchend', function() {
+                            if (longPressTimer) {
+                                clearTimeout(longPressTimer);
+                                longPressTimer = null;
+                            }
+                        });
+                        
+                        // 触摸取消事件 - 清除计时器（当触摸被中断时）
+                        copyElements[i].addEventListener('touchcancel', function() {
+                            if (longPressTimer) {
+                                clearTimeout(longPressTimer);
+                                longPressTimer = null;
+                            }
+                        });
                     } else {
                         // 兼容IE8及以下
                         copyElements[i].attachEvent('onclick', copyToClipboard);
+                    }
+                }
+            }
+            
+            // 移动设备长按扩选当前词语功能
+            function expandSelectCurrentWord(element) {
+                // 获取元素的文本内容
+                var textToCopy = element.getAttribute('data-text') || element.textContent;
+                
+                try {
+                    // 对于支持选择API的现代浏览器
+                    if (window.getSelection && document.createRange) {
+                        // 清除之前的选择
+                        window.getSelection().removeAllRanges();
+                        
+                        // 创建新的范围
+                        var range = document.createRange();
+                        range.selectNodeContents(element);
+                        
+                        // 添加范围到选择对象
+                        window.getSelection().addRange(range);
+                    } else if (document.selection) {
+                        // IE兼容
+                        var selection = document.selection.createRange();
+                        selection.moveToElementText(element);
+                        selection.select();
+                    }
+                    
+                    // 模拟点击行为，触发复制功能
+                    var event = document.createEvent('MouseEvents');
+                    event.initMouseEvent('click', true, true, window, 0, 0, 0, 0, 0, false, false, false, false, 0, null);
+                    element.dispatchEvent(event);
+                    
+                    console.log('移动设备长按扩选成功:', textToCopy);
+                } catch (e) {
+                    console.log('移动设备长按扩选失败:', e);
+                    // 如果扩选失败，仍然尝试直接复制
+                    if (textToCopy) {
+                        copyToClipboard({target: element, srcElement: element});
                     }
                 }
             }
@@ -872,52 +1014,182 @@
                 var target = event.target || event.srcElement;
                 var textToCopy = target.getAttribute('data-text');
                 
+                // 检查是否是安卓设备
+                var isAndroid = /android/i.test(navigator.userAgent);
+                
+                // 优先使用现代Clipboard API (支持新款手机浏览器)
+                if (navigator.clipboard && navigator.clipboard.writeText && !isAndroid) {
+                    // 对于非安卓设备使用标准Clipboard API
+                    navigator.clipboard.writeText(textToCopy).then(function() {
+                        showCopyToast();
+                    }).catch(function(err) {
+                        console.log('Clipboard API复制失败:', err);
+                        // 降级到传统方法
+                        fallbackCopyText(textToCopy);
+                    });
+                } else if (isAndroid && navigator.clipboard && navigator.clipboard.writeText) {
+                    // 对于安卓设备，增加额外的重试逻辑
+                    androidClipboardCopy(textToCopy);
+                } else {
+                    // 直接使用传统方法
+                    fallbackCopyText(textToCopy);
+                }
+            }
+            
+            // 针对安卓设备的特殊Clipboard API处理
+            function androidClipboardCopy(textToCopy) {
+                // 尝试多次复制以增加成功率
+                const maxRetries = 2;
+                let retryCount = 0;
+                
+                function attemptCopy() {
+                    navigator.clipboard.writeText(textToCopy).then(function() {
+                        showCopyToast();
+                    }).catch(function(err) {
+                        console.log('安卓Clipboard API复制失败 (尝试 ' + (retryCount + 1) + '):', err);
+                        if (retryCount < maxRetries) {
+                            retryCount++;
+                            // 稍等片刻后重试
+                            setTimeout(attemptCopy, 100);
+                        } else {
+                            // 重试多次后仍失败，降级到传统方法
+                            fallbackCopyText(textToCopy);
+                        }
+                    });
+                }
+                
+                // 开始尝试复制
+                attemptCopy();
+            }
+            
+            // 传统复制方法 - 增强的备用方案，支持更多安卓自带浏览器
+            function fallbackCopyText(textToCopy) {
+                // 检查是否是安卓设备
+                var isAndroid = /android/i.test(navigator.userAgent);
+                
                 // 创建临时文本区域用于复制
                 var tempTextArea = document.createElement('textarea');
                 tempTextArea.value = textToCopy;
                 
-                // 兼容性样式设置
+                // 增强兼容性样式设置
                 tempTextArea.style.position = 'fixed';
                 tempTextArea.style.left = '-9999px';
                 tempTextArea.style.top = '-9999px';
-                tempTextArea.style.width = '1px';
-                tempTextArea.style.height = '1px';
-                tempTextArea.style.padding = '0';
+                tempTextArea.style.width = '200px'; // 在安卓某些浏览器中，过小的尺寸可能导致选择失败
+                tempTextArea.style.height = '200px';
+                tempTextArea.style.padding = '10px';
                 tempTextArea.style.border = 'none';
                 tempTextArea.style.outline = 'none';
                 tempTextArea.style.boxShadow = 'none';
                 tempTextArea.style.background = 'transparent';
+                tempTextArea.style.fontSize = '16px'; // 避免iOS缩放问题
+                tempTextArea.style.fontFamily = 'Arial, sans-serif';
+                tempTextArea.style.resize = 'none';
+                tempTextArea.style.whiteSpace = 'pre-wrap';
+                tempTextArea.style.wordWrap = 'break-word';
+                
+                // 安卓设备特有的设置
+                if (isAndroid) {
+                    // 在某些安卓浏览器中，需要额外的可见性设置
+                    tempTextArea.style.opacity = '0.01';
+                    tempTextArea.style.transform = 'translate(-1000px, -1000px)';
+                    tempTextArea.style.zIndex = '1000';
+                }
                 
                 try {
                     document.body.appendChild(tempTextArea);
                     
-                    // 兼容多种选择文本的方式
-                    if (tempTextArea.createTextRange) {
-                        // IE兼容
-                        var range = tempTextArea.createTextRange();
-                        range.execCommand('select');
-                    } else if (window.getSelection) {
-                        // 标准浏览器
+                    // 强制重排以确保元素正确渲染
+                    tempTextArea.offsetHeight;
+                    
+                    // 增强的文本选择逻辑，尝试多种方法
+                    var selectionSuccess = false;
+                    
+                    // 方法1: 标准select()
+                    try {
                         tempTextArea.select();
-                    } else if (tempTextArea.setSelectionRange) {
-                        // 移动设备
-                        tempTextArea.setSelectionRange(0, 999999);
+                        selectionSuccess = true;
+                    } catch (e) {
+                        console.log('select() 方法失败:', e);
                     }
                     
-                    // 执行复制操作
+                    // 方法2: 针对移动设备的setSelectionRange
+                    if (!selectionSuccess) {
+                        try {
+                            if (tempTextArea.setSelectionRange) {
+                                tempTextArea.setSelectionRange(0, 999999);
+                                selectionSuccess = true;
+                            }
+                        } catch (e) {
+                            console.log('setSelectionRange() 方法失败:', e);
+                        }
+                    }
+                    
+                    // 方法3: IE的createTextRange
+                    if (!selectionSuccess) {
+                        try {
+                            if (tempTextArea.createTextRange) {
+                                var range = tempTextArea.createTextRange();
+                                range.execCommand('select');
+                                selectionSuccess = true;
+                            }
+                        } catch (e) {
+                            console.log('createTextRange() 方法失败:', e);
+                        }
+                    }
+                    
+                    // 方法4: 针对某些安卓浏览器的特殊处理
+                    if (!selectionSuccess && isAndroid) {
+                        try {
+                            // 模拟用户选择操作
+                            var selection = window.getSelection();
+                            var range = document.createRange();
+                            range.selectNodeContents(tempTextArea);
+                            selection.removeAllRanges();
+                            selection.addRange(range);
+                            selectionSuccess = true;
+                        } catch (e) {
+                            console.log('安卓特殊选择方法失败:', e);
+                        }
+                    }
+                    
+                    // 执行复制操作，尝试多种方法
                     var success = false;
+                    
+                    // 方法1: 标准document.execCommand('copy')
                     try {
                         success = document.execCommand('copy');
                     } catch (err) {
-                        // 降级方案：如果复制失败，尝试使用古老的window.clipboardData
+                        console.log('document.execCommand复制失败:', err);
+                    }
+                    
+                    // 方法2: 古老的window.clipboardData
+                    if (!success) {
                         try {
                             if (window.clipboardData && window.clipboardData.setData) {
                                 window.clipboardData.setData('Text', textToCopy);
                                 success = true;
                             }
                         } catch (err2) {
-                            console.log('复制失败:', err2);
+                            console.log('clipboardData复制失败:', err2);
                         }
+                    }
+                    
+                    // 方法3: 针对特定安卓浏览器的延迟重试
+                    if (!success && isAndroid) {
+                        try {
+                            // 强制延迟以增加某些安卓浏览器的成功率
+                            setTimeout(function() {
+                                try {
+                                    const delayedSuccess = document.execCommand('copy');
+                                    if (delayedSuccess) {
+                                        console.log('安卓延迟复制成功');
+                                        // 由于是异步操作，这里无法直接更新success变量
+                                        // 但我们已经尽力，可以让用户尝试手动复制
+                                    }
+                                } catch (e) {}
+                            }, 100);
+                        } catch (e) {}
                     }
                     
                     // 显示复制提示
@@ -935,7 +1207,12 @@
                     // 确保移除临时元素
                     try {
                         if (tempTextArea.parentNode) {
-                            document.body.removeChild(tempTextArea);
+                            // 使用较长的延迟确保在各种安卓浏览器中都能正确移除
+                            setTimeout(function() {
+                                try {
+                                    document.body.removeChild(tempTextArea);
+                                } catch (e) {}
+                            }, 100);
                         }
                     } catch (e) {}
                 }
@@ -1656,7 +1933,7 @@
         <div class="chat-content">
             <div class="chat-messages" id="chatMessages">
                 <div class="message bot">
-                    请将评论的规范➍张截图都发送给我<br>
+                    请将评论的规范❸张截图都发送给我<br>
                     审核通过后我会发送入群链接和资料合集~<br>
                     <small style="color: #6B7280;">注意：不规范截图和发送重复的截图将重置进度，所以是一定不能投机取巧的哦！</small>
                 </div>
@@ -1932,7 +2209,7 @@
                                                         chatWidget.classList.remove('shake');
                                                     }, 500);
 
-                                                    addMessage('辛苦饱饱啦，欢迎加入我们！<br><span onclick="showQRCodeImage()" class="send-link" style="font-weight: bold; color: blue; text-decoration: underline; cursor: pointer;">✅点击入群</span><br><a href="https://pan.quark.cn/s/3f390042f6c8" class="send-link" target="_blank" style="font-weight: bold; color: blue; text-decoration: underline;">✅往期资源①：</a><br><a href="https://pan.xunlei.com/s/VOZ-yG3V4ncFhdFwwlBwQIRgA1?pwd=2wku#" class="send-link" target="_blank" style="font-weight: bold; color: blue; text-decoration: underline;">✅备用资源②：</a>', true);
+                                                    addMessage('辛苦饱饱啦，欢迎加入我们！<br><span onclick="showQRCodeImage()" class="send-link" style="font-weight: bold; color: white; text-decoration: underline; cursor: pointer;">✅点击入群</span><br><a href="https://pan.quark.cn/s/3f390042f6c8" class="send-link" target="_blank" style="font-weight: bold; color: white; text-decoration: underline;">✅往期资源①：</a><br><a href="https://pan.xunlei.com/s/VOZ-yG3V4ncFhdFwwlBwQIRgA1?pwd=2wku#" class="send-link" target="_blank" style="font-weight: bold; color: white; text-decoration: underline;">✅备用资源②：</a>', true);
                                                 }, 1500); // 比合并消息显示延迟更长，确保顺序正确
                                             } else if (uploadedImagesCount < 5) {
                                                 console.log('Showing confirmation message for image count:', uploadedImagesCount);
@@ -1963,7 +2240,7 @@
                                                         chatWidget.classList.remove('shake');
                                                     }, 500);
                                                      
-                                                    addMessage('辛苦饱饱啦，欢迎加入我们！<br><span onclick="showQRCodeImage()" class="send-link" style="font-weight: bold; color: blue; text-decoration: underline; cursor: pointer;">✅点击入群</span><br><a href="https://pan.quark.cn/s/3f390042f6c8" class="send-link" target="_blank" style="font-weight: bold; color: blue; text-decoration: underline;">✅往期资源①：</a><br><a href="https://pan.xunlei.com/s/VOZ-yG3V4ncFhdFwwlBwQIRgA1?pwd=2wku#" class="send-link" target="_blank" style="font-weight: bold; color: blue; text-decoration: underline;">✅备用资源②：</a>', true);
+                                                    addMessage('辛苦饱饱啦，欢迎加入我们！<br><span onclick="showQRCodeImage()" class="send-link" style="font-weight: bold; color: white; text-decoration: underline; cursor: pointer;">✅点击入群</span><br><a href="https://pan.quark.cn/s/3f390042f6c8" class="send-link" target="_blank" style="font-weight: bold; color: white; text-decoration: underline;">✅往期资源①：</a><br><a href="https://pan.xunlei.com/s/VOZ-yG3V4ncFhdFwwlBwQIRgA1?pwd=2wku#" class="send-link" target="_blank" style="font-weight: bold; color: white; text-decoration: underline;">✅备用资源②：</a>', true);
                                                 }, 1500); // 比合并消息显示延迟更长，确保顺序正确
                                             }
                                         }
@@ -2012,7 +2289,7 @@
                                     chatWidget.classList.remove('shake');
                                 }, 500);
                                  
-                                addMessage('辛苦饱饱啦，欢迎加入我们！<br><span onclick="showQRCodeImage()" class="send-link" style="font-weight: bold; color: blue; text-decoration: underline; cursor: pointer;">✅点击入群</span><br><a href="https://pan.quark.cn/s/3f390042f6c8" class="send-link" target="_blank" style="font-weight: bold; color: blue; text-decoration: underline;">✅往期资源①：</a><br><a href="https://pan.xunlei.com/s/VOZ-yG3V4ncFhdFwwlBwQIRgA1?pwd=2wku#" class="send-link" target="_blank" style="font-weight: bold; color: blue; text-decoration: underline;">✅备用资源②：</a>', true);
+                                addMessage('辛苦饱饱啦，欢迎加入我们！<br><span onclick="showQRCodeImage()" class="send-link" style="font-weight: bold; color: white; text-decoration: underline; cursor: pointer;">✅点击入群</span><br><a href="https://pan.quark.cn/s/3f390042f6c8" class="send-link" target="_blank" style="font-weight: bold; color: white; text-decoration: underline;">✅往期资源①：</a><br><a href="https://pan.xunlei.com/s/VOZ-yG3V4ncFhdFwwlBwQIRgA1?pwd=2wku#" class="send-link" target="_blank" style="font-weight: bold; color: white; text-decoration: underline;">✅备用资源②：</a>', true);
                             }, 1500); // 比合并消息显示延迟更长，确保顺序正确
                         }
                     }
@@ -2211,6 +2488,18 @@
                 });
                 
                 // 检查URL参数，支持直接通过URL进入管理员模式
+                function checkAdminUrlParam() {
+                    // 获取URL参数
+                    const urlParams = new URLSearchParams(window.location.search);
+                    
+                    // 检查是否存在admin参数并且值为true
+                    if (urlParams.get('admin') === 'true') {
+                        // 显示管理员登录按钮
+                        document.getElementById('adminLoginBtn').style.display = 'block';
+                    }
+                }
+                
+                // 调用函数检查URL参数
                 checkAdminUrlParam();
                 
 
