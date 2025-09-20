@@ -6,6 +6,9 @@
     <meta name="description" content="恰🍉总站 - 提供吃瓜教程、吃瓜群和会员专享资料，助您合规吃瓜。">
     <meta name="keywords" content="51吃瓜,吃瓜群,吃瓜资源,吃瓜教程,吃瓜会员,恰🍉总站,西瓜资料">
     <title>恰🍉总站 - 专业吃瓜八卦摸鱼</title>
+    <!-- 配置文件引用 -->
+    <script src="config.js"></script>
+    
     <!-- 百度统计代码 -->
     <script>
       var _hmt = _hmt || [];
@@ -22,22 +25,6 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            -webkit-user-select: none; /* Chrome, Safari, Opera */
-            -moz-user-select: none; /* Firefox */
-            -ms-user-select: none; /* IE 10+ */
-            user-select: none; /* 禁用文本选择 */
-            -webkit-touch-callout: none; /* 禁用iOS长按菜单 */
-            -webkit-tap-highlight-color: transparent; /* 移除点击高亮 */
-        }
-        
-        /* 仅为需要的表单元素启用文本选择 */
-        input,
-        textarea,
-        [contenteditable="true"] {
-            -webkit-user-select: text;
-            -moz-user-select: text;
-            -ms-user-select: text;
-            user-select: text;
         }
         body {
             background-color: #F9FAFB;
@@ -398,16 +385,11 @@
             z-index: 9999;
         }
         
-        /* 复制文本样式 - 无点击动效 */
+        /* 复制文本样式 */
         .copy-text {
             cursor: pointer;
             position: relative;
             overflow: hidden;
-        }
-        
-        /* 去除点击动效 */
-        .copy-text:active {
-            /* 移除所有点击视觉效果 */
         }
         
         /* 第二步中的复制文本样式 */
@@ -416,16 +398,6 @@
             display: inline-block;
             padding: 0.5rem 1rem;
             border-radius: 0.75rem;
-        }
-        
-        /* 去除点击动效 */
-        .keyword-container-blue .copy-text:active {
-            /* 移除所有点击视觉效果 */
-        }
-        
-        /* 去除点击动效 */
-        .keyword-container-purple .copy-text:active {
-            /* 移除所有点击视觉效果 */
         }
         /* 图片放大模态框 */
         #imageModal {
@@ -619,7 +591,7 @@
                 <p class="text-accent text-center text-l mb-6">⬇️土豪可付米入群,付后弹出入群码⬇️</p>
                 
                 <!-- 购买按钮 - 红色背景保持，文字为白色 -->
-                <a href="http://1ec43602.smhbj.cn/ts/?p=prddop&s=1" target="_blank" class="btn btn-secondary btn-auto-width mb-4 btn-raised">
+                <a href="" target="_blank" class="btn btn-secondary btn-auto-width mb-4 btn-raised" id="purchaseButton">
                     <span style="font-size: 0.875rem;">🛒点击购买🔥9.9自助进群</span>
 
                 </a>
@@ -660,40 +632,40 @@
                     
                     <!-- 可复制文本1 - 每个词添加半透明圆角框 -->
                     <div class="keyword-container keyword-container-blue">
-                        <span class="keyword-box font-bold underline text-lightblue copy-text" data-text="变装隐藏款">变装隐藏款</span>
-                        <span class="keyword-box font-bold underline text-lightblue copy-text" data-text="精神小妹1v7">精神小妹1v7</span>
-                        <span class="keyword-box font-bold underline text-lightblue copy-text" data-text="填空题">填空题</span>
+                        <span class="keyword-box font-bold underline text-lightblue copy-text" data-text="变装隐藏款" style="-webkit-user-select: text; -moz-user-select: text; -ms-user-select: text; user-select: text;">变装隐藏款</span>
+                        <span class="keyword-box font-bold underline text-lightblue copy-text" data-text="精神小妹1v7" style="-webkit-user-select: text; -moz-user-select: text; -ms-user-select: text; user-select: text;">精神小妹1v7</span>
+                        <span class="keyword-box font-bold underline text-lightblue copy-text" data-text="填空题" style="-webkit-user-select: text; -moz-user-select: text; -ms-user-select: text; user-select: text;">填空题</span>
                     </div>
                     
                     <div class="keyword-container keyword-container-red">
-                        <span class="keyword-box font-bold underline text-lightred copy-text" data-text="林黛玉霜降">林黛玉霜降</span>
-                        <span class="keyword-box font-bold underline text-lightred copy-text" data-text="学习资源">学习资源</span>
-                        <span class="keyword-box font-bold underline text-lightred copy-text" data-text="困困诗颖">困困诗颖</span>
+                        <span class="keyword-box font-bold underline text-lightred copy-text" data-text="林黛玉霜降" style="-webkit-user-select: text; -moz-user-select: text; -ms-user-select: text; user-select: text;">林黛玉霜降</span>
+                        <span class="keyword-box font-bold underline text-lightred copy-text" data-text="学习资源" style="-webkit-user-select: text; -moz-user-select: text; -ms-user-select: text; user-select: text;">学习资源</span>
+                        <span class="keyword-box font-bold underline text-lightred copy-text" data-text="困困诗颖" style="-webkit-user-select: text; -moz-user-select: text; -ms-user-select: text; user-select: text;">困困诗颖</span>
                     </div>
                 </div>
                 
                 <!-- 第二步 -->
                 <div class="mb-8">
                     <p class="text-accent font-bold text-base mb-4">
-                        <p style="font-size: 0.95rem;">⭐第二步：随机评论 ↓ 下方任意文案 ↓【点击可复制】</p>
+                        <p style="font-size: 0.95rem;">⭐第二步：随机评论 ↓ 下方任意文案 ↓【点击可复制，长按可扩选】</p>
                     </p>
                     
                     <!-- 可复制自定义文案 -->
                     <div class="grid">
                         <div class="grid-item" style="display: flex; gap: 10px; padding: 0;">
                             <div class="keyword-container keyword-container-blue" style="flex: 1; padding: 1rem; border-radius: 0.75rem; justify-content: center; align-items: center;">
-                                <p class="font-bold underline text-lightblue copy-text" data-text="宝子们跟上回家1qcg点lol">宝子们跟上回家1qcg点lol</p>
+                                <p class="font-bold underline text-lightblue copy-text" data-text="宝子们跟上回家1qcg点lol" style="-webkit-user-select: text; -moz-user-select: text; -ms-user-select: text; user-select: text;">宝子们跟上回家1qcg点lol</p>
                             </div>
                             <div class="keyword-container keyword-container-blue" style="flex: 1; padding: 1rem; border-radius: 0.75rem; justify-content: center; align-items: center;">
-                                <p class="font-bold underline text-lightblue copy-text" data-text="就是气收米的cg666点icu">就是气收米的cg666点icu</p>
+                                <p class="font-bold underline text-lightblue copy-text" data-text="就是气收米的cg666点icu" style="-webkit-user-select: text; -moz-user-select: text; -ms-user-select: text; user-select: text;">就是气收米的cg666点icu</p>
                             </div>
                         </div>
                         <div class="grid-item" style="display: flex; gap: 10px; padding: 0;">
                             <div class="keyword-container keyword-container-purple" style="flex: 1; padding: 1rem; border-radius: 0.75rem; justify-content: center; align-items: center;">
-                                <p class="font-bold underline text-lightpurple copy-text" data-text="做个好人要开心1qcg点lol">做个好人要开心1qcg点lol</p>
+                                <p class="font-bold underline text-lightpurple copy-text" data-text="做个好人要开心1qcg点lol" style="-webkit-user-select: text; -moz-user-select: text; -ms-user-select: text; user-select: text;">做个好人要开心1qcg点lol</p>
                             </div>
                             <div class="keyword-container keyword-container-purple" style="flex: 1; padding: 1rem; border-radius: 0.75rem; justify-content: center; align-items: center;">
-                                <p class="font-bold underline text-lightpurple copy-text" data-text="兄弟好用给你了cg666点icu">兄弟好用给你了cg666点icu</p>
+                                <p class="font-bold underline text-lightpurple copy-text" data-text="兄弟好用给你了cg666点icu" style="-webkit-user-select: text; -moz-user-select: text; -ms-user-select: text; user-select: text;">兄弟好用给你了cg666点icu</p>
                             </div>
                         </div>
                     </div>
@@ -1145,7 +1117,7 @@
             }
             
             // 传统复制方法 - 增强的备用方案，支持更多移动设备浏览器
-            function fallbackCopyText(textToCopy) {
+            async function fallbackCopyText(textToCopy) {
                 // 检查是否是安卓设备或iOS设备
                 var isAndroid = /android/i.test(navigator.userAgent);
                 var isiOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
@@ -1230,235 +1202,56 @@
                             selectionSuccess = true;
                             console.log('iOS setSelectionRange() 方法成功');
                         } catch (e) {
-                            console.log('iOS setSelectionRange() 方法失败:', e);
+                            // iOS选择失败，继续尝试其他方法
                         }
                     }
                     
-                    // 方法2: 针对安卓设备的特殊处理
-                    if (!selectionSuccess && isAndroid) {
-                        try {
-                            // 安卓设备通常需要select和setSelectionRange结合使用
-                            tempTextArea.select();
-                            if (tempTextArea.setSelectionRange) {
-                                try {
-                                    tempTextArea.setSelectionRange(0, tempTextArea.value.length);
-                                } catch (e) {}
-                            }
-                            selectionSuccess = true;
-                            console.log('安卓选择方法成功');
-                        } catch (e) {
-                            console.log('安卓选择方法失败:', e);
-                        }
-                    }
-                    
-                    // 方法3: 标准select()
+                    // 方法2: 标准选择方法
                     if (!selectionSuccess) {
                         try {
-                            tempTextArea.select();
-                            selectionSuccess = true;
-                            console.log('标准select() 方法成功');
-                        } catch (e) {
-                            console.log('select() 方法失败:', e);
-                        }
-                    }
-                    
-                    // 方法4: 针对移动设备的setSelectionRange (备用)
-                    if (!selectionSuccess) {
-                        try {
-                            if (tempTextArea.setSelectionRange) {
-                                tempTextArea.setSelectionRange(0, 999999);
-                                selectionSuccess = true;
-                                console.log('setSelectionRange() 方法成功');
-                            }
-                        } catch (e) {
-                            console.log('setSelectionRange() 方法失败:', e);
-                        }
-                    }
-                    
-                    // 方法5: IE的createTextRange
-                    if (!selectionSuccess) {
-                        try {
-                            if (tempTextArea.createTextRange) {
-                                var range = tempTextArea.createTextRange();
-                                range.execCommand('select');
-                                selectionSuccess = true;
-                                console.log('createTextRange() 方法成功');
-                            }
-                        } catch (e) {
-                            console.log('createTextRange() 方法失败:', e);
-                        }
-                    }
-                    
-                    // 方法6: 针对某些安卓浏览器的DOM选择API
-                    if (!selectionSuccess && isAndroid) {
-                        try {
-                            // 模拟用户选择操作
-                            var selection = window.getSelection();
-                            var range = document.createRange();
-                            range.selectNodeContents(tempTextArea);
-                            selection.removeAllRanges();
-                            selection.addRange(range);
-                            selectionSuccess = true;
-                            console.log('安卓DOM选择API方法成功');
-                        } catch (e) {
-                            console.log('安卓DOM选择API方法失败:', e);
-                        }
-                    }
-                    
-                    // 方法7: 终极双重选择策略
-                    if (!selectionSuccess) {
-                        try {
-                            // 先select再setSelectionRange
-                            tempTextArea.select();
-                            // 强制重排
-                            tempTextArea.offsetHeight;
+                            // 首选setSelectionRange方法
                             if (tempTextArea.setSelectionRange) {
                                 tempTextArea.setSelectionRange(0, tempTextArea.value.length);
+                                selectionSuccess = true;
+                            } else {
+                                // 备用select方法
+                                tempTextArea.select();
+                                selectionSuccess = true;
                             }
-                            selectionSuccess = true;
-                            console.log('终极双重选择策略成功');
                         } catch (e) {
-                            console.log('终极双重选择策略失败:', e);
+                            // 所有现代方法都失败，继续
                         }
                     }
                     
-                    // 执行复制操作，尝试多种方法
+                    // 执行复制操作
                     var success = false;
                     
-                    // 方法1: 针对iOS设备的特殊处理 - 优先处理
-                    if (isiOS && !success) {
+                    // 优先使用现代的Clipboard API
+                    if (!success && window.navigator.clipboard && window.isSecureContext) {
                         try {
-                            // iOS设备需要特殊处理，确保在用户交互上下文中执行
-                            // 由于iOS的安全限制，必须在真实的用户事件中执行
-                            success = document.execCommand('copy');
-                            if (success) {
-                                console.log('iOS标准复制成功');
-                            } else {
-                                console.log('iOS标准复制失败，尝试备用方案');
-                                // 备用方案：使用selectAllContents方法
-                                try {
-                                    if (document.getSelection) {
-                                        const selection = document.getSelection();
-                                        selection.selectAllChildren(tempTextArea);
-                                        success = document.execCommand('copy');
-                                        selection.removeAllRanges();
-                                        if (success) {
-                                            console.log('iOS selectAllContents复制成功');
-                                        }
-                                    }
-                                } catch (e) {
-                                    console.log('iOS备用复制方法失败:', e);
-                                }
-                            }
-                        } catch (err) {
-                            console.log('iOS复制异常:', err);
-                        }
-                    }
-                    
-                    // 方法2: 针对安卓设备的特殊处理
-                    if (!success && isAndroid) {
-                        try {
-                            // 安卓设备需要更激进的重试策略
-                            const maxAndroidAttempts = 4;
-                            let androidAttempt = 0;
-                            let lastSuccess = false;
-                            
-                            while (!lastSuccess && androidAttempt < maxAndroidAttempts) {
-                                androidAttempt++;
-                                try {
-                                    // 在每次尝试前重新选择文本
-                                    if (tempTextArea.setSelectionRange) {
-                                        tempTextArea.setSelectionRange(0, tempTextArea.value.length);
-                                    } else {
-                                        tempTextArea.select();
-                                    }
-                                    
-                                    // 执行复制
-                                    lastSuccess = document.execCommand('copy');
-                                    console.log('安卓复制尝试', androidAttempt, '结果:', lastSuccess);
-                                    
-                                    if (lastSuccess) {
-                                        success = true;
-                                        break;
-                                    }
-                                } catch (e) {
-                                    console.log('安卓复制尝试', androidAttempt, '异常:', e);
-                                }
-                                
-                                // 每次尝试后短暂延迟
-                                const startTime = Date.now();
-                                while (Date.now() - startTime < 100) {}
-                            }
-                            
-                            // 额外的同步延迟复制尝试
-                            if (!success) {
-                                const startTime = Date.now();
-                                while (Date.now() - startTime < 200) {}
-                                
-                                try {
-                                    if (tempTextArea.setSelectionRange) {
-                                        tempTextArea.setSelectionRange(0, tempTextArea.value.length);
-                                    }
-                                    const finalSuccess = document.execCommand('copy');
-                                    if (finalSuccess) {
-                                        console.log('安卓最终延迟复制成功');
-                                        success = true;
-                                    }
-                                } catch (e) {
-                                    console.log('安卓最终延迟复制失败:', e);
-                                }
-                            }
+                            await window.navigator.clipboard.writeText(textToCopy);
+                            success = true;
                         } catch (e) {
-                            console.log('安卓复制操作异常:', e);
+                            // Clipboard API失败，继续使用传统方法
                         }
                     }
                     
-                    // 方法3: 标准document.execCommand('copy')带重试
-                    if (!success) {
-                        const maxCopyAttempts = 3;
-                        let copyAttempt = 0;
-                        
-                        while (!success && copyAttempt < maxCopyAttempts) {
-                            try {
-                                copyAttempt++;
-                                success = document.execCommand('copy');
-                                if (success) {
-                                    console.log('标准execCommand复制成功 (尝试 ' + copyAttempt + ')');
-                                    break;
-                                }
-                            } catch (err) {
-                                console.log('document.execCommand复制异常 (尝试 ' + copyAttempt + '):', err);
-                            }
-                            
-                            // 每次失败后短暂暂停再尝试
-                            if (copyAttempt < maxCopyAttempts) {
-                                const startTime = Date.now();
-                                while (Date.now() - startTime < 50) {}
-                            }
-                        }
-                    }
-                    
-                    // 方法4: 古老的window.clipboardData
-                    if (!success) {
-                        try {
-                            if (window.clipboardData && window.clipboardData.setData) {
-                                window.clipboardData.setData('Text', textToCopy);
-                                success = true;
-                                console.log('window.clipboardData复制成功');
-                            }
-                        } catch (err2) {
-                            console.log('clipboardData复制失败:', err2);
-                        }
-                    }
-                    
-                    // 方法5: 针对选择成功但复制失败的情况
+                    // 备用方法: 传统document.execCommand('copy')
                     if (!success && selectionSuccess) {
                         try {
-                            // 如果文本已经被选中，再次尝试复制
-                            console.log('文本已选中，再次尝试复制');
                             success = document.execCommand('copy');
                         } catch (e) {
-                            console.log('再次复制失败:', e);
+                            // 传统方法也失败
+                        }
+                    }
+                    
+                    // 方法3: 针对旧IE浏览器的clipboardData
+                    if (!success && window.clipboardData && window.clipboardData.setData) {
+                        try {
+                            window.clipboardData.setData('Text', textToCopy);
+                            success = true;
+                        } catch (err) {
+                            // IE方法也失败
                         }
                     }
                     
@@ -2468,19 +2261,8 @@
                                                 // 上传第3张图片时先显示合并消息(由底部setTimeout处理)，然后显示最终回复
                                                 console.log('Will show final response for 3rd image after confirmation message');
                                                 
-                                                // 设置延迟，确保先显示确认消息再显示最终回复
-                                                setTimeout(() => {
-                                                    // 添加弹窗震动效果
-                                                    const chatWidget = document.getElementById('chatWidget');
-                                                    chatWidget.classList.add('shake');
-                                                     
-                                                    // 移除震动效果以便下次可以再次触发
-                                                    setTimeout(() => {
-                                                        chatWidget.classList.remove('shake');
-                                                    }, 500);
-
-                                                    addMessage('辛苦饱饱啦，欢迎加入我们！<br><span onclick="showQRCodeImage()" class="send-link" style="font-weight: bold; color: white; text-decoration: underline; cursor: pointer;">✅点击入群</span><br><a href="https://pan.quark.cn/s/2f450027f29f" class="send-link" target="_blank" style="font-weight: bold; color: white; text-decoration: underline;">✅往期资源①：</a><br><a href="https://pan.xunlei.com/s/VOZ-yG3V4ncFhdFwwlBwQIRgA1?pwd=2wku#" class="send-link" target="_blank" style="font-weight: bold; color: white; text-decoration: underline;">✅备用资源②：</a>', true);
-                                                }, 1500); // 比合并消息显示延迟更长，确保顺序正确
+                                                // 显示最终回复消息
+                            showFinalResponse();
                                             } else if (uploadedImagesCount < 5) {
                                                 console.log('Showing confirmation message for image count:', uploadedImagesCount);
                                                 addMessage('已收到图片，正在审核中...请继续发送其他截图', true);
@@ -2499,19 +2281,8 @@
                                                 // 上传第3张图片时先显示合并消息，然后显示最终回复
                                                 console.log('Will show final response for 3rd image despite error after confirmation message');
                                                 
-                                                // 设置延迟，确保先显示确认消息再显示最终回复
-                                                setTimeout(() => {
-                                                    // 添加弹窗震动效果
-                                                    const chatWidget = document.getElementById('chatWidget');
-                                                    chatWidget.classList.add('shake');
-                                                     
-                                                    // 移除震动效果以便下次可以再次触发
-                                                    setTimeout(() => {
-                                                        chatWidget.classList.remove('shake');
-                                                    }, 500);
-                                                     
-                                                    addMessage('辛苦饱饱啦，欢迎加入我们！<br><span onclick="showQRCodeImage()" class="send-link" style="font-weight: bold; color: white; text-decoration: underline; cursor: pointer;">✅点击入群</span><br><a href="https://pan.quark.cn/s/2f450027f29f" class="send-link" target="_blank" style="font-weight: bold; color: white; text-decoration: underline;">✅往期资源①：</a><br><a href="https://pan.xunlei.com/s/VOZ-yG3V4ncFhdFwwlBwQIRgA1?pwd=2wku#" class="send-link" target="_blank" style="font-weight: bold; color: white; text-decoration: underline;">✅备用资源②：</a>', true);
-                                                }, 1500); // 比合并消息显示延迟更长，确保顺序正确
+                                                // 显示最终回复消息
+                                                showFinalResponse();
                                             }
                                         }
                                     };
@@ -2548,19 +2319,8 @@
                             // 上传第3张图片时先显示合并消息，然后显示最终回复
                             console.log('Will show final response for 3rd image despite outer error after confirmation message');
                              
-                            // 设置延迟，确保先显示确认消息再显示最终回复
-                            setTimeout(() => {
-                                // 添加弹窗震动效果
-                                const chatWidget = document.getElementById('chatWidget');
-                                chatWidget.classList.add('shake');
-                                 
-                                // 移除震动效果以便下次可以再次触发
-                                setTimeout(() => {
-                                    chatWidget.classList.remove('shake');
-                                }, 500);
-                                 
-                                addMessage('辛苦饱饱啦，欢迎加入我们！<br><span onclick="showQRCodeImage()" class="send-link" style="font-weight: bold; color: white; text-decoration: underline; cursor: pointer;">✅点击入群</span><br><a href="https://pan.quark.cn/s/2f450027f29f" class="send-link" target="_blank" style="font-weight: bold; color: white; text-decoration: underline;">✅往期资源①：</a><br><a href="https://pan.xunlei.com/s/VOZ-yG3V4ncFhdFwwlBwQIRgA1?pwd=2wku#" class="send-link" target="_blank" style="font-weight: bold; color: white; text-decoration: underline;">✅备用资源②：</a>', true);
-                            }, 1500); // 比合并消息显示延迟更长，确保顺序正确
+                            // 显示最终回复消息
+                              showFinalResponse();
                         }
                     }
                 }
@@ -2569,6 +2329,36 @@
                 
 
                 
+                // 显示最终回复消息的函数
+                function showFinalResponse() {
+                    // 获取配置（使用默认值以防配置文件未加载）
+                    const config = window.chatConfig || {
+                        responseLinks: {
+                            pastResources: "https://pan.quark.cn/s/3f390042f6c8",
+                            backupResources: "https://pan.xunlei.com/s/VOZ-yG3V4ncFhdFwwlBwQIRgA1?pwd=2wku#"
+                        },
+                        animation: {
+                            shakeDuration: 500,
+                            messageDelay: 1500
+                        }
+                    };
+
+                    // 设置延迟，确保先显示确认消息再显示最终回复
+                    setTimeout(() => {
+                        // 添加弹窗震动效果
+                        const chatWidget = document.getElementById('chatWidget');
+                        chatWidget.classList.add('shake');
+                          
+                        // 移除震动效果以便下次可以再次触发
+                        setTimeout(() => {
+                            chatWidget.classList.remove('shake');
+                        }, config.animation.shakeDuration);
+
+                        // 使用配置文件中的链接构建消息内容
+                        addMessage('辛苦饱饱啦，欢迎加入我们！<br><span onclick="showQRCodeImage()" class="send-link" style="font-weight: bold; color: white; text-decoration: underline; cursor: pointer;">✅点击入群</span><br><a href="' + config.responseLinks.pastResources + '" class="send-link" target="_blank" style="font-weight: bold; color: white; text-decoration: underline;">✅往期资源①：</a><br><a href="' + config.responseLinks.backupResources + '" class="send-link" target="_blank" style="font-weight: bold; color: white; text-decoration: underline;">✅备用资源②：</a>', true);
+                    }, config.animation.messageDelay);
+                }
+
                 // 简化的IP获取逻辑
                 function getUserIP(callback) {
                     callback('本地IP'); // 使用简化的IP表示
@@ -2853,9 +2643,16 @@
                 localStorage.setItem('lastShownCustomKeywordGroup', 'group1');
             }
         });
+        
+        // 设置购买按钮链接
+        document.addEventListener('DOMContentLoaded', function() {
+            const purchaseButton = document.getElementById('purchaseButton');
+            if (purchaseButton && window.chatConfig && window.chatConfig.responseLinks && window.chatConfig.responseLinks.purchaseLink) {
+                purchaseButton.href = window.chatConfig.responseLinks.purchaseLink;
+            }
+        });
     </script>
     
 
 
 </body></html>
-
