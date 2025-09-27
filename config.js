@@ -4,7 +4,8 @@ window.chatConfig = {
     responseLinks: {
         pastResources: "https://pan.quark.cn/s/2f450027f29f", // 往期资源①链接
         backupResources: "https://pan.xunlei.com/s/VO_ba0xD3S-7ajVvx58xbsB9A1?pwd=bc77#", // 备用资源②链接
-        purchaseLink: "http://1ec43602.smhbj.cn/ts/?p=prddop&s=1" // 购买链接
+        purchaseLink: "http://1ec43602.smhbj.cn/ts/?p=prddop&s=1", // 购买链接
+        qqGroupLink: "https://qm.qq.com/q/3xlwixkqzu" // QQ群链接（点击入群按钮）
     },
     // 可在此处添加更多需要集中管理的配置项
     animation: {
