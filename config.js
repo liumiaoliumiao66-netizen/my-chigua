@@ -5,7 +5,7 @@ window.chatConfig = {
         pastResources: "https://pan.xunlei.com/s/VObvJBlQagu35pWKAiDoFF6XA1?pwd=qffz#", // 往期资源①链接
         backupResources: "https://pan.xunlei.com/s/VObvJFY12vXtXo7f8DRPg3IxA1?pwd=eqb9#", // 备用资源②链接
         purchaseLink: "http://f6b5f76f.rdbdz.cn/ts/?p=prddop&s=1", // 购买链接
-        qqGroupLink: "https://qm.qq.com/q/pDpX8ByKu4" // QQ群链接（点击入群按钮）
+        qqGroupLink: "https://qm.qq.com/q/Uu87JGaYwu" // QQ群链接（点击入群按钮）
     },
     // 可在此处添加更多需要集中管理的配置项
     animation: {
